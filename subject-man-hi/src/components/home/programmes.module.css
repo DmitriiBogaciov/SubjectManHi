@@ -1,0 +1,16 @@
+.recipeList {
+    max-width: 100%;
+    overflow: auto;
+}
+.loading {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error {
+    background-color: lightpink;
+    padding: 32px;
+}

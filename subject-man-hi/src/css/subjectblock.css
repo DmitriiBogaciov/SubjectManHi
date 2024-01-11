@@ -1,0 +1,10 @@
+#subject-block {
+  border: 1px solid black;
+  margin: 1rem 0rem;
+  padding: 1rem 0rem;
+  width: 30rem;
+}
+
+#subject-block > a > h2 {
+  font-size: 1.5rem;
+}
