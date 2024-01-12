@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import SubjectBlock from "./Subject-block";
 import { useAuth0 } from "@auth0/auth0-react";
+
 function Program() {
   const { id } = useParams();
   const { getAccessTokenSilently } = useAuth0();
@@ -18,11 +19,7 @@ function Program() {
 
   async function removeItem(program_id) {
     const accessToken = await getAccessTokenSilently();
-
-    const new_subjects = subjects.filter(
-      (subject) => subject._id !== program_id
-    );
-    console.log(new_subjects);
+    const new_subjects = subjects.filter((subject) => subject._id !== program_id);
     await axios.put(
       `/study-programme/update/` + dataOfSingleProgram._id,
       {
@@ -35,44 +32,39 @@ function Program() {
       }
     );
   }
+
   useEffect(() => {
     async function getData() {
       try {
-        const response = await axios.get(
-          `/study-programme/get/${id}`
-        );
+        const response = await axios.get(`/study-programme/get/${id}`);
         setDataOfSingleProgram(response.data.result);
-        var ids = response.data.result.subjects
-          ?.map((subject) => subject._id)
+        const ids = response.data.result.subjects
+          .map((subject) => subject._id)
           .join(",");
 
-        ids.slice(0, -1);
-        const subjectsResponse = await axios.get(
-          `/subject/get/?subjectIds=${ids}`
-        );
-        var new_subjects = {
+        const subjectsResponse = await axios.get(`/subject/get/?subjectIds=${ids}`);
+        const new_subjects = {
           firstYear: [],
           secondYear: [],
           thirdYear: [],
         };
         setSubjects(response.data.result.subjects);
-        subjectsResponse.data.result.map((subject) => {
-          const year = response?.data?.result.subjects.find(
+
+        subjectsResponse.data.result.forEach((subject) => {
+          const year = response.data.result.subjects.find(
             (subject_real) => subject._id === subject_real._id
           ).year;
-          console.log(year);
           switch (year) {
             case 1:
-              console.log("Jsem subject pro první ročník");
               new_subjects.firstYear.push(subject);
               break;
             case 2:
-              console.log("Jsem subject pro druhý ročník");
               new_subjects.secondYear.push(subject);
               break;
             case 3:
-              console.log("Jsem subject pro třetí ročník");
               new_subjects.thirdYear.push(subject);
+              break;
+            default:
               break;
           }
         });
@@ -84,6 +76,7 @@ function Program() {
 
     getData();
   }, [id]);
+
   return (
     <div className="App">
       <h1>{dataOfSingleProgram?.name}</h1>
@@ -92,24 +85,17 @@ function Program() {
       <p>{dataOfSingleProgram?.language} </p>
       <div id="subjects-list">
         <h2> První ročník </h2>
-        {console.log("Test")}
-        {subjectsByYear.firstYear != null &&
-          subjectsByYear.firstYear != undefined &&
-          subjectsByYear.firstYear.map((subject2) => (
-            <SubjectBlock methodToRemove={removeItem} subject={subject2} />
-          ))}
+        {subjectsByYear.firstYear.map((subject) => (
+          <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
+        ))}
         <h2> Druhý ročník </h2>
-        {subjectsByYear.secondYear != null &&
-          subjectsByYear.secondYear != undefined &&
-          subjectsByYear.secondYear.map((subject) => (
-            <SubjectBlock methodToRemove={removeItem} subject={subject} />
-          ))}
+        {subjectsByYear.secondYear.map((subject) => (
+          <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
+        ))}
         <h2> Třetí ročník </h2>
-        {subjectsByYear.thirdYear != null &&
-          subjectsByYear.thirdYear != undefined &&
-          subjectsByYear.thirdYear.map((subject) => (
-            <SubjectBlock methodToRemove={removeItem} subject={subject} />
-          ))}
+        {subjectsByYear.thirdYear.map((subject) => (
+          <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
+        ))}
       </div>
     </div>
   );
