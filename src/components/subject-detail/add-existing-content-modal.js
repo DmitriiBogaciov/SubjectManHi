@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const AddExistingContentModal = ({ show, onClose, onSelect }) => {
   const [digitalContents, setDigitalContents] = useState([]);
@@ -9,7 +10,7 @@ const AddExistingContentModal = ({ show, onClose, onSelect }) => {
   useEffect(() => {
     const fetchDigitalContents = async () => {
       try {
-        const response = await axios.get('/digital-content/list');
+        const response = await axios.get(`${apiUrl}/digital-content/list`);
         console.log('Response from fetching all digital content:', response);
 
         if (response.status === 200) {

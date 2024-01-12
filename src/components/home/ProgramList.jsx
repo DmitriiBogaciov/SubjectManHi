@@ -1,16 +1,16 @@
 import "../../App.css";
 import { Link } from "react-router-dom";
-import { listOfSubjects } from "./mock-data/list-of-subjects";
 import "bootstrap/dist/css/bootstrap.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 function ProgramList() {
   const [listofProgrammes, setListofProgrammes] = useState();
   useEffect(() => {
     async function getData() {
       await axios
-        .get("/study-programme/list")
+        .get(`${apiUrl}/study-programme/list`)
         .then((response) => {
           setListofProgrammes(response.data);
           console.log(response.data);

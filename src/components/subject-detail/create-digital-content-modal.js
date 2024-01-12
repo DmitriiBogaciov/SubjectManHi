@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const CreateDigitalContentModal = ({accessToken, show, onClose, onCreateDigitalContent }) => {
   const [contentName, setContentName] = useState('');
@@ -9,7 +10,7 @@ const CreateDigitalContentModal = ({accessToken, show, onClose, onCreateDigitalC
 
   const handleCreate = async () => {
     try {
-      const response = await axios.post('/digital-content/create', {
+      const response = await axios.post(`${apiUrl}/digital-content/create`, {
         name: contentName,
         description: contentDescription,
         externalLink: contentExternalLink,

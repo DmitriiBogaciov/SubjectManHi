@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { jwtDecode } from "jwt-decode";
 import { useAuth0 } from "@auth0/auth0-react";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function StudyProgrammeGrid({onDelete}) {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
@@ -43,7 +44,7 @@ export default function StudyProgrammeGrid({onDelete}) {
   }, [isAuthenticated, user, getAccessTokenSilently]);
 
   useEffect(() => {
-    fetch("/study-programme/list", {
+    fetch(`${apiUrl}/study-programme/list`, {
       method: "GET",
     })
       .then(async (response) => {

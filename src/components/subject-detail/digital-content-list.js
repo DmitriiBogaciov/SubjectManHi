@@ -4,6 +4,7 @@ import DigitalContentInfo from './digital-content-info';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from "react-bootstrap";
 import EditContentModal from "./edit-digital-content-modal";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const DigitalContentList = ({accessToken, permissions, digitalContentIdList, onAddExistingContent, onAddNewContent, onDeleteContent, onEditContent}) => {
   const [digitalContents, setDigitalContents] = useState([]);
@@ -19,7 +20,7 @@ const DigitalContentList = ({accessToken, permissions, digitalContentIdList, onA
     const fetchDigitalContents = async () => {
       try {
         console.log(`digital contents id to load`, digitalContentIdList)
-        const response = await axios.get(`/digital-content/get?digitalContentIds=${digitalContentIdList.join(',')}`);
+        const response = await axios.get(`${apiUrl}/digital-content/get?digitalContentIds=${digitalContentIdList.join(',')}`);
         console.log(`Response from fetching digital content by ids`, response);
         const contentType = response.headers['content-type'];
 
@@ -49,7 +50,7 @@ const DigitalContentList = ({accessToken, permissions, digitalContentIdList, onA
       const contentToSend = { ...editedContent, id: editedContent._id };
       delete contentToSend._id;
 
-      const response = await axios.put('/digital-content/update', contentToSend, {
+      const response = await axios.put(`${apiUrl}/digital-content/update`, contentToSend, {
         headers: {
           'Authorization': `Bearer ${accessToken}`
         }

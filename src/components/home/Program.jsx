@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import SubjectBlock from "./Subject-block";
 import { useAuth0 } from "@auth0/auth0-react";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 function Program() {
   const { id } = useParams();
@@ -21,7 +22,7 @@ function Program() {
     const accessToken = await getAccessTokenSilently();
     const new_subjects = subjects.filter((subject) => subject._id !== program_id);
     await axios.put(
-      `/study-programme/update/` + dataOfSingleProgram._id,
+      `${apiUrl}/study-programme/update/` + dataOfSingleProgram._id,
       {
         subjects: new_subjects,
       },
@@ -36,13 +37,13 @@ function Program() {
   useEffect(() => {
     async function getData() {
       try {
-        const response = await axios.get(`/study-programme/get/${id}`);
+        const response = await axios.get(`${apiUrl}/study-programme/get/${id}`);
         setDataOfSingleProgram(response.data.result);
         const ids = response.data.result.subjects
           .map((subject) => subject._id)
           .join(",");
 
-        const subjectsResponse = await axios.get(`/subject/get/?subjectIds=${ids}`);
+        const subjectsResponse = await axios.get(`${apiUrl}/subject/get/?subjectIds=${ids}`);
         const new_subjects = {
           firstYear: [],
           secondYear: [],

@@ -12,6 +12,7 @@ import CreateDigitalContentModal from "./create-digital-content-modal";
 import DeleteModal from "./delete-modal";
 import { useAuth0 } from "@auth0/auth0-react";
 import {jwtDecode} from "jwt-decode";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const TopicList = ({topicIdList, onCreateTopic, subjectId }) => {
   const [topics, setTopics] = useState([]);
@@ -38,7 +39,7 @@ const TopicList = ({topicIdList, onCreateTopic, subjectId }) => {
         setPermissions(decodedToken.permissions);
         console.log('Permissions from token', decodedToken.permissions);
 
-        const response = await axios.get(`/topic/get?topicsIds=${topicIdList.join(',')}`, {
+        const response = await axios.get(`${apiUrl}/topic/get?topicsIds=${topicIdList.join(',')}`, {
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }
@@ -109,7 +110,7 @@ const TopicList = ({topicIdList, onCreateTopic, subjectId }) => {
   const handleSaveTopic = async (editedTopic) => {
     console.log(`Topic data to server`, editedTopic);
     try {
-      const response = await axios.put('/topic/update', editedTopic, {
+      const response = await axios.put(`${apiUrl}/topic/update`, editedTopic, {
         headers: {
           'Authorization': `Bearer ${accessToken}`
         }
@@ -133,7 +134,7 @@ const TopicList = ({topicIdList, onCreateTopic, subjectId }) => {
 
   const deleteTopic = async (deletedTopic) => {
     try {
-      const response = await axios.delete(`/topic/delete/${deletedTopic._id}`, {
+      const response = await axios.delete(`${apiUrl}/topic/delete/${deletedTopic._id}`, {
         headers: {
           'Authorization': `Bearer ${accessToken}`
         }
@@ -146,7 +147,7 @@ const TopicList = ({topicIdList, onCreateTopic, subjectId }) => {
       };
       console.log(`Update subject after removing topic`, updatedSubject)
 
-      await axios.put('/subject/update', updatedSubject, {
+      await axios.put(`${apiUrl}/subject/update`, updatedSubject, {
         headers: {
           'Authorization': `Bearer ${accessToken}`
         }
@@ -170,7 +171,7 @@ const TopicList = ({topicIdList, onCreateTopic, subjectId }) => {
 
       console.log(`Updated topic to save`, updatedTopic)
 
-      const response = await axios.put('/topic/update', updatedTopic, {
+      const response = await axios.put(`${apiUrl}/topic/update`, updatedTopic, {
         headers: {
           'Authorization': `Bearer ${accessToken}`
         }
@@ -202,7 +203,7 @@ const TopicList = ({topicIdList, onCreateTopic, subjectId }) => {
         digitalContentIdList: selectedTopic.digitalContentIdList.filter((contentId) => contentId !== deletingContent),
       };
 
-      const response = await axios.put('/topic/update', updatedTopic, {
+      const response = await axios.put(`${apiUrl}/topic/update`, updatedTopic, {
         headers: {
           'Authorization': `Bearer ${accessToken}`
         }
