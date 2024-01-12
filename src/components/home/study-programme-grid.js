@@ -4,7 +4,6 @@ import Icon from "@mdi/react";
 import { mdiLoading } from "@mdi/js";
 import styles from "./programmes.module.css";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import DeleteModal from "./delete-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +14,6 @@ export default function StudyProgrammeGrid({onDelete}) {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
   const [studyProgrammes, setStudyProgrammes] = useState([]);
   const [permissions, setPermissions] = useState([]);
-  const [token, setToken] = useState("");
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [selectedProgramme, setSelectedProgramme] = useState(null)
   const [programmesLoadCall, setProgrammesLoadCall] = useState({
@@ -33,7 +31,6 @@ export default function StudyProgrammeGrid({onDelete}) {
         console.log(userId);
 
         const decodedToken = jwtDecode(accessToken);
-        console.log(decodedToken);
         setPermissions(decodedToken.permissions);
         setToken(accessToken);
       } catch (error) {

@@ -15,8 +15,7 @@ export default function Home() {
   const [showTokenModal, setShowTokenModal] = useState(false);
   const [token, setToken] = useState("");
   const [showCreateModal, setShowCreateModal] = useState(false);
-
-  const handleShowModal = () => setShowCreateModal(true);
+  
   const handleCloseModal = () => setShowCreateModal(false);
 
   useEffect(() => {

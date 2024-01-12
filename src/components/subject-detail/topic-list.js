@@ -15,7 +15,7 @@ import {jwtDecode} from "jwt-decode";
 
 const TopicList = ({topicIdList, onCreateTopic, subjectId }) => {
   const [topics, setTopics] = useState([]);
-  const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const [openTopics, setOpenTopics] = useState([]);
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);

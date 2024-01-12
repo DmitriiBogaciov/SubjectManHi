@@ -7,7 +7,6 @@ import EditContentModal from "./edit-digital-content-modal";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const DigitalContentList = ({accessToken, permissions, digitalContentIdList, onAddExistingContent, onAddNewContent, onDeleteContent, onEditContent}) => {
-  const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
   const [digitalContents, setDigitalContents] = useState([]);
   const [showEditContentModal, setShowEditContentModal] = useState(false);
   const [editingContent, setEditingContent] = useState(null);
