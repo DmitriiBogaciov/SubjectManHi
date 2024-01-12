@@ -10,6 +10,7 @@ import CreateTopicModal from '../components/subject-detail/create-topic-modal';
 import EditSubjectModal from "../components/subject-detail/edit-subject-modal";
 import DeleteModal from "../components/subject-detail/delete-modal";
 import StudentManagerModal from "../components/subject-detail/student-manager-modal";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function SubjectDetail() {
     const navigate = useNavigate();
@@ -22,7 +23,6 @@ export default function SubjectDetail() {
     const [showDeleteModal, setShowDeleteModal] = useState(false); //Subject
     const [accessToken, setAccessToken] = useState('');
     const [showStudentManagerModal, setShowStudentManagerModal] = useState(false);
-    const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         const handleAuth = async () => {
