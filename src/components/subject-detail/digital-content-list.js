@@ -4,7 +4,6 @@ import DigitalContentInfo from './digital-content-info';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from "react-bootstrap";
 import EditContentModal from "./edit-digital-content-modal";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const DigitalContentList = ({accessToken, permissions, digitalContentIdList, onAddExistingContent, onAddNewContent, onDeleteContent, onEditContent}) => {
   const [digitalContents, setDigitalContents] = useState([]);

@@ -32,7 +32,6 @@ export default function StudyProgrammeGrid({onDelete}) {
 
         const decodedToken = jwtDecode(accessToken);
         setPermissions(decodedToken.permissions);
-        setToken(accessToken);
       } catch (error) {
         console.error("Error during authentication:", error.message);
       }
