@@ -22,6 +22,7 @@ export default function SubjectDetail() {
     const [showDeleteModal, setShowDeleteModal] = useState(false); //Subject
     const [accessToken, setAccessToken] = useState('');
     const [showStudentManagerModal, setShowStudentManagerModal] = useState(false);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         const handleAuth = async () => {
@@ -49,7 +50,7 @@ export default function SubjectDetail() {
     useEffect(() => {
         const fetchSubjects = async () => {
             try {
-                const response = await axios.get(`/subject/get?subjectIds=${id}`);
+                const response = await axios.get(`${apiUrl}/subject/get?subjectIds=${id}`);
                 console.log(`Response from subject/get`, response);
 
                 const contentType = response.headers["content-type"];
@@ -77,7 +78,7 @@ export default function SubjectDetail() {
     const handleCreateTopic = async (newTopic) => {
         try {
             console.log('New topic to send to server', newTopic)
-            const response = await axios.post('/topic/create', newTopic, {
+            const response = await axios.post(`${apiUrl}/topic/create`, newTopic, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
@@ -86,7 +87,7 @@ export default function SubjectDetail() {
 
             if (response.data.response_code === 200) {
                 const newTopicId = response.data.result.id;
-                const updatedSubjectResponse = await axios.put('/subject/update', {
+                const updatedSubjectResponse = await axios.put(`${apiUrl}/subject/update`, {
                     id: subject._id,
                     topicIdList: [...subject.topicIdList, newTopicId]
                 }, {
@@ -116,7 +117,7 @@ export default function SubjectDetail() {
 
     const handleEditSubject = async (editedSubject) => {
         try {
-            const response = await axios.put(`/subject/update`, editedSubject, {
+            const response = await axios.put(`${apiUrl}/subject/update`, editedSubject, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
@@ -137,7 +138,7 @@ export default function SubjectDetail() {
 
     const handleDeleteSubject = async () => {
         try {
-            const response = await axios.delete(`/subject/delete/${subject._id}`, {
+            const response = await axios.delete(`${apiUrl}/subject/delete/${subject._id}`, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
