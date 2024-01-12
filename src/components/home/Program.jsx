@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../../App.css";
 import "../../css/program.css";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import SubjectBlock from "./Subject-block";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -20,7 +20,7 @@ function Program() {
     const accessToken = await getAccessTokenSilently();
 
     const new_subjects = subjects.filter(
-      (subject) => subject._id != program_id
+      (subject) => subject._id !== program_id
     );
     console.log(new_subjects);
     await axios.put(
@@ -58,7 +58,7 @@ function Program() {
         setSubjects(response.data.result.subjects);
         subjectsResponse.data.result.map((subject) => {
           const year = response?.data?.result.subjects.find(
-            (subject_real) => subject._id == subject_real._id
+            (subject_real) => subject._id === subject_real._id
           ).year;
           console.log(year);
           switch (year) {

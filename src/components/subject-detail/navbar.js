@@ -2,8 +2,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faUserGraduate } from '@fortawesome/free-solid-svg-icons';
-import { Button } from 'react-bootstrap';
-import EditSubjectModal from './edit-subject-modal';
 
 export default function Navbar(props) {
   const { onEditSubject, onDeleteSubject, onManageStudents } = props;
