@@ -8,6 +8,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Modal, Form } from "react-bootstrap";
 import "../css/home.css";
 import axios from "axios";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function Home() {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
@@ -48,7 +49,7 @@ export default function Home() {
   const handleCreateProgramme = async (newProgramme) => {
     try {
       console.log(`New programme to send to server`, newProgramme);
-      const response = await axios.post('/study-programme/create', newProgramme, {
+      const response = await axios.post(`${apiUrl}/study-programme/create`, newProgramme, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -68,7 +69,7 @@ export default function Home() {
   const handleDeleteProgramme = async (deletedProgramme) => {
     try {
       console.log(`Programme id to delete`, deletedProgramme);
-      const response = await axios.delete(`/study-programme/delete/${deletedProgramme}`, {
+      const response = await axios.delete(`${apiUrl}/study-programme/delete/${deletedProgramme}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
