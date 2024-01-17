@@ -15,9 +15,9 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function StudyProgrammeGridData({ onDelete }) {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
- 
+
   const [dataLoadStatus, setDataLoadStatus] = useState("Pending");
-  const [errorMessage,setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [studyProgrammes, setStudyProgrammes] = useState([]);
   const [permissions, setPermissions] = useState([]);
@@ -47,10 +47,10 @@ export default function StudyProgrammeGridData({ onDelete }) {
           progress: undefined,
           theme: "dark",
 
-      });
+        });
       }
     };
-   
+
 
     if (isAuthenticated) {
       handleAuth();
@@ -82,36 +82,27 @@ export default function StudyProgrammeGridData({ onDelete }) {
           draggable: true,
           progress: undefined,
           theme: "dark",
-      
-      });
+
+        });
       });
   }, []);
 
 
 
   return (
-<<<<<<< HEAD
-    <div className="flex justify-center">
-      {
 
-        <StudyProgrammeGrid onDelete={onDelete}></StudyProgrammeGrid>
+    <div className="">
+      {
+        (dataLoadStatus === "Pending") ?
+          <Loading></Loading>
+          : (dataLoadStatus === "Error") ?
+            <ErrorComponent message={errorMessage}></ErrorComponent> :
+            <StudyProgrammeGrid onDelete={onDelete} permissions={permissions} studyProgrammes={studyProgrammes}></StudyProgrammeGrid>
 
       }
-=======
-   
-    <div className="">
-    {
-      (dataLoadStatus === "Pending")?
-      <Loading></Loading>
-      :(dataLoadStatus === "Error")?
-      <ErrorComponent message={errorMessage}></ErrorComponent>:
-      <StudyProgrammeGrid onDelete={onDelete} permissions={permissions} studyProgrammes={studyProgrammes}></StudyProgrammeGrid>
-    
-    }
->>>>>>> 7b741c6c4bb92b29b935b15015276c7d9fe1c323
 
 
     </div>
-   
+
   )
 }
