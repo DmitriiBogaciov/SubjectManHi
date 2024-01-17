@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/home/navbar";
+import Navbar from "../components/visual-component/navbar-home";
 import { jwtDecode } from "jwt-decode";
-import SearchBox from "../components/home/search-box";
-import StudyProgrammeGrid from "../components/home/study-programme-grid";
-import CreateProgrammeModal from "../components/home/create-programme-modal";
+import SearchBox from "../components/visual-component/search-box";
+import StudyProgrammeGridData from "../components/data-component/study-programme-grid-data";
+import CreateProgrammeModal from "../components/visual-component/create-programme-modal";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Modal, Form } from "react-bootstrap";
 import "../css/home.css";
@@ -93,7 +93,7 @@ export default function Home() {
         onCreate={() => setShowCreateModal(true)}
       />
       <SearchBox />
-      <StudyProgrammeGrid
+      <StudyProgrammeGridData
         onDelete = {handleDeleteProgramme}
       />
 

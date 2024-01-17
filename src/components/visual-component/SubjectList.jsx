@@ -1,7 +1,7 @@
 import "../../App.css";
 import { Link } from "react-router-dom";
-import { listOfSubjects } from "./mock-data/list-of-subjects";
-import { studyProgrames } from "./mock-data/study-programes";
+import { listOfSubjects } from "../mock-data/list-of-subjects";
+import { studyProgrames } from "../mock-data/study-programes";
 import "bootstrap/dist/css/bootstrap.css";
 
 function SubjectList() {

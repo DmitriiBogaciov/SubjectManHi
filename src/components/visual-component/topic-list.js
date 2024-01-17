@@ -7,7 +7,7 @@ import DeleteTopicModal from "./delete-topic-modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "react-bootstrap";
-import AddExistingContentModal from "./add-existing-content-modal";
+import AddExistingContentModal from "./add-existing-content-modal"
 import CreateDigitalContentModal from "./create-digital-content-modal";
 import DeleteModal from "./delete-modal";
 import { useAuth0 } from "@auth0/auth0-react";

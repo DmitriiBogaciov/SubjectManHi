@@ -6,9 +6,9 @@ import Home from "./routes/home";
 import Subject from "./routes/subject-detail";
 import reportWebVitals from "./reportWebVitals";
 import Auth0ProviderWithNavigate from "./auth0-provider-with-navigate";
-import Program from "./components/home/Program";
+import Program from "./components/visual-component/Program";
 
-console.log(process.env);
+
 
 const root = createRoot(document.getElementById("root"));
 root.render(

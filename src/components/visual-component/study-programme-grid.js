@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import React, { useEffect, useState } from "react";
 import Icon from "@mdi/react";
 import { mdiLoading } from "@mdi/js";
-import styles from "./programmes.module.css";
+
 import { Link } from "react-router-dom";
 import DeleteModal from "./delete-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -66,7 +66,7 @@ export default function StudyProgrammeGrid({onDelete}) {
     switch (programmesLoadCall.state) {
       case "pending":
         return (
-          <div className={styles.loading}>
+          <div >
             <Icon size={2} path={mdiLoading} spin={true} />
           </div>
         );
@@ -121,7 +121,7 @@ export default function StudyProgrammeGrid({onDelete}) {
         );
       case "error":
         return (
-          <div className={styles.error}>
+          <div >
             <div>Failed to load programmes data.</div>
             <br />
             <pre>{JSON.stringify(programmesLoadCall.error, null, 2)}</pre>

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate} from 'react-router-dom';
-import Navbar from "../components/subject-detail/navbar";
+import Navbar from "../components/visual-component/navbar";
 import {jwtDecode} from "jwt-decode";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import SubjectInfo from '../components/subject-detail/subject-info';
-import TopicList from '../components/subject-detail/topic-list';
-import CreateTopicModal from '../components/subject-detail/create-topic-modal';
-import EditSubjectModal from "../components/subject-detail/edit-subject-modal";
-import DeleteModal from "../components/subject-detail/delete-modal";
-import StudentManagerModal from "../components/subject-detail/student-manager-modal";
+import SubjectInfo from '../components/visual-component/subject-info';
+import TopicList from "../components/visual-component/topic-list";
+import CreateTopicModal from '../components/visual-component/create-topic-modal';
+import EditSubjectModal from "../components/visual-component/edit-subject-modal";
+import DeleteModal from "../components/visual-component/delete-modal";
+import StudentManagerModal from "../components/visual-component/student-manager-modal";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function SubjectDetail() {
