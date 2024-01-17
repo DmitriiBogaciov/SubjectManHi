@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/visual-component/navbar-home";
 import { jwtDecode } from "jwt-decode";
 import SearchBox from "../components/visual-component/search-box";
+
 import StudyProgrammeGridData from "../components/data-component/study-programme-grid-data";
-import CreateProgrammeModal from "../components/visual-component/create-programme-modal";
+import CreateProgrammeModalData from "../components/data-component/create-programme-modal-data";
+
+
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Modal, Form } from "react-bootstrap";
 import "../css/home.css";
 import axios from "axios";
+import { ToastContainer } from "react-toastify";
+
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function Home() {
@@ -57,12 +62,14 @@ export default function Home() {
 
       if (response.data && response.data.response_code === 200) {
         console.log('Programme created successfully:', response.data.result);
-        window.location.reload();
+        return true
       } else {
         console.error('Failed to create programme. Response code is not positive:', response.data.response_code);
+        return false
       }
     } catch (error) {
       console.error('Failed to create programme:', error);
+      return false
     }
   };
 
@@ -108,7 +115,7 @@ export default function Home() {
         </Button>
       )}
 
-      <CreateProgrammeModal
+      <CreateProgrammeModalData
         show={showCreateModal}
         handleClose={handleCloseModal}
         handleCreateProgramme={handleCreateProgramme}
@@ -132,7 +139,7 @@ export default function Home() {
           </Button>
         </Modal.Footer>
       </Modal>
-
+      <ToastContainer/>
     </div>
   );
 }

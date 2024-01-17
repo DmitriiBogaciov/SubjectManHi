@@ -16,11 +16,10 @@ const CreateProgrammeModal = ({ show, handleClose, handleCreateProgramme }) => {
 
   const handleSubmit = () => {
     handleCreateProgramme(formData);
-    handleClose();
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <div>
       <Modal.Header closeButton>
         <Modal.Title>Create Programme</Modal.Title>
       </Modal.Header>
@@ -86,7 +85,7 @@ const CreateProgrammeModal = ({ show, handleClose, handleCreateProgramme }) => {
           Create
         </Button>
       </Modal.Footer>
-    </Modal>
+    </div>
   );
 };
 

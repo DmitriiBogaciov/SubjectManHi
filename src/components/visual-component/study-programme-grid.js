@@ -11,66 +11,28 @@ import { jwtDecode } from "jwt-decode";
 import { useAuth0 } from "@auth0/auth0-react";
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export default function StudyProgrammeGrid({onDelete}) {
+export default function StudyProgrammeGrid({permissions, onDelete, studyProgrammes}) {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
-  const [studyProgrammes, setStudyProgrammes] = useState([]);
-  const [permissions, setPermissions] = useState([]);
+  const [study_programmes, set_study_programmes] = useState(studyProgrammes);
+  const [_permissions, set_permissions] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [selectedProgramme, setSelectedProgramme] = useState(null)
-  const [programmesLoadCall, setProgrammesLoadCall] = useState({
-    state: "pending",
-  });
 
-  useEffect(() => {
-    const handleAuth = async () => {
-      try {
-        const accessToken = await getAccessTokenSilently();
 
-        const userProfile = await user;
-        const userId = user.sub;
-        console.log(userProfile);
-        console.log(userId);
+  useEffect(()=>
+  {
+    set_permissions(permissions)
+  },[permissions])
 
-        const decodedToken = jwtDecode(accessToken);
-        setPermissions(decodedToken.permissions);
-      } catch (error) {
-        console.error("Error during authentication:", error.message);
-      }
-    };
+  useEffect(()=>
+  {
+    set_study_programmes(studyProgrammes)
+  },[studyProgrammes])
 
-    if (isAuthenticated) {
-      handleAuth();
-    }
-  }, [isAuthenticated, user, getAccessTokenSilently]);
 
-  useEffect(() => {
-    fetch(`${apiUrl}/study-programme/list`, {
-      method: "GET",
-    })
-      .then(async (response) => {
-        const responseJson = await response.json();
-        console.log(responseJson.result);
-        if (response.status >= 400) {
-          setProgrammesLoadCall({ state: "error", error: responseJson });
-        } else {
-          setProgrammesLoadCall({ state: "success", data: responseJson });
-          setStudyProgrammes(responseJson.result);
-        }
-      })
-      .catch((error) => {
-        setProgrammesLoadCall({ state: "error", error: error.message });
-      });
-  }, []);
 
   function getChild() {
-    switch (programmesLoadCall.state) {
-      case "pending":
-        return (
-          <div >
-            <Icon size={2} path={mdiLoading} spin={true} />
-          </div>
-        );
-      case "success":
+
         return (
           <div className="container text-center">
             <div className="row">
@@ -96,7 +58,7 @@ export default function StudyProgrammeGrid({onDelete}) {
                       </p>
                     </div>
                   </Link>
-                  {permissions.includes('delete:programmes') && (
+                  {_permissions.includes('delete:programmes') && (
                     <div className="d-flex justify-content-end" style={{ margin: "5px" }}>
                       <FontAwesomeIcon
                         onClick={() => {
@@ -119,17 +81,7 @@ export default function StudyProgrammeGrid({onDelete}) {
             />
           </div>
         );
-      case "error":
-        return (
-          <div >
-            <div>Failed to load programmes data.</div>
-            <br />
-            <pre>{JSON.stringify(programmesLoadCall.error, null, 2)}</pre>
-          </div>
-        );
-      default:
-        return null;
-    }
+       
   }
 
   return <div>{getChild()}</div>;

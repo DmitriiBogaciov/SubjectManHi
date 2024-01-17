@@ -5,6 +5,8 @@ import Navigation from './bricks/Navigation';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.css";
 
+import { ToastContainer } from 'react-bootstrap';
+
 function App() {
 
   return (
@@ -14,6 +16,7 @@ function App() {
           </Helmet>
           <Navigation/>
           <Outlet />
+
       </div>
   );
 }

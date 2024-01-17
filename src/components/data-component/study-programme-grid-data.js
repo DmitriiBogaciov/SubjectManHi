@@ -5,23 +5,23 @@ import { jwtDecode } from "jwt-decode";
 import { useAuth0 } from "@auth0/auth0-react";
 
 //Custom components...
-import LoadingComponent from "../visual-component/Loading.component";
-import Error_component from "../visual-component/Error.component";
+import Loading from "../visual-component/Loading";
+import ErrorComponent from "../visual-component/Error.component";
 import StudyProgrammeGrid from "../visual-component/study-programme-grid";
+
+import { ToastContainer, toast } from 'react-toastify';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function StudyProgrammeGridData({ onDelete }) {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
+ 
   const [dataLoadStatus, setDataLoadStatus] = useState("Pending");
+  const [errorMessage,setErrorMessage] = useState("");
 
   const [studyProgrammes, setStudyProgrammes] = useState([]);
   const [permissions, setPermissions] = useState([]);
-  const [showDeleteModal, setShowDeleteModal] = useState(false)
-  const [selectedProgramme, setSelectedProgramme] = useState(null)
-  const [programmesLoadCall, setProgrammesLoadCall] = useState({
-    state: "pending",
-  });
+
 
   useEffect(() => {
     const handleAuth = async () => {
@@ -37,8 +37,20 @@ export default function StudyProgrammeGridData({ onDelete }) {
         setPermissions(decodedToken.permissions);
       } catch (error) {
         console.error("Error during authentication:", error.message);
+
+        toast.error("Error during authentication:", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+
+      });
       }
     };
+   
 
     if (isAuthenticated) {
       handleAuth();
@@ -53,25 +65,53 @@ export default function StudyProgrammeGridData({ onDelete }) {
         const responseJson = await response.json();
         console.log(responseJson.result);
         if (response.status >= 400) {
-          setProgrammesLoadCall({ state: "error", error: responseJson });
+          setDataLoadStatus("Error")
+          setErrorMessage("Error getting study pragmmes")
         } else {
-          setProgrammesLoadCall({ state: "success", data: responseJson });
+          setDataLoadStatus("Loaded")
           setStudyProgrammes(responseJson.result);
         }
       })
       .catch((error) => {
-        setProgrammesLoadCall({ state: "error", error: error.message });
+        setDataLoadStatus("Error")
+        toast.error("Error Fetching Data", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+      
+      });
       });
   }, []);
 
+
+
   return (
+<<<<<<< HEAD
     <div className="flex justify-center">
       {
 
         <StudyProgrammeGrid onDelete={onDelete}></StudyProgrammeGrid>
 
       }
+=======
+   
+    <div className="">
+    {
+      (dataLoadStatus === "Pending")?
+      <Loading></Loading>
+      :(dataLoadStatus === "Error")?
+      <ErrorComponent message={errorMessage}></ErrorComponent>:
+      <StudyProgrammeGrid onDelete={onDelete} permissions={permissions} studyProgrammes={studyProgrammes}></StudyProgrammeGrid>
+    
+    }
+>>>>>>> 7b741c6c4bb92b29b935b15015276c7d9fe1c323
+
 
     </div>
+   
   )
 }
