@@ -5,13 +5,13 @@ import axios from "axios";
 import SubjectBlock from "../components/visual-component/Subject-block";
 import { useAuth0 } from "@auth0/auth0-react";
 import EditProgramModal from "../components/visual-component/edit-program";
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 const apiUrl = process.env.REACT_APP_API_URL;
 
 
 function Program() {
   const { id } = useParams();
-  const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const [dataOfSingleProgram, setDataOfSingleProgram] = useState();
   const [subjects, setSubjects] = useState();
   const [subjectsByYear, setSubjectsByYear] = useState({
