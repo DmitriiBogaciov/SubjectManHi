@@ -6,15 +6,9 @@ import Home from "./routes/home";
 import Subject from "./routes/subject-detail";
 import reportWebVitals from "./reportWebVitals";
 import Auth0ProviderWithNavigate from "./auth0-provider-with-navigate";
-<<<<<<< HEAD
 import Program from "./routes/Program";
-
-
-=======
-import Program from "./components/visual-component/Program";
 import { ToastContainer } from "react-bootstrap";
 import 'react-toastify/dist/ReactToastify.css';
->>>>>>> 7b741c6c4bb92b29b935b15015276c7d9fe1c323
 
 const root = createRoot(document.getElementById("root"));
 root.render(
@@ -27,9 +21,9 @@ root.render(
           <Route path="/program/:id" element={<Program />} />
         </Route>
       </Routes>
- 
+
     </Auth0ProviderWithNavigate>
   </BrowserRouter>
-  
+
 );
 reportWebVitals();
