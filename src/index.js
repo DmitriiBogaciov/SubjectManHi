@@ -7,8 +7,8 @@ import Subject from "./routes/subject-detail";
 import reportWebVitals from "./reportWebVitals";
 import Auth0ProviderWithNavigate from "./auth0-provider-with-navigate";
 import Program from "./components/visual-component/Program";
-
-
+import { ToastContainer } from "react-bootstrap";
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = createRoot(document.getElementById("root"));
 root.render(
@@ -21,7 +21,9 @@ root.render(
           <Route path="/program/:id" element={<Program />} />
         </Route>
       </Routes>
+ 
     </Auth0ProviderWithNavigate>
   </BrowserRouter>
+  
 );
 reportWebVitals();
