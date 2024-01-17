@@ -11,7 +11,7 @@ import StudyProgrammeGrid from "../visual-component/study-programme-grid";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export default function StudyProgrammeGridData({onDelete}) {
+export default function StudyProgrammeGridData({ onDelete }) {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
   const [dataLoadStatus, setDataLoadStatus] = useState("Pending");
 
@@ -66,14 +66,11 @@ export default function StudyProgrammeGridData({onDelete}) {
 
   return (
     <div className="flex justify-center">
-    {
-      (dataLoadStatus === "Pending")?
-      <LoadingComponent></LoadingComponent>
-      :(dataLoadStatus === "Error")?
-      <Error_component></Error_component>:
-      <StudyProgrammeGrid onDelete={onDelete}></StudyProgrammeGrid>
+      {
 
-    }
+        <StudyProgrammeGrid onDelete={onDelete}></StudyProgrammeGrid>
+
+      }
 
     </div>
   )

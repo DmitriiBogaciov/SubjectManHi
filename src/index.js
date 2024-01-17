@@ -6,7 +6,7 @@ import Home from "./routes/home";
 import Subject from "./routes/subject-detail";
 import reportWebVitals from "./reportWebVitals";
 import Auth0ProviderWithNavigate from "./auth0-provider-with-navigate";
-import Program from "./components/visual-component/Program";
+import Program from "./routes/Program";
 
 
 
