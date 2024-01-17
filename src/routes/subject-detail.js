@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate} from 'react-router-dom';
-import Navbar from "../components/visual-component/navbar";
+import Navbar from "../components/visual-component/navbar-subject";
 import {jwtDecode} from "jwt-decode";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";

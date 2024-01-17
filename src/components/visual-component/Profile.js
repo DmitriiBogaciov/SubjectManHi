@@ -17,8 +17,8 @@ const Profile = () => {
                     alt={user.name}
                     style={{ borderRadius: '50%', width: '30px', height: '30px', marginRight: '10px' }}
                 />
-                <div>
-                    <h2 style={{ fontSize: '14px', margin: '0' }}>{user.name}</h2>
+                <div className='flex justify-center'>
+                    <h2 className='text-white text-sm m-0'>{user.name} </h2>
                 </div>
             </div>
         )

@@ -1,3 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, #root {
+  height: 100% !important; /* We still have to fix html height */
+}
+
+body {
+  min-height: 100%;
+}
+
+body, #root {
+  min-height: 100% !important;
+  height: 100%;
+}
+
 .App {
   text-align: center;
 }
@@ -24,6 +41,8 @@
   color: white;
 }
 
+
+
 .App-link {
   color: #61dafb;
 }
@@ -41,4 +60,31 @@
 .col > a:visited {
   text-decoration: none;
   text-decoration-line: none;
+}
+
+@media only screen and (min-width: 1024px) {
+  .card-container
+  {
+    position: relative;
+  }
+  .card-header
+  {
+    position: relative;
+    top:50px;
+  }
+  .card-description
+  {
+    opacity: 0;
+  }
+  .card-container:hover .card-header
+  {
+      top:5px;
+      transition: 200ms;
+  }
+  .card-container:hover .card-description
+  {
+      opacity: 1;
+      transition: 500ms;
+  }
+
 }

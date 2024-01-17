@@ -1,18 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import Select from 'react-select'
 
-const CreateProgrammeModal = ({ show, handleClose, handleCreateProgramme }) => {
+
+const StudyProgrammeModal = ({ show, handleClose, handleCreateProgramme, subjects }) => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
     language: '',
     degree: '',
+    subjectsYear1:[],
+    subjectsYear2:[],
+    subjectsYear3:[],
+    subjectsYear4:[],
   });
+  const [subjectOptions,setSubjectOptions] = useState([]);
+
+  useEffect(()=>
+  {
+  
+    let newOptions = [];
+    for(let s in subjects)
+    {
+      newOptions.push({value:subjects[s].id,label:subjects[s].name})
+    }
+    setSubjectOptions(newOptions)
+  },[subjects])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
+  const handleSubjectsChange = (e,year) => {
+    console.log(e)
+    let f = formData;
+    f["subjectsYear"+year] = [...e]
+
+    setFormData(f);
+    console.log(f)
+
+  }
 
   const handleSubmit = () => {
     handleCreateProgramme(formData);
@@ -75,6 +102,23 @@ const CreateProgrammeModal = ({ show, handleClose, handleCreateProgramme }) => {
               <option value="Master">Master</option>
             </Form.Control>
           </Form.Group>
+
+          <Form.Group controlId="formSubjects">
+            <Form.Label>Subjects for 1st year</Form.Label>
+            <Select  isMulti={true} onChange={(e)=>handleSubjectsChange(e,1)} isSearchable={true} options={subjectOptions}></Select>
+          </Form.Group>
+          <Form.Group controlId="formSubjects">
+            <Form.Label>Subjects for 2nd year</Form.Label>
+            <Select  isMulti={true} onChange={(e)=>handleSubjectsChange(e,2)} isSearchable={true} options={subjectOptions}></Select>
+          </Form.Group>
+          <Form.Group controlId="formSubjects">
+            <Form.Label>Subjects for 3rd year</Form.Label>
+            <Select  isMulti={true} onChange={(e)=>handleSubjectsChange(e,3)} isSearchable={true} options={subjectOptions}></Select>
+          </Form.Group>
+          <Form.Group controlId="formSubjects">
+            <Form.Label>Subjects for 4th year</Form.Label>
+            <Select  isMulti={true} onChange={(e)=>handleSubjectsChange(e,4)} isSearchable={true} options={subjectOptions}></Select>
+          </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
@@ -89,4 +133,4 @@ const CreateProgrammeModal = ({ show, handleClose, handleCreateProgramme }) => {
   );
 };
 
-export default CreateProgrammeModal;
+export default StudyProgrammeModal;

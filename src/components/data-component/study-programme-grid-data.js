@@ -20,6 +20,8 @@ export default function StudyProgrammeGridData({ onDelete }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [studyProgrammes, setStudyProgrammes] = useState([]);
+
+
   const [permissions, setPermissions] = useState([]);
 
 
@@ -85,6 +87,8 @@ export default function StudyProgrammeGridData({ onDelete }) {
 
         });
       });
+
+    
   }, []);
 
 

@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import SearchBox from "../components/visual-component/search-box";
 
 import StudyProgrammeGridData from "../components/data-component/study-programme-grid-data";
-import CreateProgrammeModalData from "../components/data-component/create-programme-modal-data";
+import CreateProgrammeModalData from "../components/data-component/programme-modal-data";
 
 
 import { useAuth0 } from "@auth0/auth0-react";
@@ -18,7 +18,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 export default function Home() {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
   const [permissions, setPermissions] = useState([]);
-  const [showTokenModal, setShowTokenModal] = useState(false);
+
   const [token, setToken] = useState("");
   const [showCreateModal, setShowCreateModal] = useState(false);
   
@@ -48,30 +48,9 @@ export default function Home() {
     }
   }, [isAuthenticated, user, getAccessTokenSilently]);
 
-  const handleShowToken = () => setShowTokenModal(true);
-  const handleCloseToken = () => setShowTokenModal(false);
 
-  const handleCreateProgramme = async (newProgramme) => {
-    try {
-      console.log(`New programme to send to server`, newProgramme);
-      const response = await axios.post(`${apiUrl}/study-programme/create`, newProgramme, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
 
-      if (response.data && response.data.response_code === 200) {
-        console.log('Programme created successfully:', response.data.result);
-        return true
-      } else {
-        console.error('Failed to create programme. Response code is not positive:', response.data.response_code);
-        return false
-      }
-    } catch (error) {
-      console.error('Failed to create programme:', error);
-      return false
-    }
-  };
+ 
 
   const handleDeleteProgramme = async (deletedProgramme) => {
     try {
@@ -94,52 +73,26 @@ export default function Home() {
   }
 
   return (
-    <div className="home">
+    <main className="container bg-slate-900 pt-3">
       <Navbar
         permissions={permissions}
         onCreate={() => setShowCreateModal(true)}
       />
-      <SearchBox />
+
       <StudyProgrammeGridData
         onDelete = {handleDeleteProgramme}
       />
 
-      {isAuthenticated && (
-        <Button
-          variant="primary"
-          style={{ margin: "20px" }}
-          onClick={handleShowToken}
-          className="token-button"
-        >
-          Show Token
-        </Button>
-      )}
+      
 
       <CreateProgrammeModalData
         show={showCreateModal}
         handleClose={handleCloseModal}
-        handleCreateProgramme={handleCreateProgramme}
+        token={token}
       />
 
-      <Modal show={showTokenModal} onHide={handleCloseToken}>
-        <Modal.Header closeButton>
-          <Modal.Title>Access Token</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group controlId="formToken">
-              <Form.Label>Token</Form.Label>
-              <Form.Control as="textarea" rows={21} value={token} readOnly />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseToken}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+     
       <ToastContainer/>
-    </div>
+    </main>
   );
 }
