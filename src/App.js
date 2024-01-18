@@ -5,8 +5,6 @@ import Navigation from './components/visual-component/navbar-main';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.css";
 
-import { ToastContainer } from 'react-bootstrap';
-
 function App() {
 
   return (

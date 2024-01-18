@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 import StudyProgrammeModal from '../visual-component/programme-modal';
 import Loading from '../visual-component/Loading';
@@ -15,7 +15,7 @@ const ProgrammeModalData = ({ show, handleClose, token, mode, studyProgramme  })
   const [dataLoadStatus, setDataLoadStatus] = useState("Loaded");
   const [errorMessage, setErrorMessage] = useState("");
   const [subjects, setSubjects] = useState([]);
-  const [study_programme,set_study_programme] = useState([])
+  //const [study_programme,set_study_programme] = useState([])
 
 
   useEffect(() => {
@@ -230,7 +230,7 @@ const ProgrammeModalData = ({ show, handleClose, token, mode, studyProgramme  })
   };
 
   
-  const handleDeleteProgramme = async (deletedProgramme) => {
+ /* const handleDeleteProgramme = async (deletedProgramme) => {
     try {
       setDataLoadStatus("Pending")
       console.log(`Programme id to delete`, deletedProgramme);
@@ -261,7 +261,7 @@ const ProgrammeModalData = ({ show, handleClose, token, mode, studyProgramme  })
     } catch (error) {
     console.error('Failed to delete programme:', error);
     }
-  }
+  }*/
 
   return (
     <Modal show={show} onHide={handleClose}>

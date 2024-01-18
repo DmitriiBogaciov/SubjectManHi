@@ -1,18 +1,15 @@
 import "bootstrap/dist/css/bootstrap.css";
 import React, { useEffect, useState } from "react";
-import Icon from "@mdi/react";
-import { mdiLoading } from "@mdi/js";
 import DeleteModal from "./delete-modal";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { jwtDecode } from "jwt-decode";
 import { useAuth0 } from "@auth0/auth0-react";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function StudyProgrammeGrid({ permissions, onDelete, studyProgrammes }) {
-  const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
-  const [study_programmes, set_study_programmes] = useState(studyProgrammes);
+ // const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
+  //const [study_programmes, set_study_programmes] = useState(studyProgrammes);
   const [_permissions, set_permissions] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [selectedProgramme, setSelectedProgramme] = useState(null)
@@ -22,9 +19,9 @@ export default function StudyProgrammeGrid({ permissions, onDelete, studyProgram
     set_permissions(permissions)
   }, [permissions])
 
-  useEffect(() => {
+  /*useEffect(() => {
     set_study_programmes(studyProgrammes)
-  }, [studyProgrammes])
+  }, [studyProgrammes])*/
 
 
 

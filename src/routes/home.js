@@ -9,10 +9,7 @@ import CreateProgrammeModalData from "../components/data-component/programme-mod
 
 import { useAuth0 } from "@auth0/auth0-react";
 import "../css/home.css";
-import axios from "axios";
 import { ToastContainer } from "react-toastify";
-
-const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function Home() {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();

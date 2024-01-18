@@ -2,15 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import Button from './Button';
-import LogoutButton from '../../LogoutButton';
 import Profile from './Profile';
 import { Modal, Form } from "react-bootstrap";
 import { useAuth0 } from '@auth0/auth0-react';
 import { useState, useEffect } from 'react';
 import { jwtDecode } from "jwt-decode";
-
-const apiUrl = process.env.REACT_APP_API_URL;
-
 
 const Navigation = () => {
 
@@ -32,7 +28,6 @@ const Navigation = () => {
                 console.log(userProfile);
                 console.log(userId);
 
-                const decodedToken = jwtDecode(accessToken);
                 setToken(accessToken);
             } catch (error) {
                 console.error("Error during authentication:", error.message);
