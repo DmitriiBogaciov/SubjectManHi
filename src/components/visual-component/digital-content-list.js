@@ -77,10 +77,10 @@ const DigitalContentList = ({accessToken, permissions, digitalContentIdList, onA
     <div className='bg-slate-500 p-2'>
       <div className="d-flex ">
         {permissions.includes('update:topic') && (
-        <Button onClick={onAddExistingContent} style={{marginLeft: "0px", marginBottom: "5px", marginTop: "5px"}} variant="outline-dark" size="sm">+</Button>
+        <Button onClick={onAddExistingContent} style={{marginLeft: "0px", marginBottom: "5px", marginTop: "5px"}} variant="outline-light" size="sm">+</Button>
         )}
         {permissions.includes('create:digitalContent') && (
-          <Button onClick={onAddNewContent} style={{marginLeft: "5px", marginBottom: "5px", marginTop: "5px"}} variant="outline-dark" size="sm">Create</Button>
+          <Button onClick={onAddNewContent} style={{marginLeft: "5px", marginBottom: "5px", marginTop: "5px"}} variant="outline-light" size="sm">Create</Button>
         )}
       </div>
       <div className="row">

@@ -43,8 +43,8 @@ function Program() {
     getAccessTokenSilently().then((val) => {
       setToken(val);
     })
-
-  }, [])
+    
+  },[getAccessTokenSilently])
 
   useEffect(() => {
     async function getData() {
@@ -56,8 +56,7 @@ function Program() {
         });
 
         setDataOfSingleProgram(response.data.result);
-        const ids = response.data.result.subjects
-          .map((subject) => subject._id);
+     
 
         let subjectResponse = await (await axios.get(`${apiUrl}/subject/list`)).data.result
 
@@ -85,7 +84,7 @@ function Program() {
     }
 
     getData();
-  }, [id]);
+  }, [id, token]);
 
   return (
     <div className="pt-3">
