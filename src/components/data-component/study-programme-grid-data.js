@@ -9,11 +9,12 @@ import Loading from "../visual-component/Loading";
 import ErrorComponent from "../visual-component/Error.component";
 import StudyProgrammeGrid from "../visual-component/study-programme-grid";
 
-import { ToastContainer, toast } from 'react-toastify';
+import axios from "axios";
+import { toast } from 'react-toastify';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export default function StudyProgrammeGridData({ onDelete }) {
+export default function StudyProgrammeGridData({ token }) {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
   const [dataLoadStatus, setDataLoadStatus] = useState("Pending");
@@ -21,9 +22,7 @@ export default function StudyProgrammeGridData({ onDelete }) {
 
   const [studyProgrammes, setStudyProgrammes] = useState([]);
 
-
   const [permissions, setPermissions] = useState([]);
-
 
   useEffect(() => {
     const handleAuth = async () => {
@@ -88,9 +87,59 @@ export default function StudyProgrammeGridData({ onDelete }) {
         });
       });
 
-    
+
   }, []);
 
+  const handleDeleteProgramme = async (deletedProgramme) => {
+    try {
+      setDataLoadStatus("Pending")
+      console.log(`Programme id to delete`, deletedProgramme);
+      const response = await axios.delete(`${apiUrl}/study-programme/delete/${deletedProgramme}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (response.data && response.data.response_code === 200) {
+        toast.success("Study programme deleted!", {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          onClose: () => {
+            window.location.reload();
+          },
+        });
+        console.log('Programme deleted successfully:', response.data.result);
+      } else {
+        console.error('Failed to delete programme. Response code is not positive:', response.data.response_code);
+        toast.error("Deleting programme Failed", {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    } catch (error) {
+      console.error('Failed to delete programme:', error);
+      toast.error("Deleting programme Failed", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+    setDataLoadStatus("Loaded")
+  }
 
 
   return (
@@ -101,7 +150,7 @@ export default function StudyProgrammeGridData({ onDelete }) {
           <Loading></Loading>
           : (dataLoadStatus === "Error") ?
             <ErrorComponent message={errorMessage}></ErrorComponent> :
-            <StudyProgrammeGrid onDelete={onDelete} permissions={permissions} studyProgrammes={studyProgrammes}></StudyProgrammeGrid>
+            <StudyProgrammeGrid onDelete={handleDeleteProgramme} permissions={permissions} studyProgrammes={studyProgrammes}></StudyProgrammeGrid>
 
       }
 

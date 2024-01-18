@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/visual-component/navbar-home";
 import { jwtDecode } from "jwt-decode";
-import SearchBox from "../components/visual-component/search-box";
+
 
 import StudyProgrammeGridData from "../components/data-component/study-programme-grid-data";
 import CreateProgrammeModalData from "../components/data-component/programme-modal-data";
 
 
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button, Modal, Form } from "react-bootstrap";
 import "../css/home.css";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
@@ -50,27 +49,6 @@ export default function Home() {
 
 
 
- 
-
-  const handleDeleteProgramme = async (deletedProgramme) => {
-    try {
-      console.log(`Programme id to delete`, deletedProgramme);
-      const response = await axios.delete(`${apiUrl}/study-programme/delete/${deletedProgramme}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      if (response.data && response.data.response_code === 200) {
-        console.log('Programme deleted successfully:', response.data.result);
-        window.location.reload();
-      } else {
-        console.error('Failed to delete programme. Response code is not positive:', response.data.response_code);
-      }
-    } catch (error) {
-    console.error('Failed to delete programme:', error);
-    }
-  }
 
   return (
     <main className="container bg-slate-900 pt-3">
@@ -80,7 +58,7 @@ export default function Home() {
       />
 
       <StudyProgrammeGridData
-        onDelete = {handleDeleteProgramme}
+        token={token}
       />
 
       
@@ -89,6 +67,7 @@ export default function Home() {
         show={showCreateModal}
         handleClose={handleCloseModal}
         token={token}
+        mode={"create"}
       />
 
      

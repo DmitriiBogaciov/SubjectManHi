@@ -3,38 +3,51 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import Select from 'react-select'
 
 
-const StudyProgrammeModal = ({ show, handleClose, handleCreateProgramme, subjects }) => {
+const StudyProgrammeModal = ({ show, handleClose, handleCreateProgramme, studyProgramme, handleUpdateProgramme, mode, subjects }) => {
   const [formData, setFormData] = useState({
+    _id: undefined,
     name: '',
     description: '',
     language: '',
     degree: '',
-    subjectsYear1:[],
-    subjectsYear2:[],
-    subjectsYear3:[],
-    subjectsYear4:[],
+    subjectsYear1: [],
+    subjectsYear2: [],
+    subjectsYear3: [],
+    subjectsYear4: [],
   });
-  const [subjectOptions,setSubjectOptions] = useState([]);
+  const [subjectOptions, setSubjectOptions] = useState([]);
 
-  useEffect(()=>
-  {
-  
+  useEffect(() => {
+    if (studyProgramme) {
+      formData.name = studyProgramme.name
+      formData.description = studyProgramme.description;
+      formData.language = studyProgramme.description;
+      formData.degree = studyProgramme.degree;
+      for (let s in studyProgramme.subjects) {
+        formData["subjectsYear" + studyProgramme.subjects[s].year].value = studyProgramme.subjects[s]._id;
+        formData["subjectsYear" + studyProgramme.subjects[s].year].label = studyProgramme.subjects[s].name;
+      }
+    }
+  }, [studyProgramme])
+
+  useEffect(() => {
+
     let newOptions = [];
-    for(let s in subjects)
-    {
-      newOptions.push({value:subjects[s].id,label:subjects[s].name})
+    for (let s in subjects) {
+      newOptions.push({ value: subjects[s].id, label: subjects[s].name })
     }
     setSubjectOptions(newOptions)
-  },[subjects])
+  }, [subjects])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-  const handleSubjectsChange = (e,year) => {
+
+  const handleSubjectsChange = (e, year) => {
     console.log(e)
     let f = formData;
-    f["subjectsYear"+year] = [...e]
+    f["subjectsYear" + year] = [...e]
 
     setFormData(f);
     console.log(f)
@@ -42,7 +55,10 @@ const StudyProgrammeModal = ({ show, handleClose, handleCreateProgramme, subject
   }
 
   const handleSubmit = () => {
-    handleCreateProgramme(formData);
+    if (mode === "create")
+      handleCreateProgramme(formData);
+    if (mode === "update")
+      handleUpdateProgramme(formData);
   };
 
   return (
@@ -105,19 +121,19 @@ const StudyProgrammeModal = ({ show, handleClose, handleCreateProgramme, subject
 
           <Form.Group controlId="formSubjects">
             <Form.Label>Subjects for 1st year</Form.Label>
-            <Select  isMulti={true} onChange={(e)=>handleSubjectsChange(e,1)} isSearchable={true} options={subjectOptions}></Select>
+            <Select isMulti={true} onChange={(e) => handleSubjectsChange(e, 1)} isSearchable={true} options={subjectOptions}></Select>
           </Form.Group>
           <Form.Group controlId="formSubjects">
             <Form.Label>Subjects for 2nd year</Form.Label>
-            <Select  isMulti={true} onChange={(e)=>handleSubjectsChange(e,2)} isSearchable={true} options={subjectOptions}></Select>
+            <Select isMulti={true} onChange={(e) => handleSubjectsChange(e, 2)} isSearchable={true} options={subjectOptions}></Select>
           </Form.Group>
           <Form.Group controlId="formSubjects">
             <Form.Label>Subjects for 3rd year</Form.Label>
-            <Select  isMulti={true} onChange={(e)=>handleSubjectsChange(e,3)} isSearchable={true} options={subjectOptions}></Select>
+            <Select isMulti={true} onChange={(e) => handleSubjectsChange(e, 3)} isSearchable={true} options={subjectOptions}></Select>
           </Form.Group>
           <Form.Group controlId="formSubjects">
             <Form.Label>Subjects for 4th year</Form.Label>
-            <Select  isMulti={true} onChange={(e)=>handleSubjectsChange(e,4)} isSearchable={true} options={subjectOptions}></Select>
+            <Select isMulti={true} onChange={(e) => handleSubjectsChange(e, 4)} isSearchable={true} options={subjectOptions}></Select>
           </Form.Group>
         </Form>
       </Modal.Body>

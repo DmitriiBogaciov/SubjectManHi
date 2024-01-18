@@ -5,6 +5,7 @@ import axios from "axios";
 import SubjectBlock from "../components/visual-component/Subject-block";
 import { useAuth0 } from "@auth0/auth0-react";
 import EditProgramModal from "../components/visual-component/edit-program";
+import ProgrammeModalData from "../components/data-component/programme-modal-data";
 import { Button } from 'react-bootstrap';
 const apiUrl = process.env.REACT_APP_API_URL;
 

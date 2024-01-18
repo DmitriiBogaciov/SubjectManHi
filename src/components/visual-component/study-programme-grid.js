@@ -2,9 +2,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import React, { useEffect, useState } from "react";
 import Icon from "@mdi/react";
 import { mdiLoading } from "@mdi/js";
-
-import { Link } from "react-router-dom";
 import DeleteModal from "./delete-modal";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { jwtDecode } from "jwt-decode";
