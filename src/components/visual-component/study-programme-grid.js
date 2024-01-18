@@ -76,7 +76,12 @@ export default function StudyProgrammeGrid({ permissions, onDelete, studyProgram
           value={"Study Programme"}
           show={showDeleteModal}
           handleClose={() => setShowDeleteModal(false)}
-          handleDelete={() => onDelete(selectedProgramme)}
+          handleDelete={() => 
+            {
+              studyProgrammes.slice(studyProgrammes.indexOf(selectedProgramme),1);
+              onDelete(selectedProgramme)
+            }
+          }
         />
       </div>
     );

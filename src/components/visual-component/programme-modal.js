@@ -19,14 +19,27 @@ const StudyProgrammeModal = ({ show, handleClose, handleCreateProgramme, studyPr
 
   useEffect(() => {
     if (studyProgramme) {
-      formData.name = studyProgramme.name
-      formData.description = studyProgramme.description;
-      formData.language = studyProgramme.description;
-      formData.degree = studyProgramme.degree;
+      console.log(studyProgramme)
+      let newFormData = JSON.parse(JSON.stringify(formData));
+      newFormData._id = studyProgramme._id
+      newFormData.name = studyProgramme.name
+      newFormData.description = studyProgramme.description;
+      newFormData.language = studyProgramme.language;
+      newFormData.degree = studyProgramme.degree;
+
       for (let s in studyProgramme.subjects) {
-        formData["subjectsYear" + studyProgramme.subjects[s].year].value = studyProgramme.subjects[s]._id;
-        formData["subjectsYear" + studyProgramme.subjects[s].year].label = studyProgramme.subjects[s].name;
+
+        for (let i in subjects) {
+
+          if (subjects[i]._id && subjects[i]._id === studyProgramme.subjects[s]._id) {
+            let subjectEntry = { value: subjects[i]._id, label: subjects[i].name }
+            newFormData["subjectsYear" + studyProgramme.subjects[s].year].push(subjectEntry);
+          }
+        }
       }
+      console.log(studyProgramme)
+      console.log(newFormData)
+      setFormData(newFormData)
     }
   }, [studyProgramme])
 
@@ -45,13 +58,11 @@ const StudyProgrammeModal = ({ show, handleClose, handleCreateProgramme, studyPr
   };
 
   const handleSubjectsChange = (e, year) => {
-    console.log(e)
-    let f = formData;
-    f["subjectsYear" + year] = [...e]
 
+    let f = JSON.parse(JSON.stringify(formData));
+    f["subjectsYear" + year] = new Array(...e);
+  
     setFormData(f);
-    console.log(f)
-
   }
 
   const handleSubmit = () => {
@@ -64,7 +75,7 @@ const StudyProgrammeModal = ({ show, handleClose, handleCreateProgramme, studyPr
   return (
     <div>
       <Modal.Header closeButton>
-        <Modal.Title>Create Programme</Modal.Title>
+        <Modal.Title>Study Programme</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -121,19 +132,19 @@ const StudyProgrammeModal = ({ show, handleClose, handleCreateProgramme, studyPr
 
           <Form.Group controlId="formSubjects">
             <Form.Label>Subjects for 1st year</Form.Label>
-            <Select isMulti={true} onChange={(e) => handleSubjectsChange(e, 1)} isSearchable={true} options={subjectOptions}></Select>
+            <Select isMulti={true} onChange={(e) => handleSubjectsChange(e, 1)} isSearchable={true} options={subjectOptions} value={formData.subjectsYear1}></Select>
           </Form.Group>
           <Form.Group controlId="formSubjects">
             <Form.Label>Subjects for 2nd year</Form.Label>
-            <Select isMulti={true} onChange={(e) => handleSubjectsChange(e, 2)} isSearchable={true} options={subjectOptions}></Select>
+            <Select isMulti={true} onChange={(e) => handleSubjectsChange(e, 2)} isSearchable={true} options={subjectOptions} value={formData.subjectsYear2}></Select>
           </Form.Group>
           <Form.Group controlId="formSubjects">
             <Form.Label>Subjects for 3rd year</Form.Label>
-            <Select isMulti={true} onChange={(e) => handleSubjectsChange(e, 3)} isSearchable={true} options={subjectOptions}></Select>
+            <Select isMulti={true} onChange={(e) => handleSubjectsChange(e, 3)} isSearchable={true} options={subjectOptions} value={formData.subjectsYear3}></Select>
           </Form.Group>
           <Form.Group controlId="formSubjects">
             <Form.Label>Subjects for 4th year</Form.Label>
-            <Select isMulti={true} onChange={(e) => handleSubjectsChange(e, 4)} isSearchable={true} options={subjectOptions}></Select>
+            <Select isMulti={true} onChange={(e) => handleSubjectsChange(e, 4)} isSearchable={true} options={subjectOptions} value={formData.subjectsYear4}></Select>
           </Form.Group>
         </Form>
       </Modal.Body>
@@ -142,7 +153,7 @@ const StudyProgrammeModal = ({ show, handleClose, handleCreateProgramme, studyPr
           Close
         </Button>
         <Button variant="primary" onClick={handleSubmit}>
-          Create
+          Confirm
         </Button>
       </Modal.Footer>
     </div>

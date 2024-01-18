@@ -4,25 +4,28 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import SubjectBlock from "../components/visual-component/Subject-block";
 import { useAuth0 } from "@auth0/auth0-react";
-import EditProgramModal from "../components/visual-component/edit-program";
+import { ToastContainer } from "react-toastify";
 import { Button } from 'react-bootstrap';
+import ProgrammeModalData from "../components/data-component/programme-modal-data";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 
 function Program() {
   const { id } = useParams();
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+  const [token,setToken] = useState()
   const [dataOfSingleProgram, setDataOfSingleProgram] = useState();
   const [subjects, setSubjects] = useState();
   const [subjectsByYear, setSubjectsByYear] = useState({
-    firstYear: [],
-    secondYear: [],
-    thirdYear: [],
+          year1: [],
+          year2: [],
+          year3: [],
+          year4: [],
   });
   const [showEditModal, setShowEditModal] = useState(false);
 
   async function removeItem(program_id) {
-    const accessToken = await getAccessTokenSilently();
+    setToken(await getAccessTokenSilently());
     const new_subjects = subjects.filter((subject) => subject._id !== program_id);
     await axios.put(
       `${apiUrl}/study-programme/update/` + dataOfSingleProgram._id,
@@ -31,47 +34,55 @@ function Program() {
       },
       {
         headers: {
-          Authorization: "Bearer " + accessToken,
+          Authorization: "Bearer " + token,
         },
       }
     );
   }
+  useEffect(()=>
+  { 
+    getAccessTokenSilently().then((val)=>
+    {
+      setToken(val);
+    })
+    
+  },[])
 
   useEffect(() => {
     async function getData() {
       try {
-        const response = await axios.get(`${apiUrl}/study-programme/get/${id}`);
-        setDataOfSingleProgram(response.data.result);
-        const ids = response.data.result.subjects
-          .map((subject) => subject._id)
-          .join(",");
-
-        const subjectsResponse = await axios.get(`${apiUrl}/subject/get/?subjectIds=${ids}`);
-        const new_subjects = {
-          firstYear: [],
-          secondYear: [],
-          thirdYear: [],
-        };
-        setSubjects(response.data.result.subjects);
-
-        subjectsResponse.data.result.forEach((subject) => {
-          const year = response.data.result.subjects.find(
-            (subject_real) => subject._id === subject_real._id
-          ).year;
-          switch (year) {
-            case 1:
-              new_subjects.firstYear.push(subject);
-              break;
-            case 2:
-              new_subjects.secondYear.push(subject);
-              break;
-            case 3:
-              new_subjects.thirdYear.push(subject);
-              break;
-            default:
-              break;
+        const response = await axios.get(`${apiUrl}/study-programme/get/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
           }
         });
+
+        setDataOfSingleProgram(response.data.result);
+        const ids = response.data.result.subjects
+          .map((subject) => subject._id);
+        
+        let subjectResponse = await (await axios.get(`${apiUrl}/subject/list`)).data.result
+        
+        //const subjectsResponse = await axios.get(`${apiUrl}/subject/get/?subjectIds=${ids}`);
+        const new_subjects = {
+          year1: [],
+          year2: [],
+          year3: [],
+          year4: [],
+        };
+        let subjectsToShow = [];
+        for(let sub in subjectResponse)
+        {
+            for(let r in response.data.result.subjects)
+            {
+              if(response.data.result.subjects[r]._id === subjectResponse[sub]._id)
+              {
+                new_subjects["year"+response.data.result.subjects[r].year].push(subjectResponse[sub]);
+              }
+            }
+        }
+        setSubjects(response.data.result.subjects);
+        
         setSubjectsByYear(new_subjects);
       } catch (error) {
         console.error("Chyba:", error.message);
@@ -108,7 +119,7 @@ function Program() {
               First Year
             </p>
             <p className="fs-8 p-3 mb-2 bg-body-secondary">
-              {subjectsByYear.firstYear.map((subject) => (
+              {subjectsByYear.year1.map((subject) => (
                 <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
               ))}
             </p>
@@ -118,7 +129,7 @@ function Program() {
               Second Year
             </p>
             <p className="fs-8 p-3 mb-2 bg-body-secondary">
-              {subjectsByYear.secondYear.map((subject) => (
+              {subjectsByYear.year2.map((subject) => (
                 <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
               ))}
             </p>
@@ -128,20 +139,35 @@ function Program() {
               Third Year
             </p>
             <p className="fs-8 p-3 mb-2 bg-body-secondary">
-              {subjectsByYear.thirdYear.map((subject) => (
+              {subjectsByYear.year3.map((subject) => (
+                <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
+              ))}
+            </p>
+          </div>
+          <div className="col">
+            <p className="fs-4 fw-bold p-3 mb-2 bg-secondary text-white">
+              Fourth Year
+            </p>
+            <p className="fs-8 p-3 mb-2 bg-body-secondary">
+              {subjectsByYear.year4.map((subject) => (
                 <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
               ))}
             </p>
           </div>
         </div>
       </div>
+
       {isAuthenticated && <Button onClick={() => { setShowEditModal(true) }}>Update programme</Button>}
-      <EditProgramModal
-        show={showEditModal}
-        handleClose={() => setShowEditModal(false)}
-        data={dataOfSingleProgram}
-        setData={setDataOfSingleProgram}
-      ></EditProgramModal>
+  
+      <ProgrammeModalData
+      show={showEditModal}
+      handleClose={() => setShowEditModal(false)}
+      studyProgramme={dataOfSingleProgram}
+      mode={"update"}
+      token={token} >
+      </ProgrammeModalData>
+
+      <ToastContainer></ToastContainer>
     </div>
 
   );

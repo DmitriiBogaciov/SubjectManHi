@@ -15,7 +15,6 @@ const ProgrammeModalData = ({ show, handleClose, token, mode, studyProgramme  })
   const [dataLoadStatus, setDataLoadStatus] = useState("Loaded");
   const [errorMessage, setErrorMessage] = useState("");
   const [subjects, setSubjects] = useState([]);
-  //const [study_programme,set_study_programme] = useState([])
 
 
   useEffect(() => {
@@ -102,6 +101,7 @@ const ProgrammeModalData = ({ show, handleClose, token, mode, studyProgramme  })
           theme: "dark",
           onClose: () => {
             handleClose();
+            window.location.reload();
           },
         });
       } else {
@@ -170,9 +170,13 @@ const ProgrammeModalData = ({ show, handleClose, token, mode, studyProgramme  })
         delete newProgramme["subjectsYear" + i]
       }
       newProgramme.subjects = allSubjects;
+      
 
       console.log(`New programme to send to server`, newProgramme);
-      const response = await axios.post(`${apiUrl}/study-programme/update`, newProgramme, {
+      let id = newProgramme._id;
+      delete newProgramme._id;
+      newProgramme.id = id;
+      const response = await axios.put(`${apiUrl}/study-programme/update/${newProgramme.id}`, newProgramme, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -191,6 +195,7 @@ const ProgrammeModalData = ({ show, handleClose, token, mode, studyProgramme  })
           theme: "dark",
           onClose: () => {
             handleClose();
+            window.location.reload();
           },
         });
       } else {
