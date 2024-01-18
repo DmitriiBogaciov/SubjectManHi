@@ -7,7 +7,7 @@ const Button = ({ text, handleOnClick, type }) => {
         setButtonType(type);
         if (!buttonType)
             setButtonType("Default")
-    }, [type])
+    }, [type, buttonType])
 
     return (
         <div className='flex justify-center'>
