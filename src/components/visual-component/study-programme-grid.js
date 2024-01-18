@@ -4,8 +4,6 @@ import DeleteModal from "./delete-modal";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { useAuth0 } from "@auth0/auth0-react";
-const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function StudyProgrammeGrid({ permissions, onDelete, studyProgrammes }) {
  // const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();

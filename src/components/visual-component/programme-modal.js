@@ -28,7 +28,7 @@ const StudyProgrammeModal = ({ show, handleClose, handleCreateProgramme, studyPr
         formData["subjectsYear" + studyProgramme.subjects[s].year].label = studyProgramme.subjects[s].name;
       }
     }
-  }, [studyProgramme])
+  }, [studyProgramme, formData])
 
   useEffect(() => {
 
