@@ -74,8 +74,8 @@ const DigitalContentList = ({accessToken, permissions, digitalContentIdList, onA
   };
 
   return (
-    <div>
-      <div className="d-flex">
+    <div className='bg-slate-500 p-2'>
+      <div className="d-flex ">
         {permissions.includes('update:topic') && (
         <Button onClick={onAddExistingContent} style={{marginLeft: "0px", marginBottom: "5px", marginTop: "5px"}} variant="outline-dark" size="sm">+</Button>
         )}

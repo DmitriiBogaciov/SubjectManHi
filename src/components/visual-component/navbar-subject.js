@@ -26,7 +26,7 @@ export default function Navbar(props) {
 
   return (
     <div>
-      <nav className="navbar" style={{ backgroundColor: '#D7FFF1' }}>
+      <nav className="navbar p-2 mb-2 text-white bg-slate-600" >
         <div className="container-fluid">
           <form className="d-flex" role="search">
             {

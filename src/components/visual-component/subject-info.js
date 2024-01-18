@@ -3,10 +3,10 @@ import { Card } from 'react-bootstrap';
 
 const SubjectInfo = ({ subject }) => {
   return (
-    <div style={{maxWidth: "90%", margin: "0 auto"}}>
-      <Card style={{backgroundColor: "#BAD9B2"}}>
+    <Card bg='transparent'>
+      <div className='bg-slate-800 text-white text-left p-4'>
         <Card.Body>
-          <Card.Title>{subject.name}</Card.Title>
+          <Card.Title><span className='text-4xl uppercase font-thin border-b-[1px]'> {subject.name} </span></Card.Title>
           <Card.Text>
             {subject.description}
           </Card.Text>
@@ -23,8 +23,8 @@ const SubjectInfo = ({ subject }) => {
           {/*  <strong>Supervisor:</strong> {subject.supervisorId}*/}
           {/*</Card.Text>*/}
         </Card.Body>
-      </Card>
-    </div>
+      </div>
+    </Card>
   );
 };
 

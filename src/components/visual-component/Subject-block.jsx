@@ -2,15 +2,12 @@ import { Link } from "react-router-dom";
 import "../../css/subjectblock.css";
 function SubjectBlock(props) {
   return (
-    <div key={props.subject._id}>
-      <Link to={"/subject/" + props.subject._id}>
-        <h4>{props.subject.name}</h4>
-      </Link>
-      <p>{props.subject.description}</p>
-      <button onClick={() => props.methodToRemove(props.subject._id)}>
-        Odebrat
-      </button>
-    </div>
+    <Link className="no-underline" to={"/subject/" + props.subject._id}>
+      <div className="shadow-lg bg-slate-800 rounded-md p-4 text-white" key={props.subject._id}>
+        <h4 className="uppercase font-thin border-b-[1px] p-2">{props.subject.name}</h4>
+        <p>{props.subject.description}</p>
+      </div>
+    </Link>
   );
 }
 

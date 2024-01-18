@@ -13,14 +13,14 @@ const apiUrl = process.env.REACT_APP_API_URL;
 function Program() {
   const { id } = useParams();
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
-  const [token,setToken] = useState()
+  const [token, setToken] = useState()
   const [dataOfSingleProgram, setDataOfSingleProgram] = useState();
   const [subjects, setSubjects] = useState();
   const [subjectsByYear, setSubjectsByYear] = useState({
-          year1: [],
-          year2: [],
-          year3: [],
-          year4: [],
+    year1: [],
+    year2: [],
+    year3: [],
+    year4: [],
   });
   const [showEditModal, setShowEditModal] = useState(false);
 
@@ -39,14 +39,12 @@ function Program() {
       }
     );
   }
-  useEffect(()=>
-  { 
-    getAccessTokenSilently().then((val)=>
-    {
+  useEffect(() => {
+    getAccessTokenSilently().then((val) => {
       setToken(val);
     })
-    
-  },[])
+
+  }, [])
 
   useEffect(() => {
     async function getData() {
@@ -60,9 +58,9 @@ function Program() {
         setDataOfSingleProgram(response.data.result);
         const ids = response.data.result.subjects
           .map((subject) => subject._id);
-        
+
         let subjectResponse = await (await axios.get(`${apiUrl}/subject/list`)).data.result
-        
+
         //const subjectsResponse = await axios.get(`${apiUrl}/subject/get/?subjectIds=${ids}`);
         const new_subjects = {
           year1: [],
@@ -71,18 +69,15 @@ function Program() {
           year4: [],
         };
         let subjectsToShow = [];
-        for(let sub in subjectResponse)
-        {
-            for(let r in response.data.result.subjects)
-            {
-              if(response.data.result.subjects[r]._id === subjectResponse[sub]._id)
-              {
-                new_subjects["year"+response.data.result.subjects[r].year].push(subjectResponse[sub]);
-              }
+        for (let sub in subjectResponse) {
+          for (let r in response.data.result.subjects) {
+            if (response.data.result.subjects[r]._id === subjectResponse[sub]._id) {
+              new_subjects["year" + response.data.result.subjects[r].year].push(subjectResponse[sub]);
             }
+          }
         }
         setSubjects(response.data.result.subjects);
-        
+
         setSubjectsByYear(new_subjects);
       } catch (error) {
         console.error("Chyba:", error.message);
@@ -94,77 +89,87 @@ function Program() {
 
   return (
     <div className="pt-3">
-      <div className="container text-center">
-        <div className="row">
-          <div className="col">
-            <p className="fs-2 fw-bold text-white bg-dark bg-gradient">
-              {dataOfSingleProgram?.name}
-            </p>
-          </div>
+      <div className="container text-center bg-slate-600 p-3">
+        <div className="">
+          <p className="text-4xl text-white uppercase font-thin p-4">
+            {dataOfSingleProgram?.name}
+          </p>
         </div>
-        <div className="row row-cols-2">
-          <div className="col">
-            <p className="fs-5 p-3 mb-2 bg-body-secondary">
-              {dataOfSingleProgram?.description}
-            </p>
-          </div>
-          <div className="col">
-            <p className="fs-5 p-3 mb-2 bg-body-secondary">
-              Degree: {dataOfSingleProgram?.degree} <br></br>
-              Language: {dataOfSingleProgram?.language}
-            </p>
-          </div>
-          <div className="col">
-            <p className="fs-4 fw-bold p-3 mb-2 bg-secondary text-white">
+        <div className="grid grid-cols-1 mb-4 text-white text-xl bg-slate-700 p-4 rounded-md">
+          <p className="mr-4 uppercase font-thin text-left">Description: </p>
+          <p className="text-left">
+            {dataOfSingleProgram?.description}
+          </p>
+        </div>
+        <div className="grid grid-cols-1 mb-4 text-white text-xl bg-slate-700 p-4 rounded-md">
+          <p className="text-left">
+            <span className="mr-4 uppercase font-thin"> Degree:</span> {dataOfSingleProgram?.degree} <br></br>
+          </p>
+          <p className="text-left">
+            <span className="mr-4 uppercase font-thin text-left">Language:</span> {dataOfSingleProgram?.language}
+          </p>
+        </div>
+        <div className="mb-4 bg-slate-700 p-4 rounded-md">
+          <h3 className="text-left text-white">Subjects:</h3>
+          <div className="p-2 text-left">
+            <p className="fs-4 fw-bold p-3 mb-2 text-white">
               First Year
             </p>
-            <p className="fs-8 p-3 mb-2 bg-body-secondary">
+            <p className="">
               {subjectsByYear.year1.map((subject) => (
-                <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
+                <div className="mb-2">
+                  <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
+                </div>
               ))}
             </p>
           </div>
-          <div className="col">
-            <p className="fs-4 fw-bold p-3 mb-2 bg-secondary text-white">
+          <div className="p-2 text-left">
+            <p className="fs-4 fw-bold p-3 mb-2 text-white">
               Second Year
             </p>
-            <p className="fs-8 p-3 mb-2 bg-body-secondary">
+            <p className="">
               {subjectsByYear.year2.map((subject) => (
-                <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
+                <div className="mb-2">
+                  <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
+                </div>
               ))}
             </p>
           </div>
-          <div className="col">
-            <p className="fs-4 fw-bold p-3 mb-2 bg-secondary text-white">
+          <div className="p-2 text-left">
+            <p className="fs-4 fw-bold p-3 mb-2 text-white">
               Third Year
             </p>
-            <p className="fs-8 p-3 mb-2 bg-body-secondary">
+            <p className="">
               {subjectsByYear.year3.map((subject) => (
-                <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
+                <div className="mb-2">
+                  <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
+                </div>
               ))}
             </p>
           </div>
-          <div className="col">
-            <p className="fs-4 fw-bold p-3 mb-2 bg-secondary text-white">
+          <div className="p-2 text-left">
+            <p className="fs-4 fw-bold p-3 mb-2 text-white">
               Fourth Year
             </p>
-            <p className="fs-8 p-3 mb-2 bg-body-secondary">
+            <p className="">
               {subjectsByYear.year4.map((subject) => (
-                <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
+                <div className="mb-2">
+                  <SubjectBlock methodToRemove={removeItem} subject={subject} key={subject._id} />
+                </div>
               ))}
             </p>
           </div>
         </div>
+        {isAuthenticated && <Button onClick={() => { setShowEditModal(true) }}>Update programme</Button>}
       </div>
 
-      {isAuthenticated && <Button onClick={() => { setShowEditModal(true) }}>Update programme</Button>}
-  
+
       <ProgrammeModalData
-      show={showEditModal}
-      handleClose={() => setShowEditModal(false)}
-      studyProgramme={dataOfSingleProgram}
-      mode={"update"}
-      token={token} >
+        show={showEditModal}
+        handleClose={() => setShowEditModal(false)}
+        studyProgramme={dataOfSingleProgram}
+        mode={"update"}
+        token={token} >
       </ProgrammeModalData>
 
       <ToastContainer></ToastContainer>

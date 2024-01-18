@@ -90,10 +90,10 @@ const ProgrammeModalData = ({ show, handleClose, token, mode, studyProgramme  })
 
       if (response.data && response.data.response_code === 200) {
         console.log('Programme created successfully:', response.data.result);
-        setDataLoadStatus("Loaded");
+
         toast.success("Study Programme Added Successfuly", {
           position: "top-center",
-          autoClose: 1500,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           draggable: true,
@@ -101,6 +101,7 @@ const ProgrammeModalData = ({ show, handleClose, token, mode, studyProgramme  })
           theme: "dark",
           onClose: () => {
             handleClose();
+            setDataLoadStatus("Loaded");
             window.location.reload();
           },
         });
@@ -184,10 +185,9 @@ const ProgrammeModalData = ({ show, handleClose, token, mode, studyProgramme  })
 
       if (response.data && response.data.response_code === 200) {
         console.log('Programme created successfully:', response.data.result);
-        setDataLoadStatus("Loaded");
         toast.success("Study Programme Added Successfuly", {
           position: "top-center",
-          autoClose: 1500,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           draggable: true,
@@ -196,6 +196,7 @@ const ProgrammeModalData = ({ show, handleClose, token, mode, studyProgramme  })
           onClose: () => {
             handleClose();
             window.location.reload();
+            setDataLoadStatus("Loaded");
           },
         });
       } else {
