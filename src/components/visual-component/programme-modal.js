@@ -41,7 +41,7 @@ const StudyProgrammeModal = ({ show, handleClose, handleCreateProgramme, studyPr
       console.log(newFormData)
       setFormData(newFormData)
     }
-  }, [studyProgramme, formData])
+  }, [studyProgramme, formData, subjects])
 
   useEffect(() => {
 
