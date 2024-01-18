@@ -232,10 +232,10 @@ const TopicList = ({ topicIdList, onCreateTopic, subjectId }) => {
     <div style={{ marginTop: '20px', maxWidth: "90%", margin: "0 auto", }}>
       <h2 style={{ marginBottom: '10px', color: 'white' }}>Learning materials</h2>
       {permissions.includes('create:topic') && (
-        <Button className="d-flex align-items-center" style={{ marginLeft: "0px", marginBottom: "8px" }} variant="outline-dark" size="sm" onClick={() => onCreateTopic()}>
-          <FontAwesomeIcon icon={faPlus} size="lg" style={{ marginRight: "2px" }} />
-          New
-        </Button>
+          <Button className="d-flex align-items-center" style={{marginLeft: "0px", marginBottom: "8px"}} variant="outline-light" size="sm" onClick={() => onCreateTopic()}>
+            <FontAwesomeIcon icon={faPlus} size="lg" style={{marginRight: "2px"}}/>
+            New
+          </Button>
       )}
       {Array.isArray(topics) && topics.map((topic, index) => (
         <div key={topic._id} style={{ marginBottom: "15px" }}>
