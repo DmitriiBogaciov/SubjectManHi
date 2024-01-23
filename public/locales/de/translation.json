@@ -1,0 +1,46 @@
+{
+    "header":
+    {
+        "title":"Übersicht über die Einkaufsliste",
+        "button":"Einkaufsliste hinzufügen",
+        "language_button":"Sprachwechsel",
+        "settings_button":"Einstellungen",
+        "light_dark_mode":"Hell-/Dunkelmodus"
+    },
+
+    "button":
+    {
+        "edit":"Bearbeiten",
+        "delete":"Löschen",
+        "add":"Hinzufügen",
+        "submit":"Einreichen"
+    },
+
+    "input":
+    {
+        "list":
+        {
+            "heading_1":"Benennung",
+            "heading_2":"Aktion",
+            "cant_remove":"Kann nicht entfernt werden",
+            "cant_add":"Kann nicht hinzugefügt werden",
+            "search_for_component":"Artikel suchen",
+            "no_item":"Es konnte kein Artikel gefunden werden"
+        }
+    },
+
+    "list_grid":
+    {
+        "no_item":"Es gibt keine Einkaufslisten. Warten Sie nicht und erstellen Sie eines."
+    },
+
+    "form":
+    {
+        "name":"Benennung",
+        "description":"Beschreibung",
+        "submit":"Einreichen",
+        "items":"Artikel",
+        "create_item":"Artikel erstellen",
+        "close":"Schließen"
+    }
+}

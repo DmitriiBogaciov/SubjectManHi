@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 html, #root {
   height: 100% !important; /* We still have to fix html height */
@@ -8,6 +11,7 @@ html, #root {
 
 body {
   min-height: 100%;
+  font-family: 'Inter', sans-serif;
 }
 
 body, #root {
@@ -63,25 +67,27 @@ body, #root {
 }
 
 @media only screen and (min-width: 1024px) {
-  .card-container
+  .card-effect-container
   {
     position: relative;
+    height: 100%;
   }
-  .card-header
+  .card-effect-header
   {
     position: relative;
-    top:50px;
+    top:50%;
+    transform: translate(0, -50%);
   }
-  .card-description
+  .card-effect-description
   {
     opacity: 0;
   }
-  .card-container:hover .card-header
+  .card-effect-container:hover .card-effect-header
   {
       top:5px;
       transition: 200ms;
   }
-  .card-container:hover .card-description
+  .card-effect-container:hover .card-effect-description
   {
       opacity: 1;
       transition: 500ms;

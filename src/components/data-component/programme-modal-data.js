@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 
-import StudyProgrammeModal from '../visual-component/programme-modal';
-import Loading from '../visual-component/Loading';
-import ErrorComponent from '../visual-component/Error.component';
+import StudyProgrammeModal from '../VisualComponent/programme-modal';
+import Loading from '../VisualComponent/Loading.component';
+import ErrorComponent from '../VisualComponent/Error.component';
 import axios from "axios";
 import { toast } from 'react-toastify';
 

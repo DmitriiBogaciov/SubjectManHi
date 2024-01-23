@@ -5,9 +5,9 @@ import { jwtDecode } from "jwt-decode";
 import { useAuth0 } from "@auth0/auth0-react";
 
 //Custom components...
-import Loading from "../visual-component/Loading";
-import ErrorComponent from "../visual-component/Error.component";
-import StudyProgrammeGrid from "../visual-component/study-programme-grid";
+import Loading from "../VisualComponent/Loading.component";
+import ErrorComponent from "../VisualComponent/Error.component";
+import StudyProgrammeGrid from "../VisualComponent/study-programme-grid";
 
 import axios from "axios";
 import { toast } from 'react-toastify';

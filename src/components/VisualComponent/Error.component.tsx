@@ -1,5 +1,6 @@
+import React from "react"
 
-const Error_component = ({message}) =>
+const Error = ({message}) =>
 {
 
     return (
@@ -15,4 +16,4 @@ const Error_component = ({message}) =>
     )
 }
 
-export default Error_component
+export default Error

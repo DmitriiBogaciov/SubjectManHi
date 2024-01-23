@@ -1,13 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
-import Button from './Button';
-import Profile from './Profile';
 import { Modal, Form } from "react-bootstrap";
 import { useAuth0 } from '@auth0/auth0-react';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const Navigation = () => {
+//Custom components
+import Button from './Button.component.tsx';
+import Profile from './Profile.js';
+
+
+const MainNavBar = () => {
 
     const [showTokenModal, setShowTokenModal] = useState(false);
     const [token, setToken] = useState("");
@@ -16,6 +20,7 @@ const Navigation = () => {
 
     const handleShowToken = () => { console.log("yo"); setShowTokenModal(true) };
     const handleCloseToken = () => setShowTokenModal(false);
+    const {t} = useTranslation();
 
     useEffect(() => {
         const handleAuth = async () => {
@@ -23,9 +28,9 @@ const Navigation = () => {
                 const accessToken = await getAccessTokenSilently();
 
                 const userProfile = await user;
-                const userId = user.sub;
+                //const userId = user.sub;
                 console.log(userProfile);
-                console.log(userId);
+               // console.log(userId);
 
                 setToken(accessToken);
             } catch (error) {
@@ -47,7 +52,7 @@ const Navigation = () => {
 
     return (
         <>
-            <Navbar bg="dark" variant="dark" expand="md" className='p-4 flex'>
+            <Navbar bg="dark" variant="dark" expand="md" className='p-4 flex shadow-sm'>
                 <Nav className="flex justify-between  w-[100%]">
 
                     <NavLink to="/" className={"no-underline text-white text-3xl p-2"}>
@@ -61,20 +66,14 @@ const Navigation = () => {
                         {isAuthenticated && (
                             <div className='m-auto pl-2 pr-2'>
 
-                                <Button
-                                    text="Show Token"
-                                    handleOnClick={handleShowToken}
-                                >
-                                    Show Token
-                                </Button>
 
                             </div>
                         )}
                         <div className='m-auto'>
                             {
                                 (!isAuthenticated) ?
-                                    <Button text={"Log In"} handleOnClick={onClickLogIn} type={"Submit"} /> :
-                                    <Button text={"Log Out"} handleOnClick={onClickLogOut} type={"Delete"} />
+                                    <Button label={t("login")} onClickHandler={onClickLogIn} type={"Submit"} /> :
+                                    <Button label={t("logout")} onClickHandler={onClickLogOut} type={"Delete"} />
                             }
 
                         </div>
@@ -95,7 +94,6 @@ const Navigation = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button type="Delete" handleOnClick={handleCloseToken} text="Close" />
 
                 </Modal.Footer>
             </Modal>
@@ -104,4 +102,4 @@ const Navigation = () => {
     );
 };
 
-export default Navigation;
+export default MainNavBar;

@@ -1,0 +1,35 @@
+{
+    "header":
+    {
+
+    },
+
+    "button":
+    {
+        "edit":"Upravit",
+        "delete":"Vymazat",
+        "add":"Přidat",
+        "submit":"Potvrdit"
+    },
+
+    "list_grid":
+    {
+        "no_item":"Momentálně jsme nenašli žádné položky."
+    },
+
+    "form":
+    {
+        "name":"Název",
+        "description":"Popis",
+        "submit":"Potvrdit",
+        "items":"Položky",
+        "create_item":"Vytvořit položku",
+        "close":"Zavřít"
+    },
+
+    "error":
+    {
+        "oh_no":"Ale ne, něco se pokazilo",
+        "communication_server":"Nemohli jsme navázat spojení se serverem"
+    }
+}

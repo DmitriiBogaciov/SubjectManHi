@@ -1,0 +1,36 @@
+{
+    "header":
+    {
+
+    },
+
+    "button":
+    {
+        "edit":"Edit",
+        "delete":"Remove",
+        "add":"Add",
+        "submit":"Submit"
+    },
+
+
+
+    "list_grid":
+    {
+        "no_item":"We didn't find any items."
+    },
+
+    "form":
+    {
+        "name":"Name",
+        "description":"Description",
+        "submit":"Submit",
+        "items":"Items",
+        "create_item":"Create item",
+        "close":"Close"
+    },
+    "error":
+    {
+        "oh_no":"Oh no, something went wrong",
+        "communication_server":"Could not establish communication with server"
+    }
+}
