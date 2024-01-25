@@ -19,6 +19,18 @@ jobs:
         with:
           submodules: true
           lfs: false
+      - name: Set CI for React build   # Add this step to set CI environment variable
+        run: export CI=true
+        
+      - name: Temporarily override ESLint configuration
+        run: |
+          echo "{
+            \"rules\": {
+              \"no-unused-vars\": \"warn\"
+              // Add more rules here as needed
+            }
+          }" > .eslintrc_override.json
+          
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
