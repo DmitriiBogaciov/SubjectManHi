@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const IsAuthorized = ({children}:
-    {children:string | JSX.Element | JSX.Element[] | (() => JSX.Element),neededPermissions:Array<String> }) => {
+    {children:string | JSX.Element | JSX.Element[] | (() => JSX.Element),neededPermissions:Array<string> }) => {
 
     const { loginWithRedirect, getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
     const neededPermissions = [];
-    const [permissions, setPermissions] = useState<Array<String>>([]);
+    const [permissions, setPermissions] = useState<Array<string>>([]);
     const {t} = useTranslation();
     console.log(children)
     useEffect(() => {
@@ -17,6 +17,7 @@ const IsAuthorized = ({children}:
             try {
                 const accessToken = await getAccessTokenSilently();
                 const decodedToken = jwtDecode(accessToken);
+    
                 // @ts-ignore 
                 if (decodedToken.permissions)
                      // @ts-ignore

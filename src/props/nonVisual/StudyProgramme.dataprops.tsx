@@ -1,18 +1,19 @@
-interface StudyProgrammeDataPorps {
-    id?: String,
-    name: String,
-    description: String,
+
+interface StudyProgrammeSubjectsDataPorps {
+
+    _id: string,
+    year: number,
+    semester: "winter" | "summer",
+    type: "mandatory" | "optional" | "mandatory_optional"
+}
+interface StudyProgrammeDataProps {
+    _id?: string,
+    name: string,
+    description: string,
     language: "Czech" | "English",
     studyDegree: "Bachelor" | "Master",
-    subjects: Array<
-        {
-            _id: String,
-            year: number,
-            semester: "winter" | "summer",
-            type: "mandatory" | "optional" | "mandatory_optional"
-        }
-    >
+    subjects: Array<StudyProgrammeSubjectsDataPorps>
 
 }
 
-export type { StudyProgrammeDataPorps }
+export { StudyProgrammeDataProps, StudyProgrammeSubjectsDataPorps }

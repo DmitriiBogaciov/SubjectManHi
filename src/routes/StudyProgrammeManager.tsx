@@ -10,13 +10,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import "../css/home.css";
 
 //Props
-import { StudyProgrammeDataPorps } from "../props/nonVisual/StudyProgramme.dataprops.tsx";
+import { StudyProgrammeDataProps } from "../props/nonVisual/StudyProgramme.dataprops.tsx";
 
 export default function StudyProgrammeManager() {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
   const [permissions, setPermissions] = useState([]);
 
-  const [studyProgrammes,setStudyProgrammes] = useState<Array<StudyProgrammeDataPorps>>()
+  const [studyProgrammes,setStudyProgrammes] = useState<Array<StudyProgrammeDataProps>>()
 
   const {t} = useTranslation();
   useEffect(() => {

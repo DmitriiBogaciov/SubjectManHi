@@ -10,7 +10,7 @@ module.exports = {
         'powder-blue':'#98C1D9',
         'paper-darker-yellow':'#B8A991',
         'button-edit':"#AA8F04",
-        'button-default':"#AA8F04",
+        'button-default':"#1953bf",
         'button-delete':"#DA3535",
         'button-submit':"#64B216",
       }

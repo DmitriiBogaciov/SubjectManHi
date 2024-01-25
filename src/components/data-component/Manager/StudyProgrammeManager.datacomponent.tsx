@@ -15,17 +15,17 @@ import GetApiUrl from "../../../assets/helperFunc/GetApiUrl.helper.tsx";
 
 //~~~Props~~~
 import { LoadingStatus } from "../../../props/nonVisual/LoadingStatus.data.tsx";
-import { StudyProgrammeDataPorps } from "../../../props/nonVisual/StudyProgramme.dataprops.tsx";
+import { StudyProgrammeDataProps } from "../../../props/nonVisual/StudyProgramme.dataprops.tsx";
 
 
 const StudyProgrammeManagerData = () => {
 
-    const [allStudyProgrammes, setAllStudyProgrammes] = useState<Array<StudyProgrammeDataPorps>>([]);
+    const [allStudyProgrammes, setAllStudyProgrammes] = useState<Array<StudyProgrammeDataProps>>([]);
     const [LoadingStatus, setLoadingStatus] = useState<LoadingStatus>("Loaded");
 
     const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
-    const [permissions, setPermissions] = useState<Array<String>>([]);
+    const [permissions, setPermissions] = useState<Array<string>>([]);
 
     const { t } = useTranslation();
     useEffect(() => {
@@ -37,7 +37,7 @@ const StudyProgrammeManagerData = () => {
                 const userId = user?.sub;
 
                 const decodedToken = jwtDecode(accessToken);
-  
+                console.log(accessToken)
                 //@ts-ignore
                 if(decodedToken.permissions)
                     //@ts-ignore
@@ -97,6 +97,46 @@ const StudyProgrammeManagerData = () => {
         getAllStudyProgrammes();
     }, []);
 
+    const getAllStudyProgrammes = async () => {
+        try {
+            setLoadingStatus("Pending")
+            let response = await axios.get(`${GetApiUrl()}/study-programme/list`)
+
+            if (response && response.data && response.data.response_code === 200) {
+                setAllStudyProgrammes(response.data.result)
+                setLoadingStatus("Loaded");
+            } else {
+
+                setLoadingStatus("Error");
+                toast.error("Something went wrong when obtaining study programmes", {
+                    position: "top-center",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    onClose: () => {
+                        setLoadingStatus("Loaded");
+                    },
+                });
+            }
+        } catch (error) {
+            setLoadingStatus("Error");
+            toast.error("Something went wrong when obtaining study programme", {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                onClose: () => {
+
+                },
+            });
+        }
+    }
 
 
     return (

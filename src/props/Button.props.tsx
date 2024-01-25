@@ -3,9 +3,9 @@ import { IconProps } from "./Icon.props"
 interface ButtonProps
 {
     label:string,
-    onClickHandler:() => any,
+    on_click_handler:() => any,
     type:"Edit"| "Delete" | "Default" | "Submit",
-    iconBefore?:IconProps
+    icon_before?:IconProps
 }
 
 export type{ButtonProps}

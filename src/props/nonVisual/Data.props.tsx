@@ -1,7 +1,7 @@
 
 interface DataProps
 {
-    token?:String
+    token?:string
 }
 
 export type {DataProps}

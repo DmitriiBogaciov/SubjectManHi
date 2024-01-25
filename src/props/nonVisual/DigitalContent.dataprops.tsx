@@ -1,8 +1,8 @@
 interface DigitalContentDataPorps {
-    id?: String,
-    name: String,
-    description: String,
-    externalLink:String
+    _id?: string,
+    name: string,
+    description: string,
+    externalLink:string
 }
 
 export type { DigitalContentDataPorps }

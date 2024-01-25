@@ -1,23 +1,23 @@
 interface SubjectDataProps {
-    id?: String
-    name: String
-    description: String
+    _id?: string
+    name: string
+    description: string
     supervisor: {
-        id: String,
-        userName: String
+        id: string,
+        userName: string
     }
-    goal: String
+    goal: string
     credits: number
     language: "Czech" | "English",
     degree: "Bachelor" | "Master",
     students: Array<
         {
-            id: String,
-            userName: String
+            id: string,
+            userName: string
         }
     >
-    topicIdList:Array<String>
-    digitalContentIdList:Array<String>
+    topicIdList:Array<string>
+    digitalContentIdList:Array<string>
 }
 
 export type { SubjectDataProps }

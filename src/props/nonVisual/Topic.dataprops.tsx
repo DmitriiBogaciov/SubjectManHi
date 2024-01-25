@@ -1,8 +1,8 @@
 interface TopicDataProps {
-    id?: String
-    name: String
-    description: String
-    digitalContentIdList:Array<String>
+    _id?: string
+    name: string
+    description: string
+    digitalContentIdList:Array<string>
 }
 
 export type { TopicDataProps }

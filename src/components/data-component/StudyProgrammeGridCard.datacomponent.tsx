@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Loading from "../VisualComponent/Loading.component.tsx";
 import Error from "../VisualComponent/Error.component.tsx";
 import GridCard from "../VisualComponent/GridCard.component.tsx";
+import SearchField from "../VisualComponent/SearchField.component.tsx";
 
 import axios from "axios";
 import { toast } from 'react-toastify';
@@ -13,16 +14,17 @@ import { toast } from 'react-toastify';
 import GetApiUrl from "../../assets/helperFunc/GetApiUrl.helper.tsx";
 
 //Props
-import { GridCardDataProps } from "../../props/nonVisual/GridCard.dataprops.tsx";
+import { StudyProgrammeDataProps } from "../../props/nonVisual/StudyProgramme.dataprops.tsx";
 import { LoadingStatus } from "../../props/nonVisual/LoadingStatus.data.tsx";
 import { CardProps } from "../../props/Card.props.tsx";
 import { useTranslation } from "react-i18next";
+
 
 const StudyProgrammeGridCardData = () => {
 
     const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>("Pending");
     const [cardItems, setCardItems] = useState<Array<CardProps>>([]);
-    const [allStudyProgrammes, setAllStudyProgrammes] = useState();
+    const [allStudyProgrammes, setAllStudyProgrammes] = useState<Array<StudyProgrammeDataProps>>();
 
     const { t } = useTranslation();
 
@@ -36,14 +38,7 @@ const StudyProgrammeGridCardData = () => {
 
                     let studyProgrammes = response.data.result;
                     setAllStudyProgrammes(studyProgrammes);
-                    let newEntries: Array<CardProps> = []
-                    for (let s in studyProgrammes)
-                        newEntries.push({
-                            title: studyProgrammes[s].name, text: studyProgrammes[s].description, cursorEffect: "onHover",
-                            value: studyProgrammes[s]
-                        })
-
-                    setCardItems(newEntries)
+                    setNewCardItemsFromStudyProgrammes((studyProgrammes) ? studyProgrammes : [])
                     setLoadingStatus("Loaded")
                 } else {
 
@@ -78,6 +73,32 @@ const StudyProgrammeGridCardData = () => {
         getAllStudyProgrammes();
     }, []);
 
+    const setNewCardItemsFromStudyProgrammes = (allStudyProgrammes: Array<StudyProgrammeDataProps> | undefined) => {
+        let newEntries: Array<CardProps> = []
+        for (let s in allStudyProgrammes)
+            newEntries.push({
+                title: allStudyProgrammes[s].name, text: allStudyProgrammes[s].description, cursorEffect: "onHover",
+                value: allStudyProgrammes[s]
+            })
+
+        setCardItems(newEntries)
+    }
+
+    //Search field confirmation
+    const searchFieldHandler = (searchedString) => {
+        if (searchedString && searchedString !== "") {
+            setNewCardItemsFromStudyProgrammes(allStudyProgrammes?.filter((sp)=>
+            {
+                if(sp.name.toLowerCase().includes(searchedString.toLowerCase()))
+                    return sp;
+            }));
+        }
+        else
+        {
+            setNewCardItemsFromStudyProgrammes(allStudyProgrammes)
+        }
+    }
+
 
     return (
 
@@ -89,11 +110,13 @@ const StudyProgrammeGridCardData = () => {
                         <Error message={""}></Error>
                         :
                         <>
+                            <div>
+                                <SearchField confirmSearchHandler={searchFieldHandler}></SearchField>
+                            </div>
                             <h2 className="text-left p-2 border-b-2 border-slate-400">{t("degree.bachelor")}</h2>
                             <GridCard card_items={
                                 cardItems.filter((item) => {
                                     if (item.value && item.value.degree && item.value.degree === "Bachelor") {
-                                        console.log(item.value)
                                         return item;
                                     }
                                 })
@@ -102,7 +125,6 @@ const StudyProgrammeGridCardData = () => {
                             <GridCard card_items={
                                 cardItems.filter((item) => {
                                     if (item.value && item.value.degree && item.value.degree === "Master") {
-                                        console.log(item.value)
                                         return item;
                                     }
                                 })

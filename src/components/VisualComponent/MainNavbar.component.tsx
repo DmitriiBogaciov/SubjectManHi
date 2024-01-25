@@ -72,8 +72,8 @@ const MainNavBar = () => {
                         <div className='m-auto'>
                             {
                                 (!isAuthenticated) ?
-                                    <Button label={t("login")} onClickHandler={onClickLogIn} type={"Submit"} /> :
-                                    <Button label={t("logout")} onClickHandler={onClickLogOut} type={"Delete"} />
+                                    <Button label={t("login")} on_click_handler={onClickLogIn} type={"Submit"} /> :
+                                    <Button label={t("logout")} on_click_handler={onClickLogOut} type={"Delete"} />
                             }
 
                         </div>

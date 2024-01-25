@@ -4,7 +4,7 @@ interface GridCardProps
 {
     card_items?:Array<CardProps>
     //Optional parameters with permissions
-    permissions?:Array<String>
+    permissions?:Array<string>
 }
 
 export type {GridCardProps}
