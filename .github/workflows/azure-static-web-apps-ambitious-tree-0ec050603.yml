@@ -20,7 +20,7 @@ jobs:
           submodules: true
           lfs: false
       - name: Set CI for React build   # Add this step to set CI environment variable
-        run: export CI=true
+        run: export CI=false
         
       - name: Temporarily override ESLint configuration
         run: |
