@@ -1,0 +1,7 @@
+{
+    "rules": {
+      "no-unused-vars": "warn"
+      // Add more rules here as needed
+    }
+  }
+  
