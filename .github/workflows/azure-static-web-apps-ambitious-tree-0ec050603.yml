@@ -19,6 +19,8 @@ jobs:
         with:
           submodules: true
           lfs: false
+      - name: Set CI for React build   # Add this step to set CI environment variable
+        run: export CI=true
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
