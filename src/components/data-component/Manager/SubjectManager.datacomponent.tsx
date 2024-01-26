@@ -53,31 +53,19 @@ const SubjectManagerData = () => {
     }, [isAuthenticated, user, getAccessTokenSilently]);
 
     useEffect(() => {
-        const getAllSubjects = async () => {
-            try {
-                setLoadingStatus("Pending")
-                let response = await axios.get(`${GetApiUrl()}/subject/list`)
+        
+        getAllSubjectsHandler();
+    }, []);
 
-                if (response && response.data && response.data.response_code === 200) {
-                    setAllSubjects(response.data.result)
-                    setLoadingStatus("Loaded");
-                } else {
+    const getAllSubjectsHandler = async () => {
+        try {
+            setLoadingStatus("Pending")
+            let response = await axios.get(`${GetApiUrl()}/subject/list`)
 
-                    setLoadingStatus("Error");
-                    toast.error("Something went wrong when obtaining subjects", {
-                        position: "top-center",
-                        autoClose: 1500,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
-                        onClose: () => {
-                            setLoadingStatus("Loaded");
-                        },
-                    });
-                }
-            } catch (error) {
+            if (response && response.data && response.data.response_code === 200) {
+                setAllSubjects(response.data.result)
+                setLoadingStatus("Loaded");
+            } else {
                 setLoadingStatus("Error");
                 toast.error("Something went wrong when obtaining subjects", {
                     position: "top-center",
@@ -88,14 +76,26 @@ const SubjectManagerData = () => {
                     progress: undefined,
                     theme: "dark",
                     onClose: () => {
-
+                        setLoadingStatus("Loaded");
                     },
                 });
             }
-        }
-        getAllSubjects();
-    }, []);
+        } catch (error) {
+            setLoadingStatus("Error");
+            toast.error("Something went wrong when obtaining subjects", {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                onClose: () => {
 
+                },
+            });
+        }
+    }
 
     const deleteSubjectHandler = async (deletingSubject:SubjectDataProps) => {
         try {
@@ -113,6 +113,7 @@ const SubjectManagerData = () => {
 
             console.log(response.data)
             if (response && response.data && response.data.response_code === 200) {
+                await getAllSubjectsHandler();
                 setLoadingStatus("Loaded");
                 toast.success(t("deleted.success"), {
                     position: "top-center",

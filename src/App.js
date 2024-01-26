@@ -9,6 +9,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./routes/Home.tsx";
 import StudyProgrammeManager from "./routes/StudyProgrammeManager.tsx";
 import SubjectManager from './routes/SubjectManager.tsx';
+import TopicManager from './routes/TopicManager.tsx';
+import DigitalContentManager from './routes/DigitalContentManager.tsx';
 
 //Custom Components
 import MainNavbar from './components/VisualComponent/MainNavbar.component.tsx';
@@ -37,6 +39,8 @@ function App() {
                 <Routes>
                     <Route path="/manage/studyProgramme" element={<StudyProgrammeManager />} />
                     <Route path="/manage/subject" element={<SubjectManager />} />
+                    <Route path="/manage/topic" element={<TopicManager />} />
+                    <Route path="/manage/digitalContent" element={<DigitalContentManager />} />
                 </Routes>
             </IsAuthorized>
         </div>

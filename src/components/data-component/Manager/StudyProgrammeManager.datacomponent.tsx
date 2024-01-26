@@ -53,33 +53,20 @@ const StudyProgrammeManagerData = () => {
     }, [isAuthenticated, user, getAccessTokenSilently]);
 
     useEffect(() => {
-        const getAllStudyProgrammes = async () => {
-            try {
-                setLoadingStatus("Pending")
-                let response = await axios.get(`${GetApiUrl()}/study-programme/list`)
+        getAllStudyProgrammesHandler();
+    }, []);
+    const getAllStudyProgrammesHandler = async () => {
+        try {
+            setLoadingStatus("Pending")
+            let response = await axios.get(`${GetApiUrl()}/study-programme/list`)
 
-                if (response && response.data && response.data.response_code === 200) {
-                    setAllStudyProgrammes(response.data.result)
-                    setLoadingStatus("Loaded");
-                } else {
+            if (response && response.data && response.data.response_code === 200) {
+                setAllStudyProgrammes(response.data.result)
+                setLoadingStatus("Loaded");
+            } else {
 
-                    setLoadingStatus("Error");
-                    toast.error("Something went wrong when obtaining study programmes", {
-                        position: "top-center",
-                        autoClose: 1500,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
-                        onClose: () => {
-                            setLoadingStatus("Loaded");
-                        },
-                    });
-                }
-            } catch (error) {
                 setLoadingStatus("Error");
-                toast.error("Something went wrong when obtaining study programme", {
+                toast.error("Something went wrong when obtaining study programmes", {
                     position: "top-center",
                     autoClose: 1500,
                     hideProgressBar: false,
@@ -88,21 +75,33 @@ const StudyProgrammeManagerData = () => {
                     progress: undefined,
                     theme: "dark",
                     onClose: () => {
-
+                        setLoadingStatus("Loaded");
                     },
                 });
             }
+        } catch (error) {
+            setLoadingStatus("Error");
+            toast.error("Something went wrong when obtaining study programme", {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                onClose: () => {
+
+                },
+            });
         }
-        getAllStudyProgrammes();
-    }, []);
+    }
 
-
-    const deleteStudyProgrammeHandler = async (deletingStudyProgramme:StudyProgrammeDataProps) => {
+    const deleteStudyProgrammeHandler = async (deletingStudyProgramme: StudyProgrammeDataProps) => {
         try {
             console.log("Deleting!")
             console.log(deletingStudyProgramme);
             setLoadingStatus("Pending")
-            if(!deletingStudyProgramme._id)
+            if (!deletingStudyProgramme._id)
                 return false;
             let response = await axios.delete(`${GetApiUrl()}/study-programme/delete/${deletingStudyProgramme._id}`,
                 {
@@ -113,6 +112,7 @@ const StudyProgrammeManagerData = () => {
 
             console.log(response.data)
             if (response && response.data && response.data.response_code === 200) {
+                await getAllStudyProgrammesHandler();
                 setLoadingStatus("Loaded");
                 toast.success(t("deleted.success"), {
                     position: "top-center",
@@ -166,7 +166,7 @@ const StudyProgrammeManagerData = () => {
                     <Loading></Loading>
                     : (LoadingStatus === "Error") ?
                         <Error message={""}></Error> :
-                        <StudyProgrammeManager edit_study_programme_handler={(val)=>{console.log("editing"); return false;}} delete_study_programme_handler={(value)=>{let a=false;deleteStudyProgrammeHandler(value).then((res)=>a=res); return a;}}  all_study_programmes={allStudyProgrammes} permissions_={permissions}></StudyProgrammeManager>
+                        <StudyProgrammeManager edit_study_programme_handler={(val) => { console.log("editing"); return false; }} delete_study_programme_handler={(value) => { let a = false; deleteStudyProgrammeHandler(value).then((res) => a = res); return a; }} all_study_programmes={allStudyProgrammes} permissions_={permissions}></StudyProgrammeManager>
 
             }
 

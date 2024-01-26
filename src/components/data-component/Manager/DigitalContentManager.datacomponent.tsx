@@ -8,19 +8,19 @@ import { useTranslation } from "react-i18next";
 //Custom components
 import Loading from "../../VisualComponent/Loading.component.tsx";
 import Error from "../../VisualComponent/Error.component.tsx";
-import StudyProgrammeManager from "../../VisualComponent/Manager/SubjectManager.component.tsx";
+import DigitalContentManager from "../../VisualComponent/Manager/DigitalContentManager.component.tsx";
 
 //API URL of server
 import GetApiUrl from "../../../assets/helperFunc/GetApiUrl.helper.tsx";
 
 //~~~Props~~~
 import { LoadingStatus } from "../../../props/nonVisual/LoadingStatus.data.tsx";
-import { StudyProgrammeDataProps } from "../../../props/nonVisual/StudyProgramme.dataprops.tsx";
+import { DigitalContentDataProps } from "../../../props/nonVisual/DigitalContent.dataprops.tsx";
 
 
-const StudyProgrammeManagerData = () => {
+const DigitalContentManagerData = () => {
 
-    const [allStudyProgrammes, setAllStudyProgrammes] = useState<Array<StudyProgrammeDataProps>>([]);
+    const [allDigitalContents, setAllDigitalContents] = useState<Array<DigitalContentDataProps>>([]);
     const [LoadingStatus, setLoadingStatus] = useState<LoadingStatus>("Loaded");
 
     const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
@@ -54,61 +54,21 @@ const StudyProgrammeManagerData = () => {
     }, [isAuthenticated, user, getAccessTokenSilently]);
 
     useEffect(() => {
-        const getAllStudyProgrammes = async () => {
-            try {
-                setLoadingStatus("Pending")
-                let response = await axios.get(`${GetApiUrl()}/study-programme/list`)
-
-                if (response && response.data && response.data.response_code === 200) {
-                    setAllStudyProgrammes(response.data.result)
-                    setLoadingStatus("Loaded");
-                } else {
-
-                    setLoadingStatus("Error");
-                    toast.error("Something went wrong when obtaining study programmes", {
-                        position: "top-center",
-                        autoClose: 1500,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
-                        onClose: () => {
-                            setLoadingStatus("Loaded");
-                        },
-                    });
-                }
-            } catch (error) {
-                setLoadingStatus("Error");
-                toast.error("Something went wrong when obtaining study programme", {
-                    position: "top-center",
-                    autoClose: 1500,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                    onClose: () => {
-
-                    },
-                });
-            }
-        }
-        getAllStudyProgrammes();
+        getAllDigitalContentsHandler();
     }, []);
 
-    const getAllStudyProgrammesHandler = async () => {
+    const getAllDigitalContentsHandler = async () => {
         try {
             setLoadingStatus("Pending")
-            let response = await axios.get(`${GetApiUrl()}/study-programme/list`)
+            let response = await axios.get(`${GetApiUrl()}/digital-content/list`)
 
             if (response && response.data && response.data.response_code === 200) {
-                setAllStudyProgrammes(response.data.result)
+                setAllDigitalContents(response.data.result)
                 setLoadingStatus("Loaded");
             } else {
 
                 setLoadingStatus("Error");
-                toast.error("Something went wrong when obtaining study programmes", {
+                toast.error("Something went wrong when obtaining digitalContents", {
                     position: "top-center",
                     autoClose: 1500,
                     hideProgressBar: false,
@@ -123,7 +83,7 @@ const StudyProgrammeManagerData = () => {
             }
         } catch (error) {
             setLoadingStatus("Error");
-            toast.error("Something went wrong when obtaining study programme", {
+            toast.error("Something went wrong when obtaining digitalContent", {
                 position: "top-center",
                 autoClose: 1500,
                 hideProgressBar: false,
@@ -138,14 +98,14 @@ const StudyProgrammeManagerData = () => {
         }
     }
 
-    const deleteStudyProgrammeHandler = async (deletingStudyProgramme:StudyProgrammeDataProps) => {
+    const deleteDigitalContentHandler = async (deletingDigitalContent:DigitalContentDataProps) => {
         try {
             console.log("Deleting!")
-            console.log(deletingStudyProgramme);
+            console.log(deletingDigitalContent);
             setLoadingStatus("Pending")
-            if(!deletingStudyProgramme._id)
+            if(!deletingDigitalContent._id)
                 return false;
-            let response = await axios.delete(`${GetApiUrl()}/study-programme/delete/${deletingStudyProgramme._id}`,
+            let response = await axios.delete(`${GetApiUrl()}/digital-content/delete/${deletingDigitalContent._id}`,
                 {
                     headers: {
                         'Authorization': `Bearer ${await getAccessTokenSilently()}`
@@ -154,6 +114,7 @@ const StudyProgrammeManagerData = () => {
 
             console.log(response.data)
             if (response && response.data && response.data.response_code === 200) {
+                await getAllDigitalContentsHandler();
                 setLoadingStatus("Loaded");
                 toast.success(t("deleted.success"), {
                     position: "top-center",
@@ -207,7 +168,7 @@ const StudyProgrammeManagerData = () => {
                     <Loading></Loading>
                     : (LoadingStatus === "Error") ?
                         <Error message={""}></Error> :
-                        <StudyProgrammeManager edit_study_programme_handler={(val)=>{console.log("editing"); return false;}} delete_study_programme_handler={(value)=>{let a=false;deleteStudyProgrammeHandler(value).then((res)=>a=res); return a;}} all_study_programmes={allStudyProgrammes} permissions_={permissions}></StudyProgrammeManager>
+                        <DigitalContentManager  edit_digitalContent_handler={(val)=>{console.log("editing"); return false;}} delete_digitalContent_handler={(digitalContent)=>{let a = false; deleteDigitalContentHandler(digitalContent).then((val)=>{a=val}); return a;}} all_digitalContents={allDigitalContents} permissions_={permissions}></DigitalContentManager>
 
             }
 
@@ -216,4 +177,4 @@ const StudyProgrammeManagerData = () => {
     )
 }
 
-export default StudyProgrammeManagerData;
+export default DigitalContentManagerData;

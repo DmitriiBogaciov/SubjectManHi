@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 
 //Custom components
-import SubjectModal from '../../VisualComponent/Modals/SubjectModal.component.tsx';
+import DigitalContentModal from '../../VisualComponent/Modals/DigitalContentModal.component.tsx';
 import Loading from '../../VisualComponent/Loading.component.tsx';
 import ErrorComponent from '../../VisualComponent/Error.component.tsx';
 
@@ -15,43 +15,37 @@ import { jwtDecode } from 'jwt-decode';
 //API URL of server
 import GetApiUrl from '../../../assets/helperFunc/GetApiUrl.helper.tsx';
 import { useTranslation } from 'react-i18next';
-import { SubjectDataProps } from '../../../props/nonVisual/Subject.dataprops.tsx';
+import { DigitalContentDataProps } from '../../../props/nonVisual/DigitalContent.dataprops.tsx';
 
 
 //mode = "create" | "update"
-const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: ModalDataProps, editing_subject_id?: string }) => {
+const DigitalContentModalData = ({ modal_props, editing_digitalContent_id }: { modal_props: ModalDataProps, editing_digitalContent_id?: string }) => {
 
   const [dataLoadStatus, setDataLoadStatus] = useState("Pending");
   const [errorMessage, setErrorMessage] = useState("");
-  const [topics, setTopics] = useState([]);
+  const [digitalContents, setDigitalContents] = useState([]);
   const [modal, setModal] = useState<ModalDataProps>(modal_props)
-  const [editingSubject, setEditingSubject] = useState<SubjectDataProps>
+  const [editingDigitalContent, setEditingDigitalContent] = useState<DigitalContentDataProps>
     (
       {
         description: "",
-        language: "Czech",
         name: "",
-        credits: 0,
-        digitalContentIdList: [],
-        goal: "",
-        students: [],
-        supervisor: { _id: "", userName: "" },
-        topicIdList: []
+        externalLink:""
     });
 
   const { getAccessTokenSilently } = useAuth0();
   const { t } = useTranslation();
 
   useEffect(() => {
-    //Getting all topics
-    fetch(`${GetApiUrl()}/topic/list`, {
+    //Getting all digital contents
+    fetch(`${GetApiUrl()}/digital-content/list`, {
       method: "GET",
     })
       .then(async (response) => {
         const responseJson = await response.json();
         console.log(responseJson.result);
         if (response.status >= 400) {
-          toast.success("Success obtaining subjects", {
+          toast.success("Success obtaining digital content", {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -62,13 +56,12 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
           });
         } else {
           setDataLoadStatus("Loaded")
-          console.log(responseJson.result);
-          setTopics(responseJson.result)
+          setDigitalContents(responseJson.result)
         }
       })
       .catch((error) => {
         setDataLoadStatus("Error")
-        toast.error("Error obtaining subjects", {
+        toast.error("Error obtaining digitalContents", {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -82,26 +75,20 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
 
   useEffect(() => {
 
-    console.log(editing_subject_id)
-    if(editing_subject_id)
+    console.log(editing_digitalContent_id)
+    if(editing_digitalContent_id)
     {
-      getSubjectHandler(editing_subject_id).then((value)=>
+      getDigitalContentHandler(editing_digitalContent_id).then((value)=>
       {
         console.log(value)
-        if(typeof value === "object" && "credits" in value)
+        if(typeof value === "object" && "externalLink" in value)
         {
-          setEditingSubject(
+          setEditingDigitalContent(
             {
               _id:value._id,
               description:value.description,
-              language:value.language,
               name:value.name,
-              credits:value.credits,
-              digitalContentIdList:[...value.digitalContentIdList],
-              topicIdList:[...value.topicIdList],
-              students:(value.students)?[...value.students]:[],
-              supervisor:value.supervisor,
-              goal:value.goal,
+              externalLink:value.externalLink
             }
           );
         }
@@ -109,20 +96,14 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
       })
     }
     else
-      setEditingSubject( {
+      setEditingDigitalContent( {
         description: "",
-        language: "Czech",
         name: "",
-        credits: 0,
-        digitalContentIdList: [],
-        goal: "",
-        students: [],
-        supervisor: { _id: "", userName: "" },
-        topicIdList: []
+        externalLink:""
     })
     setModal(modal_props);
 
-  }, [editing_subject_id, modal_props])
+  }, [editing_digitalContent_id, modal_props])
 
   const handleClose = () => {
     let a = JSON.parse(JSON.stringify(modal))
@@ -130,14 +111,14 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
     setModal(a)
   }
 
-  const getSubjectHandler = async (subjectId?:string) => {
+  const getDigitalContentHandler = async (digitalContentId?:string) => {
     //setDataLoadStatus("Pending");
-    if(!subjectId)
+    if(!digitalContentId)
       return;
 
     try {
 
-      const response = await axios.get(`${GetApiUrl()}/subject/get/${subjectId}`, {
+      const response = await axios.get(`${GetApiUrl()}/digital-content/get/${digitalContentId}`, {
         headers: {
           'Authorization': `Bearer ${await getAccessTokenSilently()}`
         }
@@ -147,8 +128,8 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
         console.log('Programme obtained successfully:', response.data.result);
         return (Array.isArray(response.data.result))?response.data.result[0]:response.data.result;
       } else {
-        console.error('Failed to obtain subject. Response code is not positive:', response.data.response_code);
-        toast.error("Something went wrong when creating subject", {
+        console.error('Failed to obtain digitalContent. Response code is not positive:', response.data.response_code);
+        toast.error("Something went wrong when creating digitalContent", {
           position: "top-center",
           autoClose: 1000,
           hideProgressBar: false,
@@ -163,8 +144,8 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
         });
       }
     } catch (error) {
-      console.error('Failed to create subject:', error);
-      toast.error("Something went wrong when creating subject", {
+      console.error('Failed to create digitalContent:', error);
+      toast.error("Something went wrong when creating digitalContent", {
         position: "top-center",
         autoClose: 1000,
         hideProgressBar: false,
@@ -179,18 +160,18 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
     }
   };
 
-  const createSubjectHandler = async (newSubject) => {
+  const createDigitalContentHandler = async (newDigitalContent) => {
     setDataLoadStatus("Pending");
     try {
-      console.log(`New programme to send to server`, newSubject);
-      const response = await axios.post(`${GetApiUrl()}/subject/create`, newSubject, {
+      console.log(`New programme to send to server`, newDigitalContent);
+      const response = await axios.post(`${GetApiUrl()}/digital-content/create`, newDigitalContent, {
         headers: {
           'Authorization': `Bearer ${await getAccessTokenSilently()}`
         }
       });
 
       if (response.data && response.data.response_code === 200) {
-        toast.success("Subject Added Successfuly", {
+        toast.success("DigitalContent Added Successfuly", {
           position: "top-center",
           autoClose: 1000,
           hideProgressBar: false,
@@ -205,7 +186,7 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
           },
         });
       } else {
-        toast.error("Something went wrong when creating subject", {
+        toast.error("Something went wrong when creating digitalContent", {
           position: "top-center",
           autoClose: 1500,
           hideProgressBar: false,
@@ -220,7 +201,7 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
         });
       }
     } catch (error) {
-      toast.error("Something went wrong when creating subject", {
+      toast.error("Something went wrong when creating digitalContent", {
         position: "top-center",
         autoClose: 1500,
         hideProgressBar: false,
@@ -236,11 +217,11 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
     }
   };
 
-  const updateSubjectHandler = async (newSubject) => {
+  const updateDigitalContentHandler = async (newDigitalContent) => {
     setDataLoadStatus("Pending");
     try {
-      console.log(newSubject)
-      const response = await axios.put(`${GetApiUrl()}/subject/update`, newSubject, {
+      console.log(newDigitalContent)
+      const response = await axios.put(`${GetApiUrl()}/digital-content/update`, newDigitalContent, {
         headers: {
           'Authorization': `Bearer ${await getAccessTokenSilently()}`
         }
@@ -249,7 +230,7 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
       if (response.data && response.data.response_code === 200) {
         setDataLoadStatus("Loaded");
         console.log('Programme created successfully:', response.data.result);
-        toast.success("Subject Updated Successfuly", {
+        toast.success("DigitalContent Updated Successfuly", {
           position: "top-center",
           autoClose: 750,
           hideProgressBar: false,
@@ -263,9 +244,9 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
           },
         });
       } else {
-        console.error('Failed to update subject. Response code is not positive:', response.data.response_code);
+        console.error('Failed to update digitalContent. Response code is not positive:', response.data.response_code);
         setDataLoadStatus("Loaded");
-        toast.error("Something went wrong when updating subject", {
+        toast.error("Something went wrong when updating digitalContent", {
           position: "top-center",
           autoClose: 1000,
           hideProgressBar: false,
@@ -282,7 +263,7 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
     } catch (error) {
       console.error('Failed to create programme:', error);
       setDataLoadStatus("Loaded");
-      toast.error("Something went wrong when updating subject", {
+      toast.error("Something went wrong when updating digitalContent", {
         position: "top-center",
         autoClose: 1000,
         hideProgressBar: false,
@@ -303,20 +284,20 @@ const SubjectModalData = ({ modal_props, editing_subject_id }: { modal_props: Mo
   return (
     <Modal show={modal.show} >
       <Modal.Header closeButton>
-        <Modal.Title>{t("studyProgramme.modal.title")}</Modal.Title>
+        <Modal.Title>{t("digitalContent.modal.title")}</Modal.Title>
       </Modal.Header>
       {
         (dataLoadStatus === "Pending") ?
           <Loading></Loading>
           : (dataLoadStatus === "Error") ?
             <ErrorComponent message={errorMessage}></ErrorComponent> :
-            <SubjectModal _topics={topics} editing_subject={editingSubject} modal_props={{
-              show: modal.show, confirm_handler: (val) => { (val && val._id) ? updateSubjectHandler(val) : createSubjectHandler(val); }, type: (editingSubject._id) ? "Update" : "Create",
+            <DigitalContentModal _digitalContents={digitalContents} editing_digitalContent={editingDigitalContent} modal_props={{
+              show: modal.show, confirm_handler: (val) => { (val && val._id) ? updateDigitalContentHandler(val) : createDigitalContentHandler(val); }, type: (editingDigitalContent._id) ? "Update" : "Create",
               cancel_handler: () => { handleClose() }
-            }} ></SubjectModal>
+            }} ></DigitalContentModal>
       }
     </Modal>
   )
 };
 
-export default SubjectModalData;
+export default DigitalContentModalData;
