@@ -18,7 +18,7 @@ import { LoadingStatus } from "../../../props/nonVisual/LoadingStatus.data.tsx";
 import { StudyProgrammeDataProps } from "../../../props/nonVisual/StudyProgramme.dataprops.tsx";
 
 
-const StudyProgrammeManagerData = () => {
+const SubjectManagerData = () => {
 
     const [allStudyProgrammes, setAllStudyProgrammes] = useState<Array<StudyProgrammeDataProps>>([]);
     const [LoadingStatus, setLoadingStatus] = useState<LoadingStatus>("Loaded");
@@ -216,4 +216,4 @@ const StudyProgrammeManagerData = () => {
     )
 }
 
-export default StudyProgrammeManagerData;
+export default SubjectManagerData;

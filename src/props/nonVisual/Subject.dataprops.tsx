@@ -9,7 +9,6 @@ interface SubjectDataProps {
     goal: string
     credits: number
     language: "Czech" | "English",
-    degree: "Bachelor" | "Master",
     students: Array<
         {
             id: string,

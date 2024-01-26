@@ -66,6 +66,30 @@ body, #root {
   text-decoration-line: none;
 }
 
+/* Bootstrap Tab component */
+.custom-bt-tab.nav-tabs .nav-link
+{
+  border-radius: 10px;
+  
+  box-shadow: 1px 0px 4px black;
+  margin: 2px;
+}
+.custom-bt-tab.nav-tabs .nav-item.show .nav-link, .custom-bt-tab.nav-tabs .nav-link.active {
+  color: white;
+  background-color: #3c4857;
+  border-color: none;
+}
+
+.custom-bt-tab.nav-tabs {
+  border-bottom: none;
+}
+
+.custom-bt-tab.nav-tabs .nav-link:hover{
+  color: gray;
+  scale: 1.05;
+  transition: 200ms;
+}
+
 @media only screen and (min-width: 1024px) {
   .card-effect-container
   {

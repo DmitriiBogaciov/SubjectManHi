@@ -21,7 +21,7 @@ import { ModalDataProps } from "../../../props/nonVisual/Modal.dataprops.tsx";
 import Button from "../Button.component.tsx";
 
 
-const StudyProgrammeManager = ({ all_study_programmes, permissions_, delete_study_programme_handler, edit_study_programme_handler }:
+const SubjectManager = ({ all_study_programmes, permissions_, delete_study_programme_handler, edit_study_programme_handler }:
     {
         all_study_programmes: Array<StudyProgrammeDataProps>, permissions_: Array<string>,
         delete_study_programme_handler: (study_programme: StudyProgrammeDataProps) => boolean,
@@ -93,4 +93,4 @@ const StudyProgrammeManager = ({ all_study_programmes, permissions_, delete_stud
     )
 }
 
-export default StudyProgrammeManager;
+export default SubjectManager;

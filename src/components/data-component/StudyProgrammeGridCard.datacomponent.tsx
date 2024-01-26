@@ -113,18 +113,18 @@ const StudyProgrammeGridCardData = () => {
                             <div>
                                 <SearchField confirmSearchHandler={searchFieldHandler}></SearchField>
                             </div>
-                            <h2 className="text-left p-2 border-b-2 border-slate-400">{t("degree.bachelor")}</h2>
+                            <h2 className="text-left p-2 border-b-2 border-slate-400">{t("studyDegree.bachelor")}</h2>
                             <GridCard card_items={
                                 cardItems.filter((item) => {
-                                    if (item.value && item.value.degree && item.value.degree === "Bachelor") {
+                                    if (item.value && item.value.studyDegree && item.value.studyDegree === "Bachelor") {
                                         return item;
                                     }
                                 })
                             }></GridCard>
-                            <h2 className="text-left p-2 border-b-2 border-slate-400">{t("degree.master")}</h2>
+                            <h2 className="text-left p-2 border-b-2 border-slate-400">{t("studyDegree.master")}</h2>
                             <GridCard card_items={
                                 cardItems.filter((item) => {
-                                    if (item.value && item.value.degree && item.value.degree === "Master") {
+                                    if (item.value && item.value.studyDegree && item.value.studyDegree === "Master") {
                                         return item;
                                     }
                                 })

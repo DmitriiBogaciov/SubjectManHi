@@ -54,7 +54,7 @@ const EditProgramModal = ({ show, handleClose, data, setData }) => {
                         <Form.Label>Degree</Form.Label>
                         <Form.Control
                             as="select"
-                            name="degree"
+                            name="studyDegree"
                             onChange={handleChange}>
                             <option value="">Choose degree</option>
                             <option value="Bachelor">Bachelor</option>
