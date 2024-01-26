@@ -10,26 +10,25 @@ import { useTranslation } from "react-i18next";
 
 
 //Custom components
+import SubjectModalData from "../../data-component/Modals/SubjectModal.datacomponent.tsx";
 import ModifiableList from "../ModifiableList.component.tsx";
 
 
 //~~~Props~~~
-import { LoadingStatus } from "../../../props/nonVisual/LoadingStatus.data.tsx";
-import { StudyProgrammeDataProps, StudyProgrammeSubjectsDataPorps } from "../../../props/nonVisual/StudyProgramme.dataprops.tsx";
-import StudyProgrammeModalData from "../../data-component/Modals/StudyProgrammeModal.datacomponent.tsx";
+import { SubjectDataProps } from "../../../props/nonVisual/Subject.dataprops.tsx";
 import { ModalDataProps } from "../../../props/nonVisual/Modal.dataprops.tsx";
 import Button from "../Button.component.tsx";
 
 
-const SubjectManager = ({ all_study_programmes, permissions_, delete_study_programme_handler, edit_study_programme_handler }:
+const SubjectManager = ({ all_subjects, permissions_, delete_subject_handler, edit_subject_handler }:
     {
-        all_study_programmes: Array<StudyProgrammeDataProps>, permissions_: Array<string>,
-        delete_study_programme_handler: (study_programme: StudyProgrammeDataProps) => boolean,
-        edit_study_programme_handler: (study_programme: StudyProgrammeDataProps) => boolean
+        all_subjects: Array<SubjectDataProps>, permissions_: Array<string>,
+        delete_subject_handler: (subject: SubjectDataProps) => boolean,
+        edit_subject_handler: (subject: SubjectDataProps) => boolean
     }) => {
 
-    const [allStudyProgrammes, setAllStudyProgrammes] = useState<Array<StudyProgrammeDataProps>>(all_study_programmes);
-    const [editingStudyProgramme, setEditingStudyProgramme] = useState<StudyProgrammeDataProps>();
+    const [allSubjects, setAllSubjects] = useState<Array<SubjectDataProps>>(all_subjects);
+    const [editingSubject, setEditingSubject] = useState<SubjectDataProps>();
 
 
     const [modListItems, setModListItems] = useState<Array<{ label: string, value: string | object | number }>>([])
@@ -38,14 +37,14 @@ const SubjectManager = ({ all_study_programmes, permissions_, delete_study_progr
     const { t } = useTranslation();
 
     useEffect(() => {
-        setAllStudyProgrammes(all_study_programmes);
+        setAllSubjects(all_subjects);
         let newArray: Array<{ label: string, value: string | object | number }> = []
-        for (let sp in allStudyProgrammes) {
-            newArray.push({ label: allStudyProgrammes[sp].name, value: allStudyProgrammes[sp] })
+        for (let sp in allSubjects) {
+            newArray.push({ label: allSubjects[sp].name, value: allSubjects[sp] })
         }
         setModListItems(newArray);
         console.log(modListItems)
-    }, [all_study_programmes])
+    }, [all_subjects])
 
     const toggleModalHandler = (open:boolean) =>
     {
@@ -57,35 +56,33 @@ const SubjectManager = ({ all_study_programmes, permissions_, delete_study_progr
     return (
 
         <>
-            <h1>{t("manager.studyProgramme.title")}</h1>
+            <h1>{t("manager.subject.title")}</h1>
             <div className="flex justify-end">
-                <Button type="Submit" label={t("manager.studyProgramme.createNew")} on_click_handler={()=>{
-                    setEditingStudyProgramme({_id:"",description:"",language:"Czech",name:"",studyDegree:"Master",subjects:[]});
+                <Button type="Submit" label={t("manager.subject.createNew")} on_click_handler={()=>{
+                    setEditingSubject({_id:"",description:"",language:"Czech",name:"",credits:0,digitalContentIdList:[],goal:"",students:[],supervisor:{_id:"",userName:""},topicIdList:[]});
                     toggleModalHandler(true);
                     }}></Button>
             </div>
             <div>
-                <ModifiableList list_items={modListItems} title={t("manager.studyProgramme.list")}
+                <ModifiableList list_items={modListItems} title={t("manager.subject.list")}
                     delete_from_list_handler={(value: string | object | number) => {
                         //Checking if incoming value is object with corresponding object
-                        if (typeof value === "object" && "studyDegree" in value)                                                   
-                            return delete_study_programme_handler(value);
+                        if (typeof value === "object" && "credits" in value)                                                   
+                            return delete_subject_handler(value);
                         return false;
 
                     }}
                     edit_from_list_handler={(value: string | object | number) => {
                         //Checking if incoming value is object with corresponding object
-                        if (typeof value === "object" && "studyDegree" in value) {
-                                let newObject = (JSON.stringify(value));
-                                newObject = JSON.parse(newObject)
-                                let newProgramme: StudyProgrammeDataProps = JSON.parse(JSON.stringify(value));
+                        if (typeof value === "object" && "credits" in value) {
+                                let newSubject: SubjectDataProps = JSON.parse(JSON.stringify(value));
                                 toggleModalHandler(true);
-                                setEditingStudyProgramme({ ...newProgramme })
+                                setEditingSubject({ ...newSubject })
                         }
                         return false;
                     }} />
 
-                <StudyProgrammeModalData modal_props={modal} editing_study_programme_id={editingStudyProgramme?._id}></StudyProgrammeModalData>
+                <SubjectModalData  modal_props={modal} editing_subject_id={editingSubject?._id}></SubjectModalData>
             </div>
 
         </>

@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 import Loading from "../../VisualComponent/Loading.component.tsx";
 import Error from "../../VisualComponent/Error.component.tsx";
 import StudyProgrammeManager from "../../VisualComponent/Manager/StudyProgrammeManager.component.tsx";
-
 //API URL of server
 import GetApiUrl from "../../../assets/helperFunc/GetApiUrl.helper.tsx";
 
@@ -97,46 +96,6 @@ const StudyProgrammeManagerData = () => {
         getAllStudyProgrammes();
     }, []);
 
-    const getAllStudyProgrammesHandler = async () => {
-        try {
-            setLoadingStatus("Pending")
-            let response = await axios.get(`${GetApiUrl()}/study-programme/list`)
-
-            if (response && response.data && response.data.response_code === 200) {
-                setAllStudyProgrammes(response.data.result)
-                setLoadingStatus("Loaded");
-            } else {
-
-                setLoadingStatus("Error");
-                toast.error("Something went wrong when obtaining study programmes", {
-                    position: "top-center",
-                    autoClose: 1500,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                    onClose: () => {
-                        setLoadingStatus("Loaded");
-                    },
-                });
-            }
-        } catch (error) {
-            setLoadingStatus("Error");
-            toast.error("Something went wrong when obtaining study programme", {
-                position: "top-center",
-                autoClose: 1500,
-                hideProgressBar: false,
-                closeOnClick: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-                onClose: () => {
-
-                },
-            });
-        }
-    }
 
     const deleteStudyProgrammeHandler = async (deletingStudyProgramme:StudyProgrammeDataProps) => {
         try {
@@ -207,7 +166,7 @@ const StudyProgrammeManagerData = () => {
                     <Loading></Loading>
                     : (LoadingStatus === "Error") ?
                         <Error message={""}></Error> :
-                        <StudyProgrammeManager edit_study_programme_handler={(val)=>{console.log("editing"); return false;}} delete_study_programme_handler={(value)=>{let a=false;deleteStudyProgrammeHandler(value).then((res)=>a=res); return a;}} all_study_programmes={allStudyProgrammes} permissions_={permissions}></StudyProgrammeManager>
+                        <StudyProgrammeManager edit_study_programme_handler={(val)=>{console.log("editing"); return false;}} delete_study_programme_handler={(value)=>{let a=false;deleteStudyProgrammeHandler(value).then((res)=>a=res); return a;}}  all_study_programmes={allStudyProgrammes} permissions_={permissions}></StudyProgrammeManager>
 
             }
 

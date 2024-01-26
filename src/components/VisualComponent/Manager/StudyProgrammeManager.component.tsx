@@ -11,14 +11,12 @@ import { useTranslation } from "react-i18next";
 
 //Custom components
 import ModifiableList from "../ModifiableList.component.tsx";
-
+import StudyProgrammeModalData from "../../data-component/Modals/StudyProgrammeModal.datacomponent.tsx";
+import Button from "../Button.component.tsx";
 
 //~~~Props~~~
-import { LoadingStatus } from "../../../props/nonVisual/LoadingStatus.data.tsx";
 import { StudyProgrammeDataProps, StudyProgrammeSubjectsDataPorps } from "../../../props/nonVisual/StudyProgramme.dataprops.tsx";
-import StudyProgrammeModalData from "../../data-component/Modals/StudyProgrammeModal.datacomponent.tsx";
 import { ModalDataProps } from "../../../props/nonVisual/Modal.dataprops.tsx";
-import Button from "../Button.component.tsx";
 
 
 const StudyProgrammeManager = ({ all_study_programmes, permissions_, delete_study_programme_handler, edit_study_programme_handler }:

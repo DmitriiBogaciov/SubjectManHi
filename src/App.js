@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 //Custom routes
 import Home from "./routes/Home.tsx";
 import StudyProgrammeManager from "./routes/StudyProgrammeManager.tsx";
-
+import SubjectManager from './routes/SubjectManager.tsx';
 
 //Custom Components
 import MainNavbar from './components/VisualComponent/MainNavbar.component.tsx';
@@ -32,9 +32,13 @@ function App() {
             <AdminNavBar />
             <Routes>
                 <Route index path='/' element={<Home></Home>}></Route>
-                <Route path="/manage/studyProgramme" element={<StudyProgrammeManager />} />
             </Routes>
-
+            <IsAuthorized>
+                <Routes>
+                    <Route path="/manage/studyProgramme" element={<StudyProgrammeManager />} />
+                    <Route path="/manage/subject" element={<SubjectManager />} />
+                </Routes>
+            </IsAuthorized>
         </div>
     );
 }

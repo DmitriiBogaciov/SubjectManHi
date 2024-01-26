@@ -8,19 +8,18 @@ import { useTranslation } from "react-i18next";
 //Custom components
 import Loading from "../../VisualComponent/Loading.component.tsx";
 import Error from "../../VisualComponent/Error.component.tsx";
-import StudyProgrammeManager from "../../VisualComponent/Manager/StudyProgrammeManager.component.tsx";
-
+import SubjectManager from "../../VisualComponent/Manager/SubjectManager.component.tsx";
 //API URL of server
 import GetApiUrl from "../../../assets/helperFunc/GetApiUrl.helper.tsx";
 
 //~~~Props~~~
 import { LoadingStatus } from "../../../props/nonVisual/LoadingStatus.data.tsx";
-import { StudyProgrammeDataProps } from "../../../props/nonVisual/StudyProgramme.dataprops.tsx";
+import { SubjectDataProps } from "../../../props/nonVisual/Subject.dataprops.tsx";
 
 
 const SubjectManagerData = () => {
 
-    const [allStudyProgrammes, setAllStudyProgrammes] = useState<Array<StudyProgrammeDataProps>>([]);
+    const [allSubjects, setAllSubjects] = useState<Array<SubjectDataProps>>([]);
     const [LoadingStatus, setLoadingStatus] = useState<LoadingStatus>("Loaded");
 
     const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
@@ -54,18 +53,18 @@ const SubjectManagerData = () => {
     }, [isAuthenticated, user, getAccessTokenSilently]);
 
     useEffect(() => {
-        const getAllStudyProgrammes = async () => {
+        const getAllSubjects = async () => {
             try {
                 setLoadingStatus("Pending")
-                let response = await axios.get(`${GetApiUrl()}/study-programme/list`)
+                let response = await axios.get(`${GetApiUrl()}/subject/list`)
 
                 if (response && response.data && response.data.response_code === 200) {
-                    setAllStudyProgrammes(response.data.result)
+                    setAllSubjects(response.data.result)
                     setLoadingStatus("Loaded");
                 } else {
 
                     setLoadingStatus("Error");
-                    toast.error("Something went wrong when obtaining study programmes", {
+                    toast.error("Something went wrong when obtaining subjects", {
                         position: "top-center",
                         autoClose: 1500,
                         hideProgressBar: false,
@@ -80,7 +79,7 @@ const SubjectManagerData = () => {
                 }
             } catch (error) {
                 setLoadingStatus("Error");
-                toast.error("Something went wrong when obtaining study programme", {
+                toast.error("Something went wrong when obtaining subjects", {
                     position: "top-center",
                     autoClose: 1500,
                     hideProgressBar: false,
@@ -94,58 +93,18 @@ const SubjectManagerData = () => {
                 });
             }
         }
-        getAllStudyProgrammes();
+        getAllSubjects();
     }, []);
 
-    const getAllStudyProgrammesHandler = async () => {
-        try {
-            setLoadingStatus("Pending")
-            let response = await axios.get(`${GetApiUrl()}/study-programme/list`)
 
-            if (response && response.data && response.data.response_code === 200) {
-                setAllStudyProgrammes(response.data.result)
-                setLoadingStatus("Loaded");
-            } else {
-
-                setLoadingStatus("Error");
-                toast.error("Something went wrong when obtaining study programmes", {
-                    position: "top-center",
-                    autoClose: 1500,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                    onClose: () => {
-                        setLoadingStatus("Loaded");
-                    },
-                });
-            }
-        } catch (error) {
-            setLoadingStatus("Error");
-            toast.error("Something went wrong when obtaining study programme", {
-                position: "top-center",
-                autoClose: 1500,
-                hideProgressBar: false,
-                closeOnClick: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-                onClose: () => {
-
-                },
-            });
-        }
-    }
-
-    const deleteStudyProgrammeHandler = async (deletingStudyProgramme:StudyProgrammeDataProps) => {
+    const deleteSubjectHandler = async (deletingSubject:SubjectDataProps) => {
         try {
             console.log("Deleting!")
-            console.log(deletingStudyProgramme);
+            console.log(deletingSubject);
             setLoadingStatus("Pending")
-            if(!deletingStudyProgramme._id)
+            if(!deletingSubject._id)
                 return false;
-            let response = await axios.delete(`${GetApiUrl()}/study-programme/delete/${deletingStudyProgramme._id}`,
+            let response = await axios.delete(`${GetApiUrl()}/subject/delete/${deletingSubject._id}`,
                 {
                     headers: {
                         'Authorization': `Bearer ${await getAccessTokenSilently()}`
@@ -207,7 +166,7 @@ const SubjectManagerData = () => {
                     <Loading></Loading>
                     : (LoadingStatus === "Error") ?
                         <Error message={""}></Error> :
-                        <StudyProgrammeManager edit_study_programme_handler={(val)=>{console.log("editing"); return false;}} delete_study_programme_handler={(value)=>{let a=false;deleteStudyProgrammeHandler(value).then((res)=>a=res); return a;}} all_study_programmes={allStudyProgrammes} permissions_={permissions}></StudyProgrammeManager>
+                        <SubjectManager edit_subject_handler={()=>{return true}} permissions_={permissions} all_subjects={allSubjects} delete_subject_handler={(subject)=>{let a = false; deleteSubjectHandler(subject).then((val)=>{a=val}); return a;}} ></SubjectManager>
 
             }
 

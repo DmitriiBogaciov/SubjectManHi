@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 //Custom components
 import Loading from "../../VisualComponent/Loading.component.tsx";
 import Error from "../../VisualComponent/Error.component.tsx";
-import StudyProgrammeManager from "../../VisualComponent/Manager/StudyProgrammeManager.component.tsx";
+import StudyProgrammeManager from "../../VisualComponent/Manager/SubjectManager.component.tsx";
 
 //API URL of server
 import GetApiUrl from "../../../assets/helperFunc/GetApiUrl.helper.tsx";

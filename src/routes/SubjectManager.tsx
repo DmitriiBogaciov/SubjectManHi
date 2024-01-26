@@ -4,13 +4,13 @@ import { jwtDecode } from "jwt-decode";
 import { useTranslation } from "react-i18next";
 
 //Custom components
-import SubjectManagerData from "../components/data-component/Manager/SubjectManager.datacomponent";
+import SubjectManagerData from "../components/data-component/Manager/SubjectManager.datacomponent.tsx";
 
 import { useAuth0 } from "@auth0/auth0-react";
 import "../css/home.css";
 
 
-export default function StudyProgrammeManager() {
+export default function SubjectManager() {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
   const [permissions, setPermissions] = useState([]);
 

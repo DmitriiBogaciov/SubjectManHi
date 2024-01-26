@@ -55,7 +55,6 @@ const ModifiableList = (modifiable_list: ModifiableListProps) => {
                                     <div className='flex justify-center'>
                                         <Button label='Delete' type='Delete' on_click_handler={() => {
                                             if (modifiableList.delete_from_list_handler(item.value) === true) {
-
                                                 let newModList = JSON.parse(JSON.stringify(modifiableList));
                                                 newModList.list_items = newModList.list_items.filter((i) => {
                                                     console.log(i)
@@ -63,7 +62,6 @@ const ModifiableList = (modifiable_list: ModifiableListProps) => {
                                                         return i;
                                                 })
                                                 setModifiableList(newModList);
-
                                             }
                                         }}></Button>
                                     </div>

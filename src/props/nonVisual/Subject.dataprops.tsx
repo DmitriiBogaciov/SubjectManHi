@@ -3,15 +3,15 @@ interface SubjectDataProps {
     name: string
     description: string
     supervisor: {
-        id: string,
+        _id: string,
         userName: string
     }
     goal: string
     credits: number
     language: "Czech" | "English",
-    students: Array<
+    students?: Array<
         {
-            id: string,
+            _id: string,
             userName: string
         }
     >
