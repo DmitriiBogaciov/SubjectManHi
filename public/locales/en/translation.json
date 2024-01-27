@@ -25,10 +25,10 @@
     "communication_server": "Could not establish communication with server"
   },
   "manage": {
-    "studyProgramme.title": "Study Programme",
-    "subject.title": "Subject",
-    "topic.title": "Manage Topic",
-    "digitalContent.title": "Manage Digital Content"
+    "studyProgramme.title": "Manage Study Programmes",
+    "subject.title": "Manage Subjects",
+    "topic.title": "Manage Topics",
+    "digitalContent.title": "Manage Digital Contents"
   },
   "home": {
     "header": "Home"
@@ -52,7 +52,11 @@
     "digitalContent.createNew": "Create New Digital Content"
   },
   "table": {
-    "label": "List",
-    "action": "Edit"
+    "label": "Label",
+    "action": "Action"
+  },
+  "list":
+  {
+    "empty":"List is empty"
   }
 }

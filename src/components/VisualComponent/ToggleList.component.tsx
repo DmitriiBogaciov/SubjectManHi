@@ -26,7 +26,6 @@ const ToggleList = ({ title, list_items, is_open }: { title: string, list_items:
             {(listItems.length > 0) ?
                 
                 <>
-                here
                     <div className={`bg-slate-500 relative z-10 rounded-t-md transition-[200ms] cursor-pointer p-4 ${(!isOpen) ? "rounded-b-md" : "rounded-b-none"}`} onClick={() => {
                         setIsOpen(!isOpen);
                     }}>

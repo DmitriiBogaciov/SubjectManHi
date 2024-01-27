@@ -127,7 +127,7 @@ const TopicCardData = ({ card_props, _topic }: { card_props: CardProps, _topic: 
                                 <div className="text-left">
 
                                 </div>
-                                <ToggleList title={t("digitalContent.list")} is_open={true} list_items={listItems}></ToggleList>
+                                <ToggleList title={t("digitalContent.list")} is_open={false} list_items={listItems}></ToggleList>
                             </div>
                         </div>
 

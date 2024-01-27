@@ -49,7 +49,7 @@
   "studyProgramme.title": "Studijní program",
   "studyProgramme.list": "Seznam studijního programu",
   "studyProgramme.createNew": "Vytvořit nový studijní program",
-  "subject": {"title": "Předměty", "list"},
+  "subject": {"title": "Předměty"},
   "subject.list": "Seznam předmětů",
   "subject.createNew": "Vytvořit nový předmět",
   "topic.title": "Téma",
@@ -61,6 +61,6 @@
 },
 "table": {
   "label": "Název",
-  "action": "Upravit"
+  "action": "Akce"
 }
 }
