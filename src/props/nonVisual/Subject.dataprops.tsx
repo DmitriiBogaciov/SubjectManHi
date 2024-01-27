@@ -19,4 +19,4 @@ interface SubjectDataProps {
     digitalContentIdList:Array<string>
 }
 
-export type { SubjectDataProps }
+export { SubjectDataProps }

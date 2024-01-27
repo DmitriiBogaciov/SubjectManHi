@@ -1,5 +1,5 @@
 
-interface StudyProgrammeSubjectsDataPorps {
+interface StudyProgrammeSubjectsDataProps {
 
     _id: string,
     year: number,
@@ -12,8 +12,8 @@ interface StudyProgrammeDataProps {
     description: string,
     language: "Czech" | "English",
     studyDegree: "Bachelor" | "Master",
-    subjects: Array<StudyProgrammeSubjectsDataPorps>
+    subjects: Array<StudyProgrammeSubjectsDataProps>
 
 }
 
-export { StudyProgrammeDataProps, StudyProgrammeSubjectsDataPorps }
+export { StudyProgrammeDataProps, StudyProgrammeSubjectsDataProps }

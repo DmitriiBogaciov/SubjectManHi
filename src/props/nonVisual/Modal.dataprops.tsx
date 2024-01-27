@@ -3,7 +3,7 @@ interface ModalDataProps extends ModalProps
 {
     confirm_handler?:(value?:object)=>any;
     cancel_handler?:(value?:object)=>any;
-    type?:"Create"|"Update"
+    type?:"Create"|"Update"|"View"
 }
 
 export {ModalDataProps}

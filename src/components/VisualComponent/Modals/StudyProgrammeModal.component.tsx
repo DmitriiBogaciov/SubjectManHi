@@ -10,7 +10,7 @@ import Button from '../Button.component.tsx';
 
 //Props
 import { ModalDataProps } from '../../../props/nonVisual/Modal.dataprops.tsx';
-import { StudyProgrammeDataProps, StudyProgrammeSubjectsDataPorps } from '../../../props/nonVisual/StudyProgramme.dataprops.tsx';
+import { StudyProgrammeDataProps, StudyProgrammeSubjectsDataProps } from '../../../props/nonVisual/StudyProgramme.dataprops.tsx';
 import { SubjectDataProps } from '../../../props/nonVisual/Subject.dataprops.tsx';
 
 const StudyProgrammeModal = ({ modal_props, editing_study_programme, _subjects }: { modal_props: ModalDataProps, editing_study_programme?: StudyProgrammeDataProps, _subjects: Array<SubjectDataProps> }) => {
@@ -22,14 +22,14 @@ const StudyProgrammeModal = ({ modal_props, editing_study_programme, _subjects }
                 language: "Czech",
                 name: "",
                 studyDegree: "Bachelor",
-                subjects: new Array<StudyProgrammeSubjectsDataPorps>()
+                subjects: new Array<StudyProgrammeSubjectsDataProps>()
             });
 
     const [subjects, setSubjects] = useState<{
-        subjectsYear1: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataPorps }>,
-        subjectsYear2: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataPorps }>,
-        subjectsYear3: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataPorps }>,
-        subjectsYear4: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataPorps }>
+        subjectsYear1: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataProps }>,
+        subjectsYear2: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataProps }>,
+        subjectsYear3: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataProps }>,
+        subjectsYear4: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataProps }>
     }>(
         {
 
@@ -70,13 +70,13 @@ const StudyProgrammeModal = ({ modal_props, editing_study_programme, _subjects }
     }
 
     const setSubjectsOfEditingStudyProgramme = (subjects: {
-        subjectsYear1: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataPorps }>,
-        subjectsYear2: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataPorps }>,
-        subjectsYear3: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataPorps }>,
-        subjectsYear4: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataPorps }>
+        subjectsYear1: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataProps }>,
+        subjectsYear2: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataProps }>,
+        subjectsYear3: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataProps }>,
+        subjectsYear4: Array<{ value: object, label: string, subjectInStudyPrograme: StudyProgrammeSubjectsDataProps }>
     }) => {
 
-        editingStudyProgramme.subjects = new Array<StudyProgrammeSubjectsDataPorps>();
+        editingStudyProgramme.subjects = new Array<StudyProgrammeSubjectsDataProps>();
         Object.keys(subjects).map((subjectKey) => {
             for (let i in subjects[subjectKey]) {
 
@@ -99,7 +99,7 @@ const StudyProgrammeModal = ({ modal_props, editing_study_programme, _subjects }
     };
 
     //spSubject is more like metadata of what semester and what type is subject
-    const handleSubjectsChange = (value, spSubject: StudyProgrammeSubjectsDataPorps) => {
+    const handleSubjectsChange = (value, spSubject: StudyProgrammeSubjectsDataProps) => {
 
         let f = JSON.parse(JSON.stringify(subjects));
         console.log(f);

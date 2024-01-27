@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 
 //Custom components...
@@ -17,7 +18,7 @@ import GetApiUrl from "../../assets/helperFunc/GetApiUrl.helper.tsx";
 import { StudyProgrammeDataProps } from "../../props/nonVisual/StudyProgramme.dataprops.tsx";
 import { LoadingStatus } from "../../props/nonVisual/LoadingStatus.data.tsx";
 import { CardProps } from "../../props/Card.props.tsx";
-import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 
 
 const StudyProgrammeGridCardData = () => {
@@ -27,6 +28,7 @@ const StudyProgrammeGridCardData = () => {
     const [allStudyProgrammes, setAllStudyProgrammes] = useState<Array<StudyProgrammeDataProps>>();
 
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getAllStudyProgrammes = async () => {
@@ -77,7 +79,11 @@ const StudyProgrammeGridCardData = () => {
         let newEntries: Array<CardProps> = []
         for (let s in allStudyProgrammes)
             newEntries.push({
-                title: allStudyProgrammes[s].name, text: allStudyProgrammes[s].description, cursorEffect: "onHover",
+                title: allStudyProgrammes[s].name,
+                text: allStudyProgrammes[s].description,
+                cursorEffect: "onHover", 
+                //Redirect after clicking
+                onClick:()=>{navigate(`/studyProgramme/${allStudyProgrammes[s]._id}`,{state:{id:allStudyProgrammes[s]._id}})},
                 value: allStudyProgrammes[s]
             })
 
@@ -108,7 +114,7 @@ const StudyProgrammeGridCardData = () => {
                     <Loading></Loading>
                     : (loadingStatus === "Error") ?
                         <Error message={""}></Error>
-                        :
+                        ://Does not have special visual components, so visualizating here
                         <>
                             <div>
                                 <SearchField confirmSearchHandler={searchFieldHandler}></SearchField>
@@ -116,7 +122,7 @@ const StudyProgrammeGridCardData = () => {
                             <h2 className="text-left p-2 border-b-2 border-slate-400">{t("studyDegree.bachelor")}</h2>
                             <GridCard card_items={
                                 cardItems.filter((item) => {
-                                    if (item.value && item.value.studyDegree && item.value.studyDegree === "Bachelor") {
+                                    if (item.value && item.value.studyDegree && item.value.studyDegree === "Bachelor") {                                      
                                         return item;
                                     }
                                 })

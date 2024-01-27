@@ -15,7 +15,7 @@ import StudyProgrammeModalData from "../../data-component/Modals/StudyProgrammeM
 import Button from "../Button.component.tsx";
 
 //~~~Props~~~
-import { StudyProgrammeDataProps, StudyProgrammeSubjectsDataPorps } from "../../../props/nonVisual/StudyProgramme.dataprops.tsx";
+import { StudyProgrammeDataProps, StudyProgrammeSubjectsDataProps } from "../../../props/nonVisual/StudyProgramme.dataprops.tsx";
 import { ModalDataProps } from "../../../props/nonVisual/Modal.dataprops.tsx";
 
 

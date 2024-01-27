@@ -30,19 +30,58 @@ const DigitalContentModalData = ({ modal_props, editing_digitalContent_id }: { m
       {
         description: "",
         name: "",
-        externalLink:""
-    });
+        externalLink: ""
+      });
 
   const { getAccessTokenSilently } = useAuth0();
   const { t } = useTranslation();
 
   useEffect(() => {
+    getAllDigitalContetsHandler();
+  }, [])
+
+  useEffect(() => {
+
+    console.log(editing_digitalContent_id)
+    if (editing_digitalContent_id) {
+      getDigitalContentHandler(editing_digitalContent_id).then((value) => {
+        console.log(value)
+        if (typeof value === "object" && "externalLink" in value) {
+          setEditingDigitalContent(
+            {
+              _id: value._id,
+              description: value.description,
+              name: value.name,
+              externalLink: value.externalLink
+            }
+          );
+        }
+
+      })
+    }
+    else
+      setEditingDigitalContent({
+        description: "",
+        name: "",
+        externalLink: ""
+      })
+    setModal(modal_props);
+
+  }, [editing_digitalContent_id, modal_props])
+
+  const handleClose = () => {
+    let a = JSON.parse(JSON.stringify(modal))
+    a.show = false;
+    setModal(a)
+  }
+
+  const getAllDigitalContetsHandler = async () => {
     //Getting all digital contents
-    fetch(`${GetApiUrl()}/digital-content/list`, {
+    axios.get(`${GetApiUrl()}/digital-content/list`, {
       method: "GET",
     })
       .then(async (response) => {
-        const responseJson = await response.json();
+        const responseJson = response.data;
         console.log(responseJson.result);
         if (response.status >= 400) {
           toast.success("Success obtaining digital content", {
@@ -71,49 +110,11 @@ const DigitalContentModalData = ({ modal_props, editing_digitalContent_id }: { m
           theme: "dark",
         });
       });
-  }, [])
+  };
 
-  useEffect(() => {
-
-    console.log(editing_digitalContent_id)
-    if(editing_digitalContent_id)
-    {
-      getDigitalContentHandler(editing_digitalContent_id).then((value)=>
-      {
-        console.log(value)
-        if(typeof value === "object" && "externalLink" in value)
-        {
-          setEditingDigitalContent(
-            {
-              _id:value._id,
-              description:value.description,
-              name:value.name,
-              externalLink:value.externalLink
-            }
-          );
-        }
-        
-      })
-    }
-    else
-      setEditingDigitalContent( {
-        description: "",
-        name: "",
-        externalLink:""
-    })
-    setModal(modal_props);
-
-  }, [editing_digitalContent_id, modal_props])
-
-  const handleClose = () => {
-    let a = JSON.parse(JSON.stringify(modal))
-    a.show = false;
-    setModal(a)
-  }
-
-  const getDigitalContentHandler = async (digitalContentId?:string) => {
+  const getDigitalContentHandler = async (digitalContentId?: string) => {
     //setDataLoadStatus("Pending");
-    if(!digitalContentId)
+    if (!digitalContentId)
       return;
 
     try {
@@ -126,7 +127,7 @@ const DigitalContentModalData = ({ modal_props, editing_digitalContent_id }: { m
       console.log(response)
       if (response.data && response.data.response_code === 200) {
         console.log('Programme obtained successfully:', response.data.result);
-        return (Array.isArray(response.data.result))?response.data.result[0]:response.data.result;
+        return (Array.isArray(response.data.result)) ? response.data.result[0] : response.data.result;
       } else {
         console.error('Failed to obtain digitalContent. Response code is not positive:', response.data.response_code);
         toast.error("Something went wrong when creating digitalContent", {
@@ -291,7 +292,7 @@ const DigitalContentModalData = ({ modal_props, editing_digitalContent_id }: { m
           <Loading></Loading>
           : (dataLoadStatus === "Error") ?
             <ErrorComponent message={errorMessage}></ErrorComponent> :
-            <DigitalContentModal _digitalContents={digitalContents} editing_digitalContent={editingDigitalContent} modal_props={{
+            <DigitalContentModal editing_digitalContent={editingDigitalContent} modal_props={{
               show: modal.show, confirm_handler: (val) => { (val && val._id) ? updateDigitalContentHandler(val) : createDigitalContentHandler(val); }, type: (editingDigitalContent._id) ? "Update" : "Create",
               cancel_handler: () => { handleClose() }
             }} ></DigitalContentModal>
