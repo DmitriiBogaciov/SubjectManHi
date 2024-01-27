@@ -1,36 +1,58 @@
 {
-    "header":
-    {
+  "header": {},
 
-    },
+  "button": {
+    "edit": "Edit",
+    "delete": "Remove",
+    "add": "Add",
+    "submit": "Submit"
+  },
 
-    "button":
-    {
-        "edit":"Edit",
-        "delete":"Remove",
-        "add":"Add",
-        "submit":"Submit"
-    },
+  "list_grid": {
+    "no_item": "We didn't find any items."
+  },
 
-
-
-    "list_grid":
-    {
-        "no_item":"We didn't find any items."
-    },
-
-    "form":
-    {
-        "name":"Name",
-        "description":"Description",
-        "submit":"Submit",
-        "items":"Items",
-        "create_item":"Create item",
-        "close":"Close"
-    },
-    "error":
-    {
-        "oh_no":"Oh no, something went wrong",
-        "communication_server":"Could not establish communication with server"
-    }
+  "form": {
+    "name": "Name",
+    "description": "Description",
+    "submit": "Submit",
+    "items": "Items",
+    "create_item": "Create item",
+    "close": "Close"
+  },
+  "error": {
+    "oh_no": "Oh no, something went wrong",
+    "communication_server": "Could not establish communication with server"
+  },
+  "manage": {
+    "studyProgramme.title": "Study Programme",
+    "subject.title": "Subject",
+    "topic.title": "Manage Topic",
+    "digitalContent.title": "Manage Digital Content"
+  },
+  "home": {
+    "header": "Home"
+  },
+  "studyDegree": {
+    "bachelor": "Bachelor",
+    "master": "Master"
+  },
+  "manager": {
+    "studyProgramme.title": "Study Programme",
+    "studyProgramme.list": "Study Programme",
+    "studyProgramme.createNew": "Create New Study Programme",
+    "subject.title": "Subjects",
+    "subject.list": "Subject List",
+    "subject.createNew": "Create New Subject",
+    "topic.title": "Topic",
+    "topic.list": "Topic List",
+    "topic.createNew": "Create New Topic",
+    "digitalContent.title": "Digital Content",
+    "digitalContent.list": "List",
+    "digitalContent.createNew": "Create New Digital Content"
+  },
+  "table": {
+    "label": "List",
+    "action": "Edit"
+  }
 }
