@@ -31,5 +31,36 @@
     {
         "oh_no":"Ale ne, něco se pokazilo",
         "communication_server":"Nemohli jsme navázat spojení se serverem"
-    }
+    },
+"manage": {
+  "studyProgramme.title": "Studijní program",
+  "subject.title": "Předmět",
+  "topic.title": "Správa tématu",
+  "digitalContent.title": "Správa digitálního obsahu"
+},
+"home": {
+  "header": "Domů"
+},
+"studyDegree": {
+  "bachelor": "Bakalář",
+  "master": "Magistr"
+},
+"manager": {
+  "studyProgramme.title": "Studijní program",
+  "studyProgramme.list": "Seznam studijního programu",
+  "studyProgramme.createNew": "Vytvořit nový studijní program",
+  "subject": {"title": "Předměty", "list"},
+  "subject.list": "Seznam předmětů",
+  "subject.createNew": "Vytvořit nový předmět",
+  "topic.title": "Téma",
+  "topic.list": "Seznam téma",
+  "topic.createNew": "Vytvořit nové téma",
+  "digitalContent.title": "Digitální obsah",
+  "digitalContent.list": "Seznam",
+  "digitalContent.createNew": "Vytvořit nový digitální obsah"
+},
+"table": {
+  "label": "Název",
+  "action": "Upravit"
+}
 }
