@@ -5,7 +5,8 @@
     "edit": "Edit",
     "delete": "Remove",
     "add": "Add",
-    "submit": "Submit"
+    "submit": "Submit",
+    "close":"Close"
   },
 
   "list_grid": {
@@ -29,7 +30,7 @@
 
 
 
-  
+
 
   "table": {
     "label": "Label",
@@ -41,12 +42,23 @@
   {
     "empty":"List is empty"
   },
-    "subject":
+
+  "subject":
   {
     "studyDegree": {
       "bachelor": "Bachelor's degree",
       "master": "Master's degree"
     },
+
+    "student":
+    {
+      "add":"Add new student",
+      "id":"Student's identification",
+      "userName":"Student's username",
+      "modal":"List of students:",
+      "overview":"Overview of students"
+    },
+
     "grid":
     {
       "title":"Subjects"
@@ -80,12 +92,25 @@
     "studyDegree": {
       "bachelor": "Bachelor's degree",
       "master": "Master's degree"
+    },
+    "modal":{
+      "title":"Study Programme"
     }
   },
   "topic":{
     "digitalContent":
     {
       "list":"Topic's digital content"
+    },
+    "modal":{
+      "title":"Manage Topic"
+    },
+    "title":"Topics"
+  },
+  "digitalContent":{
+    "title":"Digital contents",
+    "modal":{
+      "title":"Manage digital content"
     }
   },
   "search":"Search",
@@ -107,6 +132,16 @@
       "title":"Manage subjects",
       "list":"List of subjects",
       "createNew":"Create new subject"
+    },
+    "topic":{
+      "title":"Manage topics",
+      "list":"List of topics",
+      "createNew":"Create new topic"
+    },
+    "digitalContent":{
+      "title":"Manage digital contents",
+      "list":"List of subjects",
+      "createNew":"Create new digital content"
     }
   },
   
@@ -119,6 +154,20 @@
     "close": "Close",
     "language":"Language",
     "studyDegree":"Study degree",
-    "goal":"Goal"
+    "goal":"Goal",
+    "supervisor":
+    {
+      "identification": "Supervisor's ID",
+      "userName":"Supervisor's Name"
+    },
+    "externalLink":"External link"
+  },
+
+  "modal":
+  {
+    "close":"Close",
+    "confirm":"Confirm"
   }
+
+
 }

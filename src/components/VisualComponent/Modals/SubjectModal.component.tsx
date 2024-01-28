@@ -183,7 +183,7 @@ const SubjectModal = ({ modal_props, editing_subject, _topics }: { modal_props: 
                             value={editingSubject.supervisor._id}
                             onChange={handleInputChange}
                         />
-                        <Form.Label>{t("form.supervisor.identification")}</Form.Label>
+                        <Form.Label>{t("form.supervisor.userName")}</Form.Label>
                         <Form.Control
                             as={"input"}
                             name="editingSubject.supervisor.userName"
