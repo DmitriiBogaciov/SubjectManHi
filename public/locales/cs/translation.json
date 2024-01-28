@@ -149,5 +149,7 @@
   "modal": {
     "close": "Zavřít",
     "confirm": "Potvrdit"
-  }
+  },
+  "authenticationNeeded": "Prosím, přihlašte se pro přístup k obsahu",
+  "notEnoughPermissions": "Nemáte dostatečné oprávnění pro prohlížení obsahu"
 }
