@@ -201,7 +201,7 @@ const StudyProgrammeModal = ({ modal_props, editing_study_programme, _subjects }
                             Object.keys(subjects).map((subjectKey) => {
                                 {/* Year selection... */ console.log(subjectKey) }
                                 return (
-                                    <Tab eventKey={subjectKey} title={t(`subject.${subjectKey}`)}>
+                                    <Tab eventKey={subjectKey} title={t(`subject.year${parseInt(subjectKey.replace("subjectsYear", ""))}`)}>
                                         {/* Semester selection... */}
                                         <Tabs defaultActiveKey="winter" className='mb-2 custom-bt-tab'>
                                             {
@@ -217,7 +217,6 @@ const StudyProgrammeModal = ({ modal_props, editing_study_programme, _subjects }
                                                                         return (
                                                                             <Tab title={t(`subject.type.${subjectType}`)} eventKey={subjectType}>
                                                                                 <Form.Group controlId="formSubjects">
-                                                                                    <Form.Label>{t(`subject.year${parseInt(subjectKey.replace("subjectsYear", ""))}`)}</Form.Label>
                                                                                     <Select isMulti={true}
                                                                                     hideSelectedOptions={true}
                                                                                         onChange={(e) =>

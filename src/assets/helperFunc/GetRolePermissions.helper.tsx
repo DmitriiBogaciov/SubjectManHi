@@ -3,7 +3,7 @@ const GetRolePermissions = (role:"Teacher"|"Student"|"Admin")=>
     return {
         "Teacher":["create:digitalContent","create:subject","create:topic",
                     "delete:digitalContent","delete:subject","delete:topic",
-                    "read:digitalContent","read:subject","read:topicTeacher",
+                    "read:digitalContent","read:subject",
                     "update:digitalContent","update:subject","update:topic",
                 ],
         "Student":["read:digitalContent","read:SubjectStudent","read:topicStudent"],

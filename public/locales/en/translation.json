@@ -12,14 +12,6 @@
     "no_item": "We didn't find any items."
   },
 
-  "form": {
-    "name": "Name",
-    "description": "Description",
-    "submit": "Submit",
-    "items": "Items",
-    "create_item": "Create item",
-    "close": "Close"
-  },
   "error": {
     "oh_no": "Oh no, something went wrong",
     "communication_server": "Could not establish communication with server"
@@ -33,30 +25,100 @@
   "home": {
     "header": "Home"
   },
-  "studyDegree": {
-    "bachelor": "Bachelor",
-    "master": "Master"
-  },
-  "manager": {
-    "studyProgramme.title": "Study Programme",
-    "studyProgramme.list": "Study Programme",
-    "studyProgramme.createNew": "Create New Study Programme",
-    "subject.title": "Subjects",
-    "subject.list": "Subject List",
-    "subject.createNew": "Create New Subject",
-    "topic.title": "Topic",
-    "topic.list": "Topic List",
-    "topic.createNew": "Create New Topic",
-    "digitalContent.title": "Digital Content",
-    "digitalContent.list": "List",
-    "digitalContent.createNew": "Create New Digital Content"
-  },
+
+
+
+
+  
+
   "table": {
     "label": "Label",
     "action": "Action"
   },
+
+
   "list":
   {
     "empty":"List is empty"
+  },
+    "subject":
+  {
+    "studyDegree": {
+      "bachelor": "Bachelor's degree",
+      "master": "Master's degree"
+    },
+    "grid":
+    {
+      "title":"Subjects"
+    },
+    "year1": "1st year",
+    "year2": "2nd year",
+    "year3": "3rd year",
+    "year4": "4th year",
+    "type":
+    {
+      "mandatory":"Mandatory subjects",
+      "optional":"Optional subjects",
+      "mandatory_optional":"Mandatory optional subjects"
+    },
+    "semester":
+    {
+      "winter":"Winter semester",
+      "summer":"Summer semester"
+    },
+    "credits":"Credits",
+    "language":"Teached language",
+    "topic":
+    {
+      "title":"Subject's topics"
+    },
+    "numberOfStudents":"Number of enrolled students"
+  },
+  
+  "studyProgramme":
+  {
+    "studyDegree": {
+      "bachelor": "Bachelor's degree",
+      "master": "Master's degree"
+    }
+  },
+  "topic":{
+    "digitalContent":
+    {
+      "list":"Topic's digital content"
+    }
+  },
+  "search":"Search",
+  "login":"Sign in",
+  "logout":"Sign out",
+  "language":
+  {
+    "choose":"Choose a language",
+    "czech":"Czech",
+    "english":"English"
+  },
+  "manager":{
+    "studyProgramme":{
+      "title":"Manage study programmes",
+      "list":"List of study programmes",
+      "createNew":"Create new study programme"
+    },
+    "subject":{
+      "title":"Manage subjects",
+      "list":"List of subjects",
+      "createNew":"Create new subject"
+    }
+  },
+  
+  "form": {
+    "name": "Name",
+    "description": "Description",
+    "submit": "Submit",
+    "items": "Items",
+    "create_item": "Create item",
+    "close": "Close",
+    "language":"Language",
+    "studyDegree":"Study degree",
+    "goal":"Goal"
   }
 }

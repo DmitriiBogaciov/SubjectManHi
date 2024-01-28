@@ -14,7 +14,7 @@ export default function StudyProgrammeDetail() {
     console.log(state)
     return (
         <main className="container pt-3">
-            <h2 className="p-0 pb-2 mb-4 text-left border-b-2 text-2xl">{t("studyProgramme.detail.header")}</h2>
+            <h2 className="p-0 pb-2 mb-4 text-left border-b-2 text-2xl">{}</h2>
             {
                 (state.id)?
                   <SubjectGridCardData study_programme_id={state.id}></SubjectGridCardData>

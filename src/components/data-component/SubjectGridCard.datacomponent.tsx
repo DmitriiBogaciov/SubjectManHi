@@ -148,18 +148,6 @@ const SubjectGridCardData = ({ study_programme_id }: { study_programme_id?: stri
         setCardItems(newEntries)
     }
 
-    //Search field confirmation
-    const searchFieldHandler = (searchedString) => {
-        if (searchedString && searchedString !== "") {
-            setNewCardItemsFromSubjects(allStudyProgrammeSubjects?.filter((sp) => {
-                if (sp.subject.name.toLowerCase().includes(searchedString.toLowerCase()))
-                    return sp;
-            }));
-        }
-        else {
-            setNewCardItemsFromSubjects(allStudyProgrammeSubjects)
-        }
-    }
 
 
     return (
@@ -172,6 +160,7 @@ const SubjectGridCardData = ({ study_programme_id }: { study_programme_id?: stri
                         <Error message={""}></Error>
                         :
                         <>
+                        
                             <SubjectGridCard all_study_programme_subjects={allStudyProgrammeSubjects}></SubjectGridCard>
                         </>
             }

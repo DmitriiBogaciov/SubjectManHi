@@ -53,18 +53,18 @@ const MainNavBar = () => {
 
     return (
         <>
-            <Navbar bg="dark" variant="dark" expand="md" className='p-4 flex shadow-sm'>
+            <Navbar bg="dark" variant="dark" expand="md" className={`p-4 sm:flex grid grid-cols-1 shadow-sm grid-cols-1`}>
                 <Nav className="flex justify-between  w-[100%]">
                     <NavLink to="/" className={"no-underline text-white text-3xl p-2"}>
                         <span className='text-2xl'>SubjectMan</span>
                     </NavLink>
                 </Nav>
-                <div className='grid justify-end sm:flex sm:grid-cols-2 grid-cols-1'>
+                <div className={`sm:grid ${(!isAuthenticated)?"sm:grid-cols-2 flex":"sm:grid-cols-1"}`}>
                     <div className='grid grid-cols-2 p-2'>
-                        <div className='flex justify-end sm:p-2 p-0 pb-2'>
+                        <div className='flex sm:justify-end justify-start sm:p-2 mr-5 pb-2' hidden={!isAuthenticated}>
                             <Profile />
                         </div>
-                        <div className='flex justify-end'>
+                        <div className='flex sm:justify-start justify-end'>
                             {
                                 (!isAuthenticated) ?
                                     <Button label={t("login")} on_click_handler={onClickLogIn} type={"Submit"} /> :
@@ -72,20 +72,20 @@ const MainNavBar = () => {
                             }
                         </div>
                     </div>
-                    <div className='p-0 m-auto flex justify-end'>
+                    <div className='sm:pr-5 pr-1 m-auto mr-2 flex justify-end'>
                         <Dropdown>
                             <Dropdown.Toggle  className=' bg-button-default ml-2'>
-                                {t("langauge.choose")}
+                                {t("language.choose")}
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 <Dropdown.Item>
                                     <div className='p-2 bg-transparent'>
-                                        <Button label={t("langauge.czech")} type='Default' on_click_handler={() => {i18n.changeLanguage("cs")}}></Button>
+                                        <Button label={t("language.czech")} type='Default' on_click_handler={() => {i18n.changeLanguage("cs")}}></Button>
                                     </div>
                                 </Dropdown.Item>
                                 <Dropdown.Item>
                                     <div className='p-2'>
-                                        <Button label={t("langauge.english")} type='Default' on_click_handler={() => {i18n.changeLanguage("en")}}></Button>
+                                        <Button label={t("language.english")} type='Default' on_click_handler={() => {i18n.changeLanguage("en")}}></Button>
                                     </div>
                                 </Dropdown.Item>
                             </Dropdown.Menu>

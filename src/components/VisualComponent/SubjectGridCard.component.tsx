@@ -76,7 +76,7 @@ const SubjectGridCard = ({ all_study_programme_subjects }: { all_study_programme
     return (
 
         <div className="">
-
+            <h1 className={"text-left uppercase text-2xl mt-1 mb-3"} >{t("subject.grid.title")}:</h1>
             <div>
                 <SearchField confirmSearchHandler={searchFieldHandler}></SearchField>
             </div>

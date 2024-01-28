@@ -79,7 +79,7 @@ const SubjectDetail = ({ _subject, all_subject_topics, _user }: { _subject?: Sub
     return (
         <>
             <div className="font-light">
-                <div className="grid sm:grid-cols-2 grid-cols-1 bg-slate-900 text-white p-10">
+                <div className="grid sm:grid-cols-2 grid-cols-1 bg-slate-900 text-white sm:p-10 pb-10 ">
                     <div className="sm:m-0 mb-10">
                         <h1 className="sm:text-3xl text-2xl text-left border-l-2 p-2">{subject.name}</h1>
                     </div>
@@ -93,20 +93,20 @@ const SubjectDetail = ({ _subject, all_subject_topics, _user }: { _subject?: Sub
                             <p className="align-middle text-center">{subject.language}</p>
                         </div>
                     </div>
-                </div>
-                <div className="sm:flex justify-start p-2 shadow-md">
-                    <div className="align-middle flex mr-4">
-                        <p className="m-auto ml-4 font-bold mr-2">{t("subject.numberOfStudents")}:</p>
-                        <p className="m-auto">{subject.students?.length}</p>
-                    </div>
-                    <IsAuthorized neededPermissions={GetRolePermissions("Teacher")}>
-                        <div>
-                            <Button label={t("subject.student.overview")} on_click_handler={() => { setStudentModal({ ...studentModal, show: true }) }} type="Submit" />
+                    <div className="sm:flex justify-start mt-3 p-2">
+                        <div className="align-middle flex mr-4">
+                            <p className=" font-bold mr-2">{t("subject.numberOfStudents")}:</p>
+                            <p className="">{subject.students?.length}</p>
                         </div>
-                    </IsAuthorized>
+                        <IsAuthorized neededPermissions={GetRolePermissions("Teacher")}>
+                            <div>
+                                <Button label={t("subject.student.overview")} on_click_handler={() => { setStudentModal({ ...studentModal, show: true }) }} type="Submit" />
+                            </div>
+                        </IsAuthorized>
+                    </div>
                 </div>
                 <div className="bg-slate-100 pt-10">
-                    <div className="mb-5 p-3 border-l-2 border-black">
+                    <div className="mb-5 p-4 ml-2 border-l-2 border-black">
                         <p className="text-left">{subject.description}</p>
                     </div>
                     {
@@ -123,7 +123,7 @@ const SubjectDetail = ({ _subject, all_subject_topics, _user }: { _subject?: Sub
                             }).length > 0)))
                             || (user._permissions && (GetRoleByPermissions(user._permissions) === "Teacher" || GetRoleByPermissions(user._permissions) === "Admin")) ?
                             <div className="mb-5 sm:p-5">
-                                <p className="text-left font-bold mr-2">{t("subject.topic.title")}:</p>
+                                <p className="text-left mr-2 uppercase text-xl mb-3">{t("subject.topic.title")}:</p>
                                 <div className="pl-6">
                                     <SearchField place_holder={t("subject.topic.search")} confirmSearchHandler={searchFieldHandler}></SearchField>
                                 </div>

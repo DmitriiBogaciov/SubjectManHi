@@ -115,11 +115,11 @@ const StudyProgrammeGridCardData = () => {
                     : (loadingStatus === "Error") ?
                         <Error message={""}></Error>
                         ://Does not have special visual components, so visualizating here
-                        <>
+                        <div className="mt-5">
                             <div>
                                 <SearchField confirmSearchHandler={searchFieldHandler}></SearchField>
                             </div>
-                            <h2 className="text-left p-2 border-b-2 border-slate-400">{t("studyDegree.bachelor")}</h2>
+                            <h2 className="text-left p-2 border-b-2 border-slate-400 uppercase">{t("subject.studyDegree.bachelor")}</h2>
                             <GridCard shown_when_empty={true} card_items={
                                 cardItems.filter((item) => {
                                     if (item.value && item.value.studyDegree && item.value.studyDegree === "Bachelor") {                                      
@@ -127,7 +127,7 @@ const StudyProgrammeGridCardData = () => {
                                     }
                                 })
                             }></GridCard>
-                            <h2 className="text-left p-2 border-b-2 border-slate-400">{t("studyDegree.master")}</h2>
+                            <h2 className="text-left p-2 border-b-2 border-slate-400 mt-5 uppercase">{t("subject.studyDegree.master")}</h2>
                             <GridCard shown_when_empty={true} card_items={
                                 cardItems.filter((item) => {
                                     if (item.value && item.value.studyDegree && item.value.studyDegree === "Master") {
@@ -135,7 +135,7 @@ const StudyProgrammeGridCardData = () => {
                                     }
                                 })
                             }></GridCard>
-                        </>
+                        </div>
             }
 
         </div>

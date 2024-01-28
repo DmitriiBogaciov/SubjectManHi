@@ -14,7 +14,7 @@ export default function SubjectDetail() {
     console.log(state)
     return (
         <IsAuthorized neededPermissions={[]} printNoAuthorization={true}>
-            <main className="container ">
+            <main className="container p-0">
                 {
                     (state.id)?
                     <SubjectDetailData subject_id={state.id}></SubjectDetailData>
