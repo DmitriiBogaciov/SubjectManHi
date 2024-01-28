@@ -55,7 +55,7 @@
       "add":"Add new student",
       "id":"Student's identification",
       "userName":"Student's username",
-      "modal":"List of students:",
+      "modal":{"title":"List of students:"},
       "overview":"Overview of students"
     },
 
