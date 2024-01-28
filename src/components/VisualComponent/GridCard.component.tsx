@@ -31,7 +31,7 @@ export default function GridCard(grid_card: GridCardProps) {
           })
           : (gridCard.shown_when_empty) ?
           <div>
-            < p > {t("list.empty")}</p>
+            <p> {t("list.empty")}</p>
           </div> 
           : null
       }

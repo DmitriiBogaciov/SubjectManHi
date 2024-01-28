@@ -21,30 +21,32 @@ import AdminNavBar from './components/VisualComponent/AdminNavBar.component.tsx'
 import "bootstrap/dist/css/bootstrap.css";
 import './App.css';
 
-
+import { Suspense } from 'react';
 
 function App() {
-    const { i18n } = useTranslation();
-    i18n.changeLanguage("en")
+
     return (
+
         <div className="App  min-h-[100%]">
+            <Suspense >
             <Helmet>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Helmet>
-            <MainNavbar />
-            <AdminNavBar />
-            <Routes>
-                <Route index path='/' element={<Home></Home>}></Route>
-                <Route index path='/studyProgramme/:id' element={<StudyProgrammeDetail></StudyProgrammeDetail>}></Route>
-                <Route index path='/subject/:id' element={<SubjectDetail></SubjectDetail>}></Route>
-            </Routes>
+                <MainNavbar />
+                <AdminNavBar />
+                <Routes>
+                    <Route index path='/' element={<Home></Home>}></Route>
+                    <Route index path='/studyProgramme/:id' element={<StudyProgrammeDetail></StudyProgrammeDetail>}></Route>
+                    <Route index path='/subject/:id' element={<SubjectDetail></SubjectDetail>}></Route>
+                </Routes>
 
-            <Routes>
-                <Route path="/manage/studyProgramme" element={<StudyProgrammeManager />} />
-                <Route path="/manage/subject" element={<SubjectManager />} />
-                <Route path="/manage/topic" element={<TopicManager />} />
-                <Route path="/manage/digitalContent" element={<DigitalContentManager />} />
-            </Routes>
+                <Routes>
+                    <Route path="/manage/studyProgramme" element={<StudyProgrammeManager />} />
+                    <Route path="/manage/subject" element={<SubjectManager />} />
+                    <Route path="/manage/topic" element={<TopicManager />} />
+                    <Route path="/manage/digitalContent" element={<DigitalContentManager />} />
+                </Routes>
+            </Suspense>
 
         </div>
     );

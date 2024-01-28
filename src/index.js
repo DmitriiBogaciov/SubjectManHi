@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -13,11 +13,12 @@ import "./i18n.tsx";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <Auth0ProviderWithNavigate>
-      <App></App>
-    </Auth0ProviderWithNavigate>
-  </BrowserRouter>
+
+    <BrowserRouter>
+      <Auth0ProviderWithNavigate>
+        <App></App>
+      </Auth0ProviderWithNavigate>
+    </BrowserRouter>
 
 );
 reportWebVitals();

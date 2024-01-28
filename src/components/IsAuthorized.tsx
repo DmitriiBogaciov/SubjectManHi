@@ -10,7 +10,7 @@ const IsAuthorized = ({children,neededPermissions,printNoAuthorization}:
 
     const [permissions, setPermissions] = useState<Array<string>>([]);
     const {t} = useTranslation();
-    console.log(children)
+
     useEffect(() => {
         const handleAuth = async () => {
             try {
@@ -21,7 +21,6 @@ const IsAuthorized = ({children,neededPermissions,printNoAuthorization}:
                 if (decodedToken.permissions)
                      // @ts-ignore
                     setPermissions(decodedToken.permissions);
-
             } catch (error) {
                 console.error("Error during authentication:", error.message);
             }

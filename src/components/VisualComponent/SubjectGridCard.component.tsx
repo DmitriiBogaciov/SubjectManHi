@@ -88,12 +88,12 @@ const SubjectGridCard = ({ all_study_programme_subjects }: { all_study_programme
                                 return (
                                     <>
                                         <h2 className="text-left p-2 border-b-2 border-slate-400">{t(`subject.year${subjectYear.toString()}`)}</h2>
-                                        <Tabs>
+                                        <Tabs className="custom-bt-tab flex">
                                             {
 
                                                 ["mandatory", "optional", "mandatory_optional"].map((subjectType) => {
                                                     return (
-                                                        <Tab eventKey={subjectType} title={t(`subject.type.${subjectType}`)} tabClassName="p-4" className="p-5">
+                                                        <Tab eventKey={subjectType} title={t(`subject.type.${subjectType}`)} tabClassName="sm:p-4 p-2" className="sm:p-5 p-2">
                                                             <h2 className="text-left text-xl font-bold mb-5 p-2 ">{t(`subject.type.${subjectType}`)}</h2>
                                                             {
                                                                 ["winter", "summer"].map((semester) => {

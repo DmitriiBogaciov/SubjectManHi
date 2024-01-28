@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { toast } from 'react-toastify';
+import { jwtDecode } from "jwt-decode";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 //Custom components...
@@ -19,6 +21,7 @@ import { CardProps } from "../../props/Card.props.tsx";
 import { Tab, Tabs } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { TopicDataProps } from "../../props/nonVisual/Topic.dataprops.tsx";
+import { UserDataProps } from "../../props/nonVisual/User.dataprops.tsx";
 
 
 const SubjectDetailData = ({ subject_id }: { subject_id?: string }) => {
@@ -29,6 +32,29 @@ const SubjectDetailData = ({ subject_id }: { subject_id?: string }) => {
 
     const { t } = useTranslation();
     const navigate = useNavigate();
+
+    const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
+
+    const [userInfo, setUserInfo] = useState<UserDataProps>({});
+
+    useEffect(() => {
+        const handleAuth = async () => {
+            try {
+                const accessToken = await getAccessTokenSilently();
+                const decodedToken = jwtDecode(accessToken);
+                // @ts-ignore 
+                if (decodedToken.permissions)
+                     // @ts-ignore
+                    setUserInfo({_user:user,_token:accessToken,_permissions:decodedToken.permissions})
+            } catch (error) {
+                console.error("Error during authentication:", error.message);
+            }
+        };
+
+        if (isAuthenticated) {
+            handleAuth();
+        }
+    }, [isAuthenticated, user, getAccessTokenSilently]);
 
     useEffect(() => {
         console.log(subject_id)
@@ -145,7 +171,7 @@ const SubjectDetailData = ({ subject_id }: { subject_id?: string }) => {
                     <Loading></Loading>
                     : (loadingStatus === "Error") ?
                         <Error message={""}></Error>
-                        : <SubjectDetail _subject={subject} all_subject_topics={allSubjectTopics}></SubjectDetail>
+                        : <SubjectDetail _subject={subject} all_subject_topics={allSubjectTopics} _user={userInfo}></SubjectDetail>
             }
         </div>
 

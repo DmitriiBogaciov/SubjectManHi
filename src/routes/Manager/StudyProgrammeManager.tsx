@@ -7,14 +7,14 @@ import IsAuthorized from "../../components/IsAuthorized.tsx";
 
 
 //Props
-import { StudyProgrammeDataProps } from "../../props/nonVisual/StudyProgramme.dataprops.tsx";
+import { GetRolePermissions } from "../../assets/helperFunc/GetRolePermissions.helper.tsx";
 
 export default function StudyProgrammeManager() {
  
 
   return (
-    <IsAuthorized neededPermissions={["admin:admin"]} printNoAuthorization={true}>
-      <main className="container pt-3">
+    <IsAuthorized neededPermissions={GetRolePermissions("Admin")} printNoAuthorization={true}>
+      <main className="container pt-3 md:p-0">
         <StudyProgrammeManagerData />
         <ToastContainer />
       </main>

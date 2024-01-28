@@ -8,8 +8,8 @@ import Button from "./Button.component.tsx"
 import IsAuthorized from "../IsAuthorized.tsx";
 
 import { useTranslation } from "react-i18next";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
+import { GetRolePermissions } from "../../assets/helperFunc/GetRolePermissions.helper.tsx";
 
 const AdminNavBar = () => {
 
@@ -17,11 +17,13 @@ const AdminNavBar = () => {
     const navigate = useNavigate();
 
     return (
-        <IsAuthorized neededPermissions={["admin:admin"]}>
+        <IsAuthorized neededPermissions={GetRolePermissions("Teacher")}>
             <div className="bg-slate-600 text-white hidden md:flex">
-                <div className="p-2">
-                    <Button label={t("manage.studyProgramme.title")} type="Default" on_click_handler={() => navigate("/manage/studyProgramme")}></Button>
-                </div>
+                <IsAuthorized neededPermissions={GetRolePermissions("Admin")}>
+                    <div className="p-2">
+                        <Button label={t("manage.studyProgramme.title")} type="Default" on_click_handler={() => navigate("/manage/studyProgramme")}></Button>
+                    </div>
+                </IsAuthorized>
                 <div className="p-2">
                     <Button label={t("manage.subject.title")} type="Default" on_click_handler={() => navigate("/manage/subject")}></Button>
                 </div>
@@ -32,11 +34,13 @@ const AdminNavBar = () => {
                     <Button label={t("manage.digitalContent.title")} type="Default" on_click_handler={() => navigate("/manage/digitalContent")}></Button>
                 </div>
             </div>
-            <div className="flex md:hidden">
-                <DropdownButton title={"yo"} className={"bg-black"}>
-                    <div className="p-2">
-                        <Button label={t("manage.studyProgramme.title")} type="Default" on_click_handler={() => navigate("/manage/studyProgramme")}></Button>
-                    </div>
+            <div className="flex md:hidden mb-2 bg-slate-600">
+                <DropdownButton title={t("admin.dropdown")} className="p-2">
+                    <IsAuthorized neededPermissions={GetRolePermissions("Admin")}>
+                        <div className="p-2">
+                            <Button label={t("manage.studyProgramme.title")} type="Default" on_click_handler={() => navigate("/manage/studyProgramme")}></Button>
+                        </div>
+                    </IsAuthorized>
                     <div className="p-2">
                         <Button label={t("manage.subject.title")} type="Default" on_click_handler={() => navigate("/manage/subject")}></Button>
                     </div>

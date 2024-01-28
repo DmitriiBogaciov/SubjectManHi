@@ -63,7 +63,7 @@ const StudyProgrammeManager = ({ all_study_programmes, permissions_, delete_stud
                     }}></Button>
             </div>
             <div>
-                <ModifiableList list_items={modListItems} title={t("manager.studyProgramme.list")}
+                <ModifiableList  list_items={modListItems} title={t("manager.studyProgramme.list")}
                     delete_from_list_handler={(value: string | object | number) => {
                         //Checking if incoming value is object with corresponding object
                         if (typeof value === "object" && "studyDegree" in value)                                                   

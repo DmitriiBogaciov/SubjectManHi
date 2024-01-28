@@ -19,7 +19,7 @@ const SearchField = (search_field: SearchFieldProps) => {
     }, [search_field])
 
     return (
-        <div className='flex'>
+        <div className='sm:flex grid grid-cols-2'>
             <div className='mt-auto mb-auto pr-4'>
                 <input placeholder={search_field.place_holder} className='border-1 placeholder-gray-300 p-2' type='text' value={searchedString} onChange={(e) => setSearchedString(e.currentTarget.value)} ></input>
             </div>

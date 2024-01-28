@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, DropdownButton, Dropdown } from 'react-bootstrap';
 import { Modal, Form } from "react-bootstrap";
 import { useAuth0 } from '@auth0/auth0-react';
 import { useState, useEffect } from 'react';
@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 //Custom components
 import Button from './Button.component.tsx';
-import Profile from './Profile.js';
+import Profile from './Profile.component.tsx';
 
 
 const MainNavBar = () => {
@@ -18,9 +18,8 @@ const MainNavBar = () => {
 
     const { logout, loginWithRedirect, isAuthenticated, getAccessTokenSilently, user } = useAuth0();
 
-    const handleShowToken = () => { console.log("yo"); setShowTokenModal(true) };
     const handleCloseToken = () => setShowTokenModal(false);
-    const {t} = useTranslation();
+    const { t, i18n } = useTranslation();
 
     useEffect(() => {
         const handleAuth = async () => {
@@ -30,7 +29,7 @@ const MainNavBar = () => {
                 const userProfile = await user;
                 //const userId = user.sub;
                 console.log(userProfile);
-               // console.log(userId);
+                // console.log(userId);
 
                 setToken(accessToken);
             } catch (error) {
@@ -54,32 +53,44 @@ const MainNavBar = () => {
         <>
             <Navbar bg="dark" variant="dark" expand="md" className='p-4 flex shadow-sm'>
                 <Nav className="flex justify-between  w-[100%]">
-
                     <NavLink to="/" className={"no-underline text-white text-3xl p-2"}>
                         <span className='text-2xl'>SubjectMan</span>
                     </NavLink>
-                    <div className='flex'>
-
-                        <div className='flex justify-end  pr-4'>
+                </Nav>
+                <div className='grid justify-end sm:flex sm:grid-cols-2 grid-cols-1'>
+                    <div className='grid grid-cols-2 p-2'>
+                        <div className='flex justify-end sm:p-2 p-0 pb-2'>
                             <Profile />
                         </div>
-                        {isAuthenticated && (
-                            <div className='m-auto pl-2 pr-2'>
-
-
-                            </div>
-                        )}
-                        <div className='m-auto'>
+                        <div className='flex justify-end'>
                             {
                                 (!isAuthenticated) ?
                                     <Button label={t("login")} on_click_handler={onClickLogIn} type={"Submit"} /> :
                                     <Button label={t("logout")} on_click_handler={onClickLogOut} type={"Delete"} />
                             }
-
                         </div>
-
                     </div>
-                </Nav>
+                    <div className='p-0 m-auto flex justify-end'>
+                        <Dropdown>
+                            <Dropdown.Toggle  className=' bg-button-default ml-2'>
+                                {t("langauge.choose")}
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item>
+                                    <div className='p-2 bg-transparent'>
+                                        <Button label={t("langauge.czech")} type='Default' on_click_handler={() => {i18n.changeLanguage("cs")}}></Button>
+                                    </div>
+                                </Dropdown.Item>
+                                <Dropdown.Item>
+                                    <div className='p-2'>
+                                        <Button label={t("langauge.english")} type='Default' on_click_handler={() => {i18n.changeLanguage("en")}}></Button>
+                                    </div>
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
+                </div>
+
             </Navbar>
             <Modal show={showTokenModal} onHide={handleCloseToken}>
                 <Modal.Header closeButton>

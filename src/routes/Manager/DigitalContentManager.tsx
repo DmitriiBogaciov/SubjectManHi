@@ -8,12 +8,13 @@ import DigitalContentManagerData from "../../components/data-component/Manager/D
 
 import { useAuth0 } from "@auth0/auth0-react";
 import IsAuthorized from "../../components/IsAuthorized.tsx";
+import { GetRolePermissions } from "../../assets/helperFunc/GetRolePermissions.helper.tsx";
 
 
 export default function DigitalContentManager() {
  
   return (
-    <IsAuthorized neededPermissions={["admin:admin"]} printNoAuthorization={true}>
+    <IsAuthorized neededPermissions={GetRolePermissions("Teacher")} printNoAuthorization={true}>
       <main className="container pt-3">
         <DigitalContentManagerData />
         <ToastContainer />

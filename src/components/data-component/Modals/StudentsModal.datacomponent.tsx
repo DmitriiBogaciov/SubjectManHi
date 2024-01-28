@@ -54,6 +54,7 @@ const StudentsModalData = ({ modal_props, _subject }: { modal_props: ModalDataPr
       });
 
       if (response.data && response.data.response_code === 200) {
+
         setDataLoadStatus("Loaded");
         toast.success("Student Updated Successfuly", {
           position: "top-center",
@@ -68,6 +69,7 @@ const StudentsModalData = ({ modal_props, _subject }: { modal_props: ModalDataPr
             handleClose();
           },
         });
+        return true;
       } else {
         console.error('Failed to update student. Response code is not positive:', response.data.response_code);
         setDataLoadStatus("Loaded");
@@ -102,6 +104,7 @@ const StudentsModalData = ({ modal_props, _subject }: { modal_props: ModalDataPr
         },
       });
     }
+    return false;
   };
 
 
@@ -116,7 +119,7 @@ const StudentsModalData = ({ modal_props, _subject }: { modal_props: ModalDataPr
           <Loading></Loading>
           : (dataLoadStatus === "Error") ?
             <ErrorComponent message={""}></ErrorComponent> :
-            <StudentsModal update_students_handler={updateStudentHandler} _subject={subject} modal_props={{...modal,cancel_handler(value) {
+            <StudentsModal update_students_handler={(newSubject)=>{let a = false; updateStudentHandler(newSubject).then((val)=>a=val); return a; }} _subject={subject} modal_props={{...modal,cancel_handler(value) {
                 handleClose();
             },}}></StudentsModal>
       }

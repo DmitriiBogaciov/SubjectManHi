@@ -63,15 +63,17 @@ const StudentsModal = ({ modal_props, _subject, update_students_handler }: { mod
                         <input onChange={handleInputChange} name='userName' type="text" value={newStudent.userName}></input>
                     </div>
                     <Button label={t("subject.student.add")} on_click_handler={() => {
-
-                        subject.students?.push(newStudent);
-                        setStudentListFromSubject(subject);
-                        if (subject.students)
-                            update_students_handler(subject.students)
+                        if (newStudent._id.length > 1 && newStudent.userName.length > 1) {
+                            console.log(newStudent)
+                            subject.students?.push(newStudent);
+                            setStudentListFromSubject(subject);
+                            if (subject.students)
+                                update_students_handler(subject.students)
+                        }
 
                     }} type="Submit" ></Button>
                 </div>
-                <ModifiableList title={t("subject.student.modal")} list_items={studentList} delete_from_list_handler={(val) => {
+                <ModifiableList notEditable={true} title={t("subject.student.modal")} list_items={studentList} delete_from_list_handler={(val) => {
                     console.log(val);
 
                     setStudentList([])
@@ -88,7 +90,7 @@ const StudentsModal = ({ modal_props, _subject, update_students_handler }: { mod
                     edit_from_list_handler={(val) => { return true }}></ModifiableList>
             </Modal.Body>
             <Modal.Footer>
-                <Button label={t("button.close")} on_click_handler={()=>{(modal.cancel_handler)?modal.cancel_handler():null}} type='Delete'></Button>
+                <Button label={t("button.close")} on_click_handler={() => { (modal.cancel_handler) ? modal.cancel_handler() : null }} type='Delete'></Button>
             </Modal.Footer>
         </>
     )
