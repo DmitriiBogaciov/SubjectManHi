@@ -3,43 +3,53 @@
 
   "button": {
     "edit": "Upravit",
-    "delete": "Vymazat",
+    "delete": "Smazat",
     "add": "Přidat",
-    "submit": "Potvrdit"
+    "submit": "Odeslat",
+    "close": "Zavřít"
   },
 
   "list_grid": {
-    "no_item": "Momentálně jsme nenašli žádné položky."
+    "no_item": "Položky nebyly nalezené"
   },
+
   "error": {
-    "oh_no": "Ale ne, něco se pokazilo",
-    "communication_server": "Nemohli jsme navázat spojení se serverem"
+    "oh_no": "Ach ne, něco se pokazilo!",
+    "communication_server": "Nebyla zahájena komunikace se serverem"
   },
   "manage": {
-    "studyProgramme.title": "Studijní program",
-    "subject.title": "Předmět",
-    "topic.title": "Správa tématu",
-    "digitalContent.title": "Správa digitálního obsahu"
+    "studyProgramme.title": "Spravovat studijní programy",
+    "subject.title": "Spravovat předměty",
+    "topic.title": "Spravovat témata",
+    "digitalContent.title": "Spravovat digitální obsah"
   },
   "home": {
     "header": "Domů"
   },
-  "studyDegree": {
-    "bachelor": "Bakalář",
-    "master": "Magistr"
-  },
+
   "table": {
-    "label": "Název",
+    "label": "Označení",
     "action": "Akce"
   },
+
   "list": {
-    "empty": "Seznam je prázdný"
+    "empty": "Seznam je prázdný."
   },
+
   "subject": {
     "studyDegree": {
-      "bachelor": "Bakalář",
-      "master": "Magistr"
+      "bachelor": "Bakalářský program",
+      "master": "Magisterský program"
     },
+
+    "student": {
+      "add": "Přidat nového studenta",
+      "id": "Studentovo id",
+      "userName": "Studentovo uživatelské jméno",
+      "modal": { "title": "Seznam studentů:" },
+      "overview": "Přehled studentů"
+    },
+
     "grid": {
       "title": "Předměty"
     },
@@ -57,42 +67,65 @@
       "summer": "Letní semestr"
     },
     "credits": "Kredity",
-    "language": "Vyučovaný jazyk",
+    "language": "Vyučované jazyky",
     "topic": {
       "title": "Témata předmětu"
     },
-    "numberOfStudents": "Počet zapsaných studentů"
+    "numberOfStudents": "Počet přihlášených studentů"
   },
 
   "studyProgramme": {
     "studyDegree": {
-      "bachelor": "Bakalář",
-      "master": "Magistr"
+      "bachelor": "Bakalářský program",
+      "master": "Magisterský program"
+    },
+    "modal": {
+      "title": "Studijní program"
     }
   },
   "topic": {
     "digitalContent": {
       "list": "Digitální obsah tématu"
+    },
+    "modal": {
+      "title": "Spravovat téma"
+    },
+    "title": "Témata"
+  },
+  "digitalContent": {
+    "title": "Digitální obsah",
+    "modal": {
+      "title": "Spravovat digitální obsah"
     }
   },
-  "search": "Vyhledat",
+  "search": "Hledat",
   "login": "Přihlásit se",
   "logout": "Odhlásit se",
   "language": {
     "choose": "Vybrat jazyk",
-    "czech": "Česky",
-    "english": "Anglicky"
+    "czech": "Čeština",
+    "english": "English"
   },
   "manager": {
     "studyProgramme": {
-      "title": "Manage study programmes",
-      "list": "List of study programmes",
-      "createNew": "Create new study programme"
+      "title": "Spravovat studijní program",
+      "list": "Seznam studijních programů",
+      "createNew": "Vytvořit nový studijní program"
     },
     "subject": {
-      "title": "Manage subjects",
-      "list": "List of subjects",
-      "createNew": "Create new subject"
+      "title": "Spravovat předměty",
+      "list": "Seznam předmětů",
+      "createNew": "Vytvořit nový předmět"
+    },
+    "topic": {
+      "title": "Spravovat témata",
+      "list": "Seznam témat",
+      "createNew": "Vytvořit nové téma"
+    },
+    "digitalContent": {
+      "title": "Spravovat digitální obsah",
+      "list": "Seznam předmětů",
+      "createNew": "Vytvořit nový digitální obsah"
     }
   },
 
@@ -101,10 +134,20 @@
     "description": "Popis",
     "submit": "Odeslat",
     "items": "Položky",
-    "create_item": "Vytvořit předmět",
+    "create_item": "Vytvořit položku",
     "close": "Zavřít",
     "language": "Jazyk",
     "studyDegree": "Studijní program",
-    "goal": "Cíl"
+    "goal": "Cíl",
+    "supervisor": {
+      "identification": "ID učitele",
+      "userName": "Jméno učitele"
+    },
+    "externalLink": "Externí odkaz"
+  },
+
+  "modal": {
+    "close": "Zavřít",
+    "confirm": "Potvrdit"
   }
 }
