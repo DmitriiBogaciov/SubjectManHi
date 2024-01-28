@@ -22,6 +22,7 @@ import IsAuthorized from "../IsAuthorized.tsx";
 import { GetRoleByPermissions, GetRolePermissions } from "../../assets/helperFunc/GetRolePermissions.helper.tsx";
 import { UserDataProps } from "../../props/nonVisual/User.dataprops.tsx";
 import { jwtDecode } from "jwt-decode";
+import { userInfo } from "os";
 
 
 const SubjectDetail = ({ _subject, all_subject_topics, _user }: { _subject?: SubjectDataProps, all_subject_topics: Array<TopicDataProps>, _user: UserDataProps }) => {
@@ -99,9 +100,16 @@ const SubjectDetail = ({ _subject, all_subject_topics, _user }: { _subject?: Sub
                             <p className="">{subject.students?.length}</p>
                         </div>
                         <IsAuthorized neededPermissions={GetRolePermissions("Teacher")}>
-                            <div>
-                                <Button label={t("subject.student.overview")} on_click_handler={() => { setStudentModal({ ...studentModal, show: true }) }} type="Submit" />
-                            </div>
+                            {
+                                
+                               ((user._permissions && user._token && GetRoleByPermissions(user._permissions) === "Teacher" &&
+                                subject.supervisor._id == jwtDecode(user._token).sub)||
+                               (user._permissions && GetRoleByPermissions(user._permissions) === "Admin"))?
+                                <div>
+                                    <Button label={t("subject.student.overview")} on_click_handler={() => { setStudentModal({ ...studentModal, show: true }) }} type="Submit" />
+                                </div>:
+                                <></>
+                            }
                         </IsAuthorized>
                     </div>
                 </div>

@@ -55,7 +55,7 @@
       "add":"Add new student",
       "id":"Student's identification",
       "userName":"Student's username",
-      "modal":{"title":"List of students:"},
+      "modal":"List of students:",
       "overview":"Overview of students"
     },
 
@@ -167,7 +167,8 @@
   {
     "close":"Close",
     "confirm":"Confirm"
-  }
+  },
 
-
+  "authenticationNeeded":"Please sign in to view content",
+  "notEnoughPermissions": "You do not have enough permissions to view contetn"
 }
