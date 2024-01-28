@@ -16,7 +16,7 @@ const MainNavBar = () => {
     const [showTokenModal, setShowTokenModal] = useState(false);
     const [token, setToken] = useState("");
 
-    const { logout, loginWithRedirect, isAuthenticated, getAccessTokenSilently, user } = useAuth0();
+    const { logout, loginWithRedirect,loginWithPopup, isAuthenticated, getAccessTokenSilently, user } = useAuth0();
 
     const handleCloseToken = () => setShowTokenModal(false);
     const { t, i18n } = useTranslation();
@@ -43,8 +43,10 @@ const MainNavBar = () => {
     }, [isAuthenticated, user, getAccessTokenSilently]);
 
     const onClickLogIn = () => {
-        loginWithRedirect()
+        //loginWithRedirect()
+        loginWithPopup();
     }
+
     const onClickLogOut = () => {
         logout({ logoutParams: { returnTo: window.location.origin } })
     }
