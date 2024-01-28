@@ -1,66 +1,110 @@
 {
-    "header":
-    {
+  "header": {},
 
-    },
+  "button": {
+    "edit": "Upravit",
+    "delete": "Vymazat",
+    "add": "Přidat",
+    "submit": "Potvrdit"
+  },
 
-    "button":
-    {
-        "edit":"Upravit",
-        "delete":"Vymazat",
-        "add":"Přidat",
-        "submit":"Potvrdit"
+  "list_grid": {
+    "no_item": "Momentálně jsme nenašli žádné položky."
+  },
+  "error": {
+    "oh_no": "Ale ne, něco se pokazilo",
+    "communication_server": "Nemohli jsme navázat spojení se serverem"
+  },
+  "manage": {
+    "studyProgramme.title": "Studijní program",
+    "subject.title": "Předmět",
+    "topic.title": "Správa tématu",
+    "digitalContent.title": "Správa digitálního obsahu"
+  },
+  "home": {
+    "header": "Domů"
+  },
+  "studyDegree": {
+    "bachelor": "Bakalář",
+    "master": "Magistr"
+  },
+  "table": {
+    "label": "Název",
+    "action": "Akce"
+  },
+  "list": {
+    "empty": "Seznam je prázdný"
+  },
+  "subject": {
+    "studyDegree": {
+      "bachelor": "Bakalář",
+      "master": "Magistr"
     },
+    "grid": {
+      "title": "Předměty"
+    },
+    "year1": "1. ročník",
+    "year2": "2. ročník",
+    "year3": "3. ročník",
+    "year4": "4. ročník",
+    "type": {
+      "mandatory": "Povinné předměty",
+      "optional": "Volitelné předměty",
+      "mandatory_optional": "Povinně volitelné předměty"
+    },
+    "semester": {
+      "winter": "Zimní semestr",
+      "summer": "Letní semestr"
+    },
+    "credits": "Kredity",
+    "language": "Vyučovaný jazyk",
+    "topic": {
+      "title": "Témata předmětu"
+    },
+    "numberOfStudents": "Počet zapsaných studentů"
+  },
 
-    "list_grid":
-    {
-        "no_item":"Momentálně jsme nenašli žádné položky."
+  "studyProgramme": {
+    "studyDegree": {
+      "bachelor": "Bakalář",
+      "master": "Magistr"
+    }
+  },
+  "topic": {
+    "digitalContent": {
+      "list": "Digitální obsah tématu"
+    }
+  },
+  "search": "Vyhledat",
+  "login": "Přihlásit se",
+  "logout": "Odhlásit se",
+  "language": {
+    "choose": "Vybrat jazyk",
+    "czech": "Česky",
+    "english": "Anglicky"
+  },
+  "manager": {
+    "studyProgramme": {
+      "title": "Manage study programmes",
+      "list": "List of study programmes",
+      "createNew": "Create new study programme"
     },
+    "subject": {
+      "title": "Manage subjects",
+      "list": "List of subjects",
+      "createNew": "Create new subject"
+    }
+  },
 
-    "form":
-    {
-        "name":"Název",
-        "description":"Popis",
-        "submit":"Potvrdit",
-        "items":"Položky",
-        "create_item":"Vytvořit položku",
-        "close":"Zavřít"
-    },
-
-    "error":
-    {
-        "oh_no":"Ale ne, něco se pokazilo",
-        "communication_server":"Nemohli jsme navázat spojení se serverem"
-    },
-"manage": {
-  "studyProgramme.title": "Studijní program",
-  "subject.title": "Předmět",
-  "topic.title": "Správa tématu",
-  "digitalContent.title": "Správa digitálního obsahu"
-},
-"home": {
-  "header": "Domů"
-},
-"studyDegree": {
-  "bachelor": "Bakalář",
-  "master": "Magistr"
-},
-"manager": {
-  "studyProgramme.title": "Studijní program",
-  "studyProgramme.list": "Seznam studijního programu",
-  "studyProgramme.createNew": "Vytvořit nový studijní program",
-  "subject": {"title": "Předměty"},
-  "subject.list": "Seznam předmětů",
-  "subject.createNew": "Vytvořit nový předmět",
-  "topic.title": "Téma",
-  "topic.list": "Seznam téma",
-  "topic.createNew": "Vytvořit nové téma",
-  "digitalContent.title": "Digitální obsah",
-  "digitalContent.list": "Seznam",
-  "digitalContent.createNew": "Vytvořit nový digitální obsah"
-},
-"table": {
-  "label": "Název",
-  "action": "Akce"
-}
+  "form": {
+    "name": "Název",
+    "description": "Popis",
+    "submit": "Odeslat",
+    "items": "Položky",
+    "create_item": "Vytvořit předmět",
+    "close": "Zavřít",
+    "language": "Jazyk",
+    "studyDegree": "Studijní program",
+    "goal": "Cíl"
+  }
 }
